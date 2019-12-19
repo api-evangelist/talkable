@@ -1,0 +1,89 @@
+{
+    "name": "Talkable",
+    "description": "<p>Talkable Social Referrals helps brands acquire new customers with endorsements from current customers. As the web becomes more person-centric, consumers trust the recommendations of their friends more than traditional advertising. By optimizing for higher conversion rates and identifying social influencers, we've achieved as high as a 58% lift in new sales.<\/p>",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28399-www-talkable-com.jpg",
+    "tags": [
+        "have api",
+        "referrers",
+        "webhook implementations"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/talkable\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "Talkable",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/28399-www-talkable-com.jpg",
+            "humanURL": "https:\/\/www.talkable.com",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/talkable-openapi.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Authentication",
+            "url": "http:\/\/docs.talkable.com\/api_v2\/intro.html#authentication"
+        },
+        {
+            "type": "Crunchbase",
+            "url": "https:\/\/crunchbase.com\/organization\/curebit"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/docs.talkable.com\/api_v2.html"
+        },
+        {
+            "type": "Developers",
+            "url": "http:\/\/docs.talkable.com\/index.html"
+        },
+        {
+            "type": "Documentation",
+            "url": "http:\/\/docs.talkable.com\/"
+        },
+        {
+            "type": "Documentation",
+            "url": "http:\/\/docs.talkable.com\/api_v2.html"
+        },
+        {
+            "type": "Email",
+            "url": "sales@talkable.com"
+        },
+        {
+            "type": "Email",
+            "url": "support@talkable.com"
+        },
+        {
+            "type": "Email",
+            "url": "legal@talkable.com"
+        },
+        {
+            "type": "Github",
+            "url": "https:\/\/github.com\/talkable"
+        },
+        {
+            "type": "Pricing",
+            "url": "http:\/\/info.talkable.com\/request-pricing"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/talkable"
+        },
+        {
+            "type": "Webhooks",
+            "url": "http:\/\/docs.talkable.com\/web_hooks.html"
+        },
+        {
+            "type": "Website",
+            "url": "https:\/\/www.talkable.com"
+        }
+    ]
+}
