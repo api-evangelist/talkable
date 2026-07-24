@@ -1,0 +1,66 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Visitors API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Visitors
+paths:
+  /api/v2/visitors:
+    post:
+      summary: Create a visitor
+      tags:
+      - Visitors
+      parameters: []
+      operationId: createVisitor
+      responses:
+        '200':
+          description: visitor created
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  uuid: 123e4567-e89b-32d1-a456-426614174000
+        '400':
+          description: site not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No site found by `site_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    uuid:
+                      $ref: '#/components/schemas/visitor_uuid'
+                  required:
+                  - uuid
+              required:
+              - site_slug
+              - data
+components:
+  schemas:
+    visitor_uuid:
+      type: string
+      format: uuid
+      example: 123e4567-e89b-32d1-a456-426614174000
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

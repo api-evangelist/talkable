@@ -1,0 +1,73 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Check Unsubscribe API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Check Unsubscribe
+paths:
+  /your_api_check_unsubscribe_web_hook_path:
+    post:
+      summary: Check Unsubscribe
+      tags:
+      - Check Unsubscribe
+      parameters: []
+      operationId: check_unsubscribe
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: check_unsubscribe_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    recipient:
+                      $ref: '#components/schemas/person'
+                    email_type:
+                      type: string
+                      enum:
+                      - notifier_offers_email
+                      - notifier_offers_share_via_email
+                      - notifier_offers_share_via_email_reminder
+                      - advocate_rewards_confirmation
+                      - advocate_rewards_paid
+                      - friend_rewards_paid
+                      - custom_share_page_email
+                      - custom_claim_page_email
+                      - wallet_welcome_email
+                      - email_capture_reward_reminder
+                      - loyalty_post_action_email
+                      - loyalty_tier_upgraded_email
+                      - loyalty_tier_downgraded_email
+                      - loyalty_points_expiring_soon_email
+                      example: notifier_offers_email
+                      description: Described view category
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

@@ -1,0 +1,1557 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Origins API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Origins
+paths:
+  /api/v2/origins:
+    post:
+      summary: Create an origin
+      tags:
+      - Origins
+      parameters: []
+      operationId: createOrigin
+      responses:
+        '201':
+          description: purchase created
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  origin:
+                    subtotal: 100.44
+                    customer_id: '1024'
+                    email: customer@store.com
+                    id: 1
+                    ip_address: 192.0.2.255
+                    order_number: '20'
+                    refunded_at: null
+                    type: Purchase
+                    segment1: null
+                    segment2: null
+                    segment3: null
+                    utm_campaign: null
+                    utm_content: null
+                    utm_medium: null
+                    utm_source: null
+                    utm_term: null
+                    order_date: '2026-07-07T11:06:14.000-07:00'
+                    partially_refunded: false
+                    refund_subtotal: null
+                    coupon_code: C0001,C0002
+                  offer:
+                    claim_url: https://share.my-store.com/x/BCR7w2
+                    email: customer@store.com
+                    id: 1
+                    short_url_code: gWQ3y4
+                    show_url: https://share.my-store.com/x/52Ea09
+                    coupon_code: null
+                    incentives: {}
+                    trigger_widget: false
+                    campaign_tags:
+                    - post-purchase
+        '400':
+          description: wrong type
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: '`type` must be within ["AffiliateMember", "Purchase", "Event"]'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  enum:
+                  - AffiliateMember
+                  - Purchase
+                  - Event
+                  example: Purchase
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: customer@store.com
+                    order_number:
+                      type: string
+                      example: '20'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      $ref: ../schemas.yaml#/ip_address
+                    uuid:
+                      $ref: '#/components/schemas/visitor_uuid'
+                    created_at:
+                      $ref: ../schemas.yaml#/date_time
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      $ref: '#/components/schemas/coupon_codes'
+                    currency_iso_code:
+                      $ref: '#/components/schemas/currency_code'
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina, 29860, United States
+                      description: Full address of the order, make sure to strictly follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 25.11
+                          quantity:
+                            type: integer
+                            example: 4
+                          product_id:
+                            type: string
+                            example: TSHIRT
+                  required:
+                  - email
+                  - order_number
+                  - subtotal
+              required:
+              - site_slug
+              - type
+              - data
+  /api/v2/origins/affiliate_member:
+    post:
+      summary: Create an affiliate member
+      tags:
+      - Origins
+      parameters: []
+      operationId: createAffiliateMember
+      responses:
+        '201':
+          description: null
+          content:
+            application/json:
+              examples:
+                affiliate member created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                      offer:
+                        claim_url: https://share.my-store.com/x/m5RhOw
+                        email: affiliate@store.com
+                        id: 1
+                        short_url_code: 4t6kTY
+                        show_url: https://share.my-store.com/x/CoEMvb
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - invite
+                      claim_links:
+                        facebook: https://share.my-store.com/x/CyABj6
+                        custom: https://share.my-store.com/x/ZeqzxQ
+                affiliate member created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                      offer:
+                        claim_url: https://share.my-store.com/x/pBsXly
+                        email: affiliate@store.com
+                        id: 1
+                        short_url_code: hlsUt5
+                        show_url: https://share.my-store.com/x/PRuHS9
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - invite
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                      offer: null
+        '400':
+          description: bad request
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Email isn't valid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: affiliate@store.com
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                    campaign_tags:
+                      type: string
+                      example: invite
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      $ref: ../schemas.yaml#/ip_address
+                    uuid:
+                      $ref: '#/components/schemas/visitor_uuid'
+                    created_at:
+                      $ref: ../schemas.yaml#/date_time
+                    traffic_source:
+                      type: string
+                      example: article-1
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: article-1
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                  required:
+                  - email
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/event:
+    post:
+      summary: Create an event
+      tags:
+      - Origins
+      parameters: []
+      operationId: createEvent
+      responses:
+        '201':
+          description: null
+          content:
+            application/json:
+              examples:
+                event created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at: null
+                        type: Event
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal: null
+                      offer:
+                        claim_url: https://share.my-store.com/x/1qj4Go
+                        email: user@store.com
+                        id: 1
+                        short_url_code: Q9nRug
+                        show_url: https://share.my-store.com/x/e3TfVg
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                      claim_links:
+                        facebook: https://share.my-store.com/x/7smUy5
+                        custom: https://share.my-store.com/x/gRrQuG
+                event created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at: null
+                        type: Event
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal: null
+                      offer:
+                        claim_url: https://share.my-store.com/x/tlbPKT
+                        email: user@store.com
+                        id: 1
+                        short_url_code: ZSCnxh
+                        show_url: https://share.my-store.com/x/AHdUvB
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at: null
+                        type: Event
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal: null
+                      offer: null
+        '400':
+          description: event with different data exists
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Duplicate entity: Talkable already has existing Event with the same event_number but different data
+
+                  '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: user@store.com
+                    event_category:
+                      type: string
+                      example: newsletter_subscription
+                    event_number:
+                      type: string
+                      example: '42'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      $ref: ../schemas.yaml#/ip_address
+                    uuid:
+                      $ref: '#/components/schemas/visitor_uuid'
+                    created_at:
+                      $ref: ../schemas.yaml#/date_time
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      $ref: '#/components/schemas/coupon_codes'
+                    currency_iso_code:
+                      $ref: '#/components/schemas/currency_code'
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina, 29860, United States
+                      description: Full address of the order, make sure to strictly follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 100.44
+                          quantity:
+                            type: integer
+                            example: 1
+                          product_id:
+                            type: string
+                            example: SUBSCRIPTION
+                  required:
+                  - email
+                  - event_category
+                  - event_number
+                  - subtotal
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/purchase:
+    post:
+      summary: Create a purchase
+      tags:
+      - Origins
+      parameters: []
+      operationId: createPurchase
+      responses:
+        '201':
+          description: null
+          content:
+            application/json:
+              examples:
+                purchase created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at: null
+                        type: Purchase
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:06:25.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: null
+                        coupon_code: C0001,C0002
+                      offer:
+                        claim_url: https://share.my-store.com/x/Q9wV8X
+                        email: customer@store.com
+                        id: 1
+                        short_url_code: mwCn1l
+                        show_url: https://share.my-store.com/x/FLMxKE
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                      claim_links:
+                        facebook: https://share.my-store.com/x/js3raT
+                        custom: https://share.my-store.com/x/F6tKyP
+                purchase created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at: null
+                        type: Purchase
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:06:26.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: null
+                        coupon_code: C0001,C0002
+                      offer:
+                        claim_url: https://share.my-store.com/x/39fxBo
+                        email: customer@store.com
+                        id: 1
+                        short_url_code: K0H3JG
+                        show_url: https://share.my-store.com/x/T518et
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at: null
+                        type: Purchase
+                        segment1: null
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:06:28.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: null
+                        coupon_code: C0001,C0002
+                      offer: null
+        '400':
+          description: purchase with different data exists
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Duplicate entity: Talkable already has existing Purchase with the same order_number but different data
+
+                  '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: customer@store.com
+                    order_number:
+                      type: string
+                      example: '20'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      $ref: ../schemas.yaml#/ip_address
+                    uuid:
+                      $ref: '#/components/schemas/visitor_uuid'
+                    created_at:
+                      $ref: ../schemas.yaml#/date_time
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      $ref: '#/components/schemas/coupon_codes'
+                    currency_iso_code:
+                      $ref: '#/components/schemas/currency_code'
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina, 29860, United States
+                      description: Full address of the order, make sure to strictly follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 25.11
+                          quantity:
+                            type: integer
+                            example: 4
+                          product_id:
+                            type: string
+                            example: TSHIRT
+                  required:
+                  - email
+                  - order_number
+                  - subtotal
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/batch/affiliate_members:
+    post:
+      summary: Create batch of affiliate members
+      description: '**EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+
+        The validation is done asynchronously, API does not respond with error
+
+        messages in case of invalid payload.
+
+
+        The records are created asynchronously by a scheduled job. This can take
+
+        some time.
+
+        '
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfAffiliateMembers
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: affiliate@store.com
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        $ref: ../schemas.yaml#/custom_properties
+                      phone_number:
+                        $ref: ../schemas.yaml#/phone_number
+                      campaign_tags:
+                        type: string
+                        example: invite
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        $ref: ../schemas.yaml#/ip_address
+                      uuid:
+                        $ref: '#/components/schemas/visitor_uuid'
+                      created_at:
+                        $ref: ../schemas.yaml#/date_time
+                      traffic_source:
+                        type: string
+                        example: article-1
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: article-1
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                    required:
+                    - email
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/batch/events:
+    post:
+      summary: Create batch of events
+      description: '**EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+
+        The validation is done asynchronously, API does not respond with error
+
+        messages in case of invalid payload.
+
+
+        The records are created asynchronously by a scheduled job. This can take
+
+        some time.
+
+        '
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfEvents
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: user@store.com
+                      event_category:
+                        type: string
+                        example: newsletter_subscription
+                      event_number:
+                        type: string
+                        example: '42'
+                      subtotal:
+                        type: number
+                        format: float
+                        example: 100.44
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        $ref: ../schemas.yaml#/custom_properties
+                      phone_number:
+                        $ref: ../schemas.yaml#/phone_number
+                      campaign_tags:
+                        type: string
+                        example: post-purchase
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        $ref: ../schemas.yaml#/ip_address
+                      uuid:
+                        $ref: '#/components/schemas/visitor_uuid'
+                      created_at:
+                        $ref: ../schemas.yaml#/date_time
+                      traffic_source:
+                        type: string
+                        example: in-store
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: in-store
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                      coupon_codes:
+                        $ref: '#/components/schemas/coupon_codes'
+                      currency_iso_code:
+                        $ref: '#/components/schemas/currency_code'
+                      shipping_address:
+                        type: string
+                        example: 456 White Finch St., North Augusta, South Carolina, 29860, United States
+                        description: Full address of the order, make sure to strictly follow a format
+                      shipping_zip:
+                        type: string
+                        example: '29860'
+                        description: Used for fraud protection by address
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              format: float
+                              example: 100.44
+                            quantity:
+                              type: integer
+                              example: 1
+                            product_id:
+                              type: string
+                              example: SUBSCRIPTION
+                    required:
+                    - email
+                    - event_category
+                    - event_number
+                    - subtotal
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/batch/purchases:
+    post:
+      summary: Create batch of purchases
+      description: '**EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+
+        The validation is done asynchronously, API does not respond with error
+
+        messages in case of invalid payload.
+
+
+        The records are created asynchronously by a scheduled job. This can take
+
+        some time.
+
+        '
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfPurchases
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: customer@store.com
+                      order_number:
+                        type: string
+                        example: '20'
+                      subtotal:
+                        type: number
+                        format: float
+                        example: 100.44
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        $ref: ../schemas.yaml#/custom_properties
+                      phone_number:
+                        $ref: ../schemas.yaml#/phone_number
+                      campaign_tags:
+                        type: string
+                        example: post-purchase
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        $ref: ../schemas.yaml#/ip_address
+                      uuid:
+                        $ref: '#/components/schemas/visitor_uuid'
+                      created_at:
+                        $ref: ../schemas.yaml#/date_time
+                      traffic_source:
+                        type: string
+                        example: in-store
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: in-store
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                      coupon_codes:
+                        $ref: '#/components/schemas/coupon_codes'
+                      currency_iso_code:
+                        $ref: '#/components/schemas/currency_code'
+                      shipping_address:
+                        type: string
+                        example: 456 White Finch St., North Augusta, South Carolina, 29860, United States
+                        description: Full address of the order, make sure to strictly follow a format
+                      shipping_zip:
+                        type: string
+                        example: '29860'
+                        description: Used for fraud protection by address
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              format: float
+                              example: 25.11
+                            quantity:
+                              type: integer
+                              example: 4
+                            product_id:
+                              type: string
+                              example: TSHIRT
+                    required:
+                    - email
+                    - order_number
+                    - subtotal
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  /api/v2/origins/{origin_slug}/refund:
+    post:
+      summary: Mark origin as refunded
+      tags:
+      - Origins
+      parameters:
+      - name: origin_slug
+        in: path
+        schema:
+          $ref: '#/components/schemas/origin_slug'
+        required: true
+      operationId: markOriginAsRefunded
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                origin marked as fully refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: null
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:44.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:07:44.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: 100.44
+                        coupon_code: ''
+                origin marked as partially refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: null
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:45.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:07:45.000-07:00'
+                        partially_refunded: true
+                        refund_subtotal: 25.11
+                        coupon_code: ''
+        '400':
+          description: origin has already been refunded
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Origin has already been refunded
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    refunded_at:
+                      $ref: ../schemas.yaml#/date_time
+                    refund_subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+              required:
+              - site_slug
+components:
+  schemas:
+    coupon_codes:
+      type: array
+      items:
+        type: string
+      example:
+      - C0001
+      - C0002
+    origin_slug:
+      type: string
+      example: B00K2EOONI
+      description: 'If origin is a ***Purchase***:
+
+
+        `order_number`, e.g.: `"B00K2EOONI"`
+
+
+        If origin is an ***Event***:
+
+
+        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
+
+        '
+    currency_code:
+      type: string
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - AUD
+      - CAD
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CDF
+      - CHF
+      - CLP
+      - CNY
+      - COP
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - FJD
+      - FKP
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - UYU
+      - UZS
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XCD
+      - XOF
+      - XPF
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      example: USD
+      description: Required for multi-currency sites
+    visitor_uuid:
+      type: string
+      format: uuid
+      example: 123e4567-e89b-32d1-a456-426614174000
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

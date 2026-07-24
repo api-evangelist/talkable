@@ -1,0 +1,492 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Referrals API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Referrals
+paths:
+  /api/v2/people/{person_slug}/referrals_as_advocate:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get Friends referred by Advocate
+      description: Returns referrals where person is an advocate.
+      tags:
+      - Referrals
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getFriendsReferredByAdvocate
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 1
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 2
+                    status: approved
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1025
+                      email: alice@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 1
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: $10
+                        code: COUPON_CODE_37
+                        expires_at: null
+                        id: 1
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until: null
+                      coupon_code: COUPON_CODE_37
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 3
+                    status: pending
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1026
+                      email: bob@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Unpaid
+                      coupon: null
+                      coupon_code: null
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/referrals_as_friend:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get Advocates who referred the Friend
+      description: Returns referrals where person is a friend.
+      tags:
+      - Referrals
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getAdvocatesWhoReferredFriend
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 2
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: approved
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1026
+                      email: signup1@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: $10
+                        code: COUPON_CODE_42
+                        expires_at: null
+                        id: 2
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until: null
+                      coupon_code: COUPON_CODE_42
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 3
+                    qa_generated: false
+                    referred_origin_id: 6
+                    status: pending
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1027
+                      email: signup2@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 3
+                      reason: referrer
+                      status: Unpaid
+                      coupon: null
+                      coupon_code: null
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 4
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 7
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/origins/{origin_slug}/referral:
+    put:
+      summary: Update referral status
+      description: 'Note that approved or voided referrals cannot be changed to the opposite state.
+
+        '
+      tags:
+      - Referrals
+      parameters:
+      - name: origin_slug
+        in: path
+        schema:
+          $ref: '#/components/schemas/origin_slug'
+        required: true
+      operationId: updateReferralStatus
+      responses:
+        '200':
+          description: referral status updated to approved
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referral:
+                    referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:40.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Friend and Advocate Refer Each Other
+                    id: 1
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 2
+                    status: approved
+                    track_method: manually_generated
+                    updated_at: '2026-07-07T11:07:40.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: signup7@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    friend_person:
+                      id: 2
+                      email: test+64@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 1
+                      reason: referrer
+                      status: Paid
+                      coupon: null
+                      coupon_code: null
+                      incentive_type: rebate
+                      incentive_description: $10 back
+                      incentive_custom_description: null
+                    friend_rewards: []
+        '400':
+          description: bad request
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No origin found by `origin_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      enum:
+                      - pending
+                      - flagged
+                      - approved
+                      - voided
+                      - blocked
+                      example: approved
+              required:
+              - site_slug
+              - data
+components:
+  schemas:
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
+    origin_slug:
+      type: string
+      example: B00K2EOONI
+      description: 'If origin is a ***Purchase***:
+
+
+        `order_number`, e.g.: `"B00K2EOONI"`
+
+
+        If origin is an ***Event***:
+
+
+        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
+
+        '
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

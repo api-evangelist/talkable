@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Friend Email Gating API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Friend Email Gating
+paths:
+  /your_api_claim_signup_web_hook_path:
+    post:
+      summary: Friend Email Gating
+      tags:
+      - Friend Email Gating
+      parameters: []
+      operationId: friend_email_gating
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: claim_signup_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    offer:
+                      $ref: '#components/schemas/offer'
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    email:
+                      $ref: '#components/schemas/email'
+                      description: Friend’s email address
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                      description: Friend’s phone number (optional)
+                    first_name:
+                      type: string
+                      example: John
+                      description: Friend’s first name (optional)
+                    last_name:
+                      type: string
+                      example: Doe
+                      description: Friend’s last name (optional)
+                    username:
+                      type: string
+                      example: johndoe1992
+                      description: Friend’s username (optional)
+                    unsubscribed_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Friend has unsubscribed with phone number (optional)
+                    subscribed_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Friend has subscribed (deprecated in favor of ``opted_in_at``)
+                    opted_in_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Friend has subscribed (optional)
+                    phone_opted_in_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Friend has subscribed with email (optional)
+                    is_loyalty_member:
+                      type: boolean
+                      example: true
+                      description: Whether the Friend participates in loyalty program
+                    loyalty_member:
+                      type: object
+                      example: {}
+                      description: Details of the Friend as a loyalty program participant
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                      description: Hash of Friend’s custom properties (optional)
+                    gender:
+                      type: string
+                      description: '[deprecated]'
+                    referral_counts:
+                      type: object
+                      description: Referral counts of Friend as Advocate
+                      properties:
+                        total:
+                          type: integer
+                          example: 2
+                        approved:
+                          type: integer
+                          example: 1
+                        pending:
+                          type: integer
+                          example: 1
+                    sub_choice:
+                      type: boolean
+                      example: false
+                      description: Subscription choice
+                    ip_address:
+                      $ref: ../schemas.yaml#/ip_address
+                      description: Friend’s IP address
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

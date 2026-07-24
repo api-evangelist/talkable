@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Claim Links API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Claim Links
+paths:
+  /api/v2/offers/{short_url_code}/claim_url_status:
+    get:
+      summary: Check offer claim link status
+      tags:
+      - Claim Links
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: claim_url
+        in: query
+        schema:
+          type: string
+      operationId: checkOfferClaimLinkStatus
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                offer claim link is active:
+                  value:
+                    ok: true
+                    result:
+                      active: true
+                offer claim link is inactive:
+                  value:
+                    ok: true
+                    result:
+                      active: false
+        '400':
+          description: Offer not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No offer found by id.
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

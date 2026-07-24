@@ -1,0 +1,115 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Advocate Signup API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Advocate Signup
+paths:
+  /your_api_offer_signup_web_hook_path:
+    post:
+      summary: Advocate Signup
+      tags:
+      - Advocate Signup
+      parameters: []
+      operationId: advocate_signup
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: offer_signup_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    offer:
+                      $ref: '#components/schemas/offer'
+                    email:
+                      $ref: '#components/schemas/email'
+                      description: Affiliate member’s email address
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                      description: Affiliate member’s phone number (optional)
+                    first_name:
+                      type: string
+                      example: John
+                      description: Affiliate member’s first name (optional)
+                    last_name:
+                      type: string
+                      example: Doe
+                      description: Affiliate member’s last name (optional)
+                    username:
+                      type: string
+                      example: johndoe1992
+                      description: Affiliate member’s username (optional)
+                    unsubscribed_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Affiliate member has unsubscribed with phone number (optional)
+                    subscribed_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Affiliate member has subscribed (deprecated in favor of ``opted_in_at``)
+                    opted_in_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Affiliate member has subscribed (optional)
+                    phone_opted_in_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Date Affiliate member has subscribed with email (optional)
+                    is_loyalty_member:
+                      type: boolean
+                      example: true
+                      description: Whether the Affiliate member participates in loyalty program
+                    loyalty_member:
+                      type: object
+                      example: {}
+                      description: Details of the Affiliate member as a loyalty program participant (optional)
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                      description: Object of Affiliate member’s custom properties (optional)
+                    gender:
+                      type: string
+                      description: '[deprecated]'
+                    referral_counts:
+                      type: object
+                      description: Referral counts of Affiliate member as Advocate
+                      properties:
+                        total:
+                          type: integer
+                          example: 2
+                        approved:
+                          type: integer
+                          example: 1
+                        pending:
+                          type: integer
+                          example: 1
+                    sub_choice:
+                      type: boolean
+                      example: false
+                      description: Subscription choice
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

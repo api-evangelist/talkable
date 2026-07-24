@@ -1,0 +1,86 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Post Share API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Post Share
+paths:
+  /your_api_post_share_web_hook_path:
+    post:
+      summary: Post Share
+      tags:
+      - Post Share
+      parameters: []
+      operationId: post_share
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: post_share_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    share_type:
+                      type: string
+                      enum:
+                      - email
+                      - facebook
+                      - facebook_message
+                      - facebook_sponsored
+                      - twitter
+                      - linkedin
+                      - whatsapp
+                      - sms
+                      - other
+                      example: facebook
+                      description: '*Note*: custom share_types can be created'
+                    share_info:
+                      type: object
+                      properties:
+                        recipients:
+                          type: array
+                          items:
+                            type: string
+                          example:
+                          - recipient1@b.com
+                          - recipient2@b.com
+                      description: "* For Facebook share:\n\n  ``facebook_share_post_id`` — Facebook post ID\n\n  ``facebook_share_user_id`` — Facebook user ID\n\n* For email share:\n\n  ``recipients`` — an array of email addresses\n"
+                    sharer_info:
+                      $ref: '#components/schemas/person'
+                      description: Object describing the person who shared the offer
+                    share_link:
+                      type: string
+                      description: Link sent in share message (optional, present only for Facebook and X (formerly Twitter) shares)
+                    origin:
+                      $ref: '#components/schemas/origin'
+                      description: Contains data about the event that issued an offer
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

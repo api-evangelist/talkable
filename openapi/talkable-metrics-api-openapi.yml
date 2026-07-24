@@ -1,0 +1,280 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Metrics API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Metrics
+paths:
+  /api/v2/metrics/{metric}:
+    get:
+      summary: Calculate a metric
+      tags:
+      - Metrics
+      parameters:
+      - name: metric
+        in: path
+        schema:
+          type: string
+          example: sharing_rate
+        required: true
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 1/15/2024
+        required: true
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 2/15/2024
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - email
+      - name: traffic_sources[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaign_ids[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        example:
+        - 42
+      - name: campaign_tags[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - default
+      - name: campaign_status
+        in: query
+        schema:
+          type: string
+          example: Live
+      - name: mobile_visitor
+        in: query
+        schema:
+          type: boolean
+          example: true
+        required: false
+      - name: device_type
+        in: query
+        schema:
+          type: string
+          example: mobile
+      - name: precision
+        in: query
+        schema:
+          type: integer
+          example: 0
+      - name: live_campaigns_only
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: exclude_qa_generated
+        in: query
+        schema:
+          type: boolean
+          example: false
+          default: true
+      operationId: calculateMetric
+      responses:
+        '200':
+          description: metric info
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  plain: 2
+                  formatted: '2'
+                  result_type: number
+        '400':
+          description: returns an error when invalid metric passed
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No metric found.
+  /api/v2/metrics/{metric}/segmentize:
+    get:
+      summary: Calculate a metric with all segmented information
+      tags:
+      - Metrics
+      parameters:
+      - name: metric
+        in: path
+        schema:
+          type: string
+          example: sharing_rate
+        required: true
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 1/15/2024
+        required: true
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 2/15/2024
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - email
+      - name: traffic_sources[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaign_ids[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        example:
+        - 42
+      - name: campaign_tags[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - default
+      - name: campaign_status
+        in: query
+        schema:
+          type: string
+          example: Live
+      - name: mobile_visitor
+        in: query
+        schema:
+          type: boolean
+          example: true
+        required: false
+      - name: device_type
+        in: query
+        schema:
+          type: string
+          example: mobile
+      - name: precision
+        in: query
+        schema:
+          type: integer
+          example: 0
+      - name: live_campaigns_only
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: exclude_qa_generated
+        in: query
+        schema:
+          type: boolean
+          example: false
+          default: true
+      - name: segment_by[period]
+        in: query
+        schema:
+          type: string
+          example: week
+      - name: segment_by[campaign_tags]
+        in: query
+        schema:
+          type: array
+        required: false
+      - name: segment_by[sharing_channels]
+        in: query
+        schema:
+          type: boolean
+        required: false
+      - name: segment_by[campaign_types]
+        in: query
+        schema:
+          type: boolean
+        required: false
+      description: Returns a metric value which includes plain value, formatted value, result’s type and all segmented information
+      operationId: calculateMetricWithAllSegmentedInformation
+      responses:
+        '200':
+          description: metric segmented
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  segmented:
+                  - plain: 0
+                    formatted: '0'
+                    result_type: number
+                    period: 6/7/26 - 6/30/26
+                  - plain: 3
+                    formatted: '3'
+                    result_type: number
+                    period: 7/1/26 - 7/7/26
+        '400':
+          description: returns an error when invalid segment_by
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Unsupported option for period segmentation. Supported options: day, week, month, quarter, year'
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Offer Claims API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Offer Claims
+paths:
+  /api/v2/offer_claims:
+    post:
+      summary: Share and claim an offer
+      tags:
+      - Offer Claims
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: advocate_email
+        in: query
+        schema:
+          type: string
+          format: email
+          example: advocate@example.com
+        required: true
+      - name: friend_email
+        in: query
+        schema:
+          type: string
+          format: email
+          example: friend@example.com
+        required: true
+      operationId: shareAndClaimOffer
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                friend rewarded:
+                  value:
+                    ok: true
+                    result:
+                      friend_reward:
+                        amount: 10.0
+                        id: 1
+                        reason: click
+                        status: Paid
+                        coupon:
+                          amount: 10.0
+                          description: $10
+                          code: COUPON_CODE_29
+                          expires_at: null
+                          id: 1
+                          percentage_discount: false
+                          single_use: true
+                          used: false
+                          active: true
+                          usages: 0
+                          valid_until: null
+                        coupon_code: COUPON_CODE_29
+                        incentive_type: discount_coupon
+                        incentive_description: single use coupon for $10 off
+                        incentive_custom_description: null
+                      friend_unredeem_reason: null
+                      friend_human_unredeem_reason: null
+                friend not rewarded:
+                  value:
+                    ok: true
+                    result:
+                      friend_reward: null
+                      friend_unredeem_reason: SELF_REFERRAL
+                      friend_human_unredeem_reason: Self Referral
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                invalid email for Advocate:
+                  value:
+                    ok: false
+                    error_message: Invalid `advocate_email`.
+                invalid email for Friend:
+                  value:
+                    ok: false
+                    error_message: Invalid `friend_email`.
+                no campaign found:
+                  value:
+                    ok: false
+                    error_message: No campaign found.
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

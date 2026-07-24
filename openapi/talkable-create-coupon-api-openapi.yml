@@ -1,0 +1,80 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Create Coupon API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Create Coupon
+paths:
+  /your_api_create_coupon_web_hook_path:
+    post:
+      summary: Create Coupon
+      tags:
+      - Create Coupon
+      parameters: []
+      operationId: create_coupon
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: create_coupon_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    coupon_auto_sync_enabled:
+                      type: boolean
+                      description: Shopify Coupon auto-sync status. Note that the webhook takes precedence over Shopify Coupon auto-sync
+                    coupon_code:
+                      type: string
+                      description: Unique coupon code
+                    coupon_list_id:
+                      type: integer
+                      description: ID of the coupon list that needs to be filled
+                    coupon_list_name:
+                      type: string
+                      description: Name of the coupon list that needs to be filled
+                    email:
+                      $ref: '#components/schemas/email'
+                      description: Email of the Advocate. This field is only relevant for personal coupons.
+                    phone_number:
+                      $ref: '#components/schemas/phone_number'
+                      description: Phone number of the Advocate. This field is only relevant for personal coupons.
+                    discount_amount:
+                      type: string
+                      example: '10.0'
+                    percentage_discount:
+                      type: boolean
+                      description: When true percentage discount should be created, otherwise fixed discount
+                    usage_limit:
+                      type: integer
+                      description: Number of usages for the coupon
+                    expires_at:
+                      $ref: ../schemas.yaml#/date_time
+                      description: Coupon expiration date
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Refunds API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Refunds
+paths:
+  /api/v2/origins/{origin_slug}/refund:
+    post:
+      summary: Mark origin as refunded
+      tags:
+      - Refunds
+      parameters:
+      - name: origin_slug
+        in: path
+        schema:
+          $ref: '#/components/schemas/origin_slug'
+        required: true
+      operationId: markOriginAsRefunded
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                origin marked as fully refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: null
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:44.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:07:44.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: 100.44
+                        coupon_code: ''
+                origin marked as partially refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: null
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:45.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2: null
+                        segment3: null
+                        utm_campaign: null
+                        utm_content: null
+                        utm_medium: null
+                        utm_source: null
+                        utm_term: null
+                        order_date: '2026-07-07T11:07:45.000-07:00'
+                        partially_refunded: true
+                        refund_subtotal: 25.11
+                        coupon_code: ''
+        '400':
+          description: origin has already been refunded
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Origin has already been refunded
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    refunded_at:
+                      $ref: ../schemas.yaml#/date_time
+                    refund_subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+              required:
+              - site_slug
+components:
+  schemas:
+    origin_slug:
+      type: string
+      example: B00K2EOONI
+      description: 'If origin is a ***Purchase***:
+
+
+        `order_number`, e.g.: `"B00K2EOONI"`
+
+
+        If origin is an ***Event***:
+
+
+        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
+
+        '
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Event API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Event
+paths:
+  /your_api_event_web_hook_path:
+    post:
+      summary: Event
+      tags:
+      - Event
+      parameters: []
+      operationId: event
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: event_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    person:
+                      $ref: '#/components/schemas/person'
+                      description: Object describing the person who triggered the event
+                    origin:
+                      $ref: '#/components/schemas/event'
+                      description: Event data
+components:
+  schemas:
+    generic_origin:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the origin event in Talkable
+          example: 1234
+        email:
+          $ref: '#/components/schemas/email'
+          description: Email address of the person
+        phone_number:
+          $ref: '#/components/schemas/phone_number'
+          description: Phone number of the person
+        customer_id:
+          type: string
+          example: AB1234
+          description: Unique external identifier of a customer who triggered the origin event
+        traffic_source:
+          type: string
+          example: post-checkout
+          description: Traffic source of the origin event
+        ip_address:
+          $ref: ../schemas.yaml#/ip_address
+          description: IP address of the origin event
+        subtotal:
+          type: number
+          format: float
+          description: Monetary attribute (for Purchase and Event)
+        coupon_code:
+          type: string
+          description: Coupon codes used with the Purchase or Event (separated by ``,`` if multiple) (for Purchase only)
+        segment1:
+          type: string
+          description: Value for segment1
+        segment2:
+          type: string
+          description: Value for segment2
+        segment3:
+          type: string
+          description: Value for segment3
+        utm_campaign:
+          type: string
+          description: Value for utm_campaign
+        utm_content:
+          type: string
+          description: Value for utm_content
+        utm_medium:
+          type: string
+          description: Value for utm_medium
+        utm_source:
+          type: string
+          description: Value for utm_source
+        utm_term:
+          type: string
+          description: Value for utm_term
+    person:
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        email:
+          $ref: '#/components/schemas/email'
+        phone_number:
+          $ref: ../schemas.yaml#/phone_number
+        username:
+          type: string
+          example: johndoe1992
+        customer_id:
+          type: string
+          example: '1024'
+        unsubscribed_at:
+          $ref: ../schemas.yaml#/date_time
+        subscribed_at:
+          $ref: ../schemas.yaml#/date_time
+          description: Date person has subscribed (deprecated in favor of ``opted_in_at``)
+        opted_in_at:
+          $ref: ../schemas.yaml#/date_time
+          description: Date person has subscribed
+        phone_opted_in_at:
+          $ref: ../schemas.yaml#/date_time
+        is_loyalty_member:
+          type: boolean
+          example: true
+        loyalty_member:
+          type: object
+          example: {}
+        custom_properties:
+          $ref: ../schemas.yaml#/custom_properties
+        gender:
+          type: string
+          description: '[deprecated]'
+        referral_counts:
+          type: object
+          description: Referral counts of person as Advocate
+          properties:
+            total:
+              type: integer
+              example: 2
+            approved:
+              type: integer
+              example: 1
+            pending:
+              type: integer
+              example: 1
+        sub_choice:
+          type: boolean
+          example: false
+          description: Subscription choice
+    email:
+      type: string
+      format: email
+      example: user@store.com
+    event:
+      allOf:
+      - $ref: '#/components/schemas/generic_origin'
+      - description: Event data
+        properties:
+          currency_iso_code:
+            type: string
+            description: Currency ISO code
+            example: USD
+          type:
+            type: string
+            enum:
+            - AffiliateMember
+            - Purchase
+            - Event
+            example: Event
+          event_category:
+            type: string
+            example: app_installed
+            description: Identifier of an action that trigger the Event (for Event only)
+          event_number:
+            type: string
+            description: Unique identifier of the Event within the associated event_category (for Event only)
+            example: subscription_12345
+    phone_number:
+      type: string
+      example: '+12025551111'
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

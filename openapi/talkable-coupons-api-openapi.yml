@@ -1,0 +1,129 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Coupons API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Coupons
+paths:
+  /api/v2/coupons/{code}:
+    get:
+      summary: Find a coupon
+      description: Returns a coupon.
+      tags:
+      - Coupons
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: code
+        in: path
+        schema:
+          type: string
+        required: true
+      operationId: findCoupon
+      responses:
+        '200':
+          description: coupon found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  talkable_coupon: true
+                  coupon:
+                    amount: 10.0
+                    description: 10%
+                    code: COUPON_CODE_1
+                    expires_at: null
+                    id: 1
+                    percentage_discount: true
+                    single_use: true
+                    used: false
+                    active: true
+                    usages: 0
+                    valid_until: null
+                  associated_reward: null
+  /api/v2/coupons/{code}/permission/{person_slug}:
+    get:
+      summary: Check if given coupon code belongs to given person
+      tags:
+      - Coupons
+      parameters:
+      - name: code
+        in: path
+        schema:
+          type: string
+        required: true
+      - $ref: '#/components/parameters/person_slug_in_path'
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: checkIfGivenCouponCodeBelongsToGivenPerson
+      responses:
+        '200':
+          description: returns result of check
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  talkable_coupon: true
+                  coupon:
+                    amount: 10.0
+                    description: 10%
+                    code: COUPON_CODE_7
+                    expires_at: null
+                    id: 1
+                    percentage_discount: true
+                    single_use: true
+                    used: false
+                    active: true
+                    usages: 0
+                    valid_until: null
+                  associated_reward: null
+                  allowed: false
+                  error_message: This coupon code has not been issued yet
+                  checks:
+                    coupon_unissued: true
+                    coupon_expired: false
+                    friend_offer_expired: false
+                    different_owner: false
+                    coupon_used: false
+components:
+  parameters:
+    person_slug_in_path:
+      name: person_slug
+      in: path
+      required: true
+      schema:
+        type: string
+      examples:
+        email:
+          value: person@example.com
+          summary: Email
+        phone_number:
+          value: '+12025551111'
+          summary: Phone number in e164 format
+        customer_id:
+          value: 357811823
+          summary: ID of the customer on the merchant site
+        username:
+          value: lizard_wizard__42
+          summary: Username
+      description: Person’s email, phone number, customer ID, or username
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

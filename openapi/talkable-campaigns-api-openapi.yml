@@ -1,0 +1,78 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Campaigns API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Campaigns
+paths:
+  /api/v2/campaigns:
+    get:
+      summary: List campaigns
+      tags:
+      - Campaigns
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+        name: site_slug
+        in: query
+        schema:
+          type: string
+      operationId: listCampaigns
+      responses:
+        '200':
+          description: returns the list of campaigns
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  campaigns:
+                  - slug: 2
+                    is_active: false
+                    appearance: popup
+                    id: 2
+                    joinable_category_names:
+                    - purchase
+                    name: Deal for friends
+                    origin_max_age: null
+                    origin_min_age: null
+                    status: Disabled
+                    tag_names: []
+                    live_period:
+                      starts_at: '2026-07-07T11:05:00.000-07:00'
+                      ends_at: '2026-07-07T11:05:00.000-07:00'
+                  - slug: 1
+                    is_active: true
+                    appearance: inline
+                    id: 1
+                    joinable_category_names:
+                    - affiliate_member
+                    name: Deal for friends
+                    origin_max_age: null
+                    origin_min_age: null
+                    status: Live
+                    tag_names: []
+                    live_period:
+                      starts_at: '2026-07-07T11:05:00.000-07:00'
+                      ends_at: null
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

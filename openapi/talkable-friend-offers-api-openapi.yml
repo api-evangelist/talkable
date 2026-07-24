@@ -1,0 +1,56 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Friend Offers API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Friend Offers
+paths:
+  /api/v2/visitor_offers/{id}/track_visit:
+    put:
+      summary: Mark visitor offer as visited
+      tags:
+      - Friend Offers
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: markVisitorOfferAsVisited
+      responses:
+        '200':
+          description: sends update
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: no visitor offer found by id
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No visitor offer found by id.
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

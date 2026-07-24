@@ -1,0 +1,990 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers People API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: People
+paths:
+  /api/v2/coupons/{code}/permission/{person_slug}:
+    get:
+      summary: Check if given coupon code belongs to given person
+      tags:
+      - People
+      parameters:
+      - name: code
+        in: path
+        schema:
+          type: string
+        required: true
+      - $ref: '#/components/parameters/person_slug_in_path'
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: checkIfGivenCouponCodeBelongsToGivenPerson
+      responses:
+        '200':
+          description: returns result of check
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  talkable_coupon: true
+                  coupon:
+                    amount: 10.0
+                    description: 10%
+                    code: COUPON_CODE_7
+                    expires_at: null
+                    id: 1
+                    percentage_discount: true
+                    single_use: true
+                    used: false
+                    active: true
+                    usages: 0
+                    valid_until: null
+                  associated_reward: null
+                  allowed: false
+                  error_message: This coupon code has not been issued yet
+                  checks:
+                    coupon_unissued: true
+                    coupon_expired: false
+                    friend_offer_expired: false
+                    different_owner: false
+                    coupon_used: false
+  /api/v2/people/{person_slug}:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Find a person
+      description: Returns a person.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: findPerson
+      responses:
+        '200':
+          description: person found by email
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at: null
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at: null
+                    personal_claim_url: https://share.my-store.com/by/johndoe1992
+                    phone_number: '+12025551111'
+                    phone_opted_in_at: null
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at: null
+                    username: johndoe1992
+                    gender: null
+                    last_invited_by: null
+                    referred_by: null
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+    put:
+      summary: Update a person
+      description: Updates an existing person or creates one if it does not exist.
+      tags:
+      - People
+      parameters: []
+      operationId: updatePerson
+      responses:
+        '200':
+          description: person updated by email
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at: null
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at: null
+                    personal_claim_url: https://share.my-store.com/by/lizard_king
+                    phone_number: '+12025551111'
+                    phone_opted_in_at: null
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at: null
+                    username: lizard_king
+                    gender: null
+                    last_invited_by: null
+                    referred_by: null
+        '400':
+          description: invalid argument
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'found unpermitted parameter: :foo'
+        '422':
+          description: username is taken
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Username has already been taken. Please try another one.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    email:
+                      type: string
+                      format: email
+                      example: user@store.com
+                    phone_number:
+                      $ref: ../schemas.yaml#/phone_number
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    identifier_hash:
+                      type: string
+                      example: '1986893236229857347'
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    gated_param_subscribed:
+                      type: boolean
+                      example: false
+                      description: Opted in for receiving marketing email letters
+                    unsubscribed:
+                      type: boolean
+                      example: true
+                    unsubscribed_at:
+                      $ref: ../schemas.yaml#/date_time
+              required:
+              - site_slug
+              - data
+  /api/v2/people/{person_slug}/referrals_as_advocate:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get Friends referred by Advocate
+      description: Returns referrals where person is an advocate.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getFriendsReferredByAdvocate
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 1
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 2
+                    status: approved
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1025
+                      email: alice@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 1
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: $10
+                        code: COUPON_CODE_37
+                        expires_at: null
+                        id: 1
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until: null
+                      coupon_code: COUPON_CODE_37
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 3
+                    status: pending
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1026
+                      email: bob@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Unpaid
+                      coupon: null
+                      coupon_code: null
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/referrals_as_friend:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get Advocates who referred the Friend
+      description: Returns referrals where person is a friend.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getAdvocatesWhoReferredFriend
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 2
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: approved
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1026
+                      email: signup1@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: $10
+                        code: COUPON_CODE_42
+                        expires_at: null
+                        id: 2
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until: null
+                      coupon_code: COUPON_CODE_42
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: null
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 3
+                    qa_generated: false
+                    referred_origin_id: 6
+                    status: pending
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1027
+                      email: signup2@example.com
+                      phone_number: null
+                      first_name: null
+                      last_name: null
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 3
+                      reason: referrer
+                      status: Unpaid
+                      coupon: null
+                      coupon_code: null
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description: null
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 4
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 7
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: '+12025551111'
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/rewards:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get rewards received by person
+      description: Returns rewards that person has earned in referral program.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getRewardsReceivedByPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  rewards:
+                  - amount: 10.0
+                    id: 1
+                    reason: referrer
+                    status: Unpaid
+                    coupon: null
+                    coupon_code: null
+                    incentive_type: discount_coupon
+                    incentive_description: single use coupon for $10 off
+                    incentive_custom_description: null
+                  - amount: 10.0
+                    id: 2
+                    reason: click
+                    status: Paid
+                    coupon:
+                      amount: 10.0
+                      description: $10
+                      code: C1383-8321
+                      expires_at: null
+                      id: 3
+                      percentage_discount: null
+                      single_use: false
+                      used: false
+                      active: true
+                      usages: null
+                      valid_until: null
+                    coupon_code: C1383-8321
+                    incentive_type: discount_coupon
+                    incentive_description: shared coupon "C1383-8321" for $10 off
+                    incentive_custom_description: null
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/shares_by:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get shares made by person
+      description: Returns shares that person made.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getSharesMadeByPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  shares:
+                  - shared_at: '2026-07-07T11:07:26.000-07:00'
+                    short_url: https://share.my-store.com/x/HZRpFC
+                    channel_identifier: facebook
+                    id: 1
+                    type: SocialOfferShare
+                    offer:
+                      claim_url: https://share.my-store.com/x/GbnMfD
+                      email: customer@example.com
+                      id: 1
+                      short_url_code: dy8h95
+                      show_url: https://share.my-store.com/x/8tp5sj
+                      coupon_code: null
+                      incentives:
+                        referrer:
+                          action_type: referrer
+                          amount: 10.0
+                          description: $10
+                          percentage: false
+                          criteria_config:
+                            new_customer: null
+                            new_optin: false
+                            subtotal_min: null
+                            subtotal_max: null
+                            referrals_min: null
+                            referrals_max: null
+                            referrals_divisible_by: null
+                            referrals_not_divisible_by: null
+                            reward_uniqueness: once_per_friend
+                            friend_event_category: null
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: referrer
+                          incentive_type: discount_coupon
+                          coupon_expires_at: null
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age: null
+                      origin_min_age: null
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:07:00.000-07:00'
+                        ends_at: null
+                    friends_count: 0
+                    friend_clicks_count: 0
+                  - shared_at: '2026-07-07T11:07:26.000-07:00'
+                    short_url: https://share.my-store.com/x/cNjpnJ
+                    channel_identifier: email
+                    id: 2
+                    type: EmailOfferShare
+                    email: test+62@example.com
+                    offer:
+                      claim_url: https://share.my-store.com/x/GbnMfD
+                      email: customer@example.com
+                      id: 1
+                      short_url_code: dy8h95
+                      show_url: https://share.my-store.com/x/8tp5sj
+                      coupon_code: null
+                      incentives:
+                        referrer:
+                          action_type: referrer
+                          amount: 10.0
+                          description: $10
+                          percentage: false
+                          criteria_config:
+                            new_customer: null
+                            new_optin: false
+                            subtotal_min: null
+                            subtotal_max: null
+                            referrals_min: null
+                            referrals_max: null
+                            referrals_divisible_by: null
+                            referrals_not_divisible_by: null
+                            reward_uniqueness: once_per_friend
+                            friend_event_category: null
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: referrer
+                          incentive_type: discount_coupon
+                          coupon_expires_at: null
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age: null
+                      origin_min_age: null
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:07:00.000-07:00'
+                        ends_at: null
+                    friends_count: 0
+                    friend_clicks_count: 0
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/anonymize:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    post:
+      summary: Anonymize a person
+      description: Removes or obscures all personal data.
+      tags:
+      - People
+      parameters: []
+      operationId: anonymizePerson
+      responses:
+        '200':
+          description: person anonymized
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties: {}
+                    sub_choice: false
+                    subscribed_at: null
+                    customer_id: null
+                    email: a7086f75-2da0-4ea8-afca-df1147425be9@anonymized.email
+                    events_count: 0
+                    first_name: null
+                    last_name: null
+                    opted_in_at: null
+                    personal_claim_url: null
+                    phone_number: null
+                    phone_opted_in_at: null
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at: null
+                    username: null
+                    gender: null
+                    last_invited_by: null
+                    referred_by: null
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+              required:
+              - site_slug
+  /api/v2/people/{person_slug}/personal_data:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    get:
+      summary: Get personal information about a person
+      description: Returns personal data.
+      tags:
+      - People
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: getPersonalInformationAboutPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    created_at: '2026-07-07T11:07:31.000-07:00'
+                    customer_id: '1024'
+                    email: customer@example.com
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at: null
+                    phone_opted_in_at: null
+                    unsubscribed_at: null
+                    username: johndoe1992
+                    origins:
+                    - type: Purchase
+                      created_at: '2026-07-07T11:07:31.000-07:00'
+                      ip_address: 1.2.3.4
+                      order_number: B00K2EOONI
+                      subtotal: 123.45
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  /api/v2/people/{person_slug}/unsubscribe:
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        $ref: '#/components/schemas/person_slug'
+      required: true
+    post:
+      summary: Unsubscribe a person
+      description: Unsubscribes a person from receiving emails.
+      tags:
+      - People
+      parameters: []
+      operationId: unsubscribePerson
+      responses:
+        '200':
+          description: person unsubscribed
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at: null
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at: null
+                    personal_claim_url: https://share.my-store.com/by/johndoe1992
+                    phone_number: '+12025551111'
+                    phone_opted_in_at: null
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at: '2026-07-07T11:07:33.000-07:00'
+                    username: johndoe1992
+                    gender: null
+                    last_invited_by: null
+                    referred_by: null
+        '422':
+          description: slug is not an existing username nor a valid email
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Email isn''t valid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+              required:
+              - site_slug
+components:
+  schemas:
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
+  parameters:
+    person_slug_in_path:
+      name: person_slug
+      in: path
+      required: true
+      schema:
+        type: string
+      examples:
+        email:
+          value: person@example.com
+          summary: Email
+        phone_number:
+          value: '+12025551111'
+          summary: Phone number in e164 format
+        customer_id:
+          value: 357811823
+          summary: ID of the customer on the merchant site
+        username:
+          value: lizard_wizard__42
+          summary: Username
+      description: Person’s email, phone number, customer ID, or username
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

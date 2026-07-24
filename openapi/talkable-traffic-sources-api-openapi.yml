@@ -1,0 +1,48 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Traffic Sources API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Traffic Sources
+paths:
+  /api/v2/traffic_sources:
+    get:
+      summary: List traffic sources
+      tags:
+      - Traffic Sources
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: listTrafficSources
+      responses:
+        '200':
+          description: traffic sources
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                - identifier: traffic_source_11
+                - identifier: traffic_source_12
+                - identifier: traffic_source_13
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

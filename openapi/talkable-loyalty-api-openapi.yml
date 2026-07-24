@@ -1,0 +1,588 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Loyalty API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Loyalty
+paths:
+  /api/v2/loyalty/members/{email}/collect_actions:
+    get:
+      summary: List collect actions
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          $ref: '#/components/schemas/member_email'
+        required: true
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: listCollectActions
+      responses:
+        '200':
+          description: returns collect actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: dummy
+                    created_at: '2026-07-07T11:05:31.000-07:00'
+                    points: 21
+                    action_config:
+                      name: Name
+                      description: description
+                      points: 21
+                    coupon: null
+                    event: null
+                    user: null
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+    post:
+      summary: Create a collect action
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          $ref: '#/components/schemas/member_email'
+        required: true
+      operationId: createCollectAction
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                creates collect action:
+                  value:
+                    ok: true
+                    result:
+                      collected: true
+                      loyalty_member:
+                        custom_properties: {}
+                        email: test+11@example.com
+                        phone_number: null
+                        points_balance: 121
+                        member_dates: []
+                no action configs matched:
+                  value:
+                    ok: true
+                    result:
+                      collected: false
+                      loyalty_member:
+                        custom_properties: {}
+                        email: test+12@example.com
+                        phone_number: null
+                        points_balance: 100
+                        member_dates: []
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                no action configs found by type:
+                  value:
+                    ok: false
+                    error_message: No action configurations found for identifier `random`
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    traffic_source:
+                      type: string
+                      default: api
+                  required:
+                  - type
+              required:
+              - site_slug
+              - data
+  /api/v2/loyalty/members/{email}/manual_adjustment_actions:
+    parameters:
+    - name: email
+      in: path
+      schema:
+        $ref: '#/components/schemas/member_email'
+      required: true
+    get:
+      summary: List manual adjustment actions
+      tags:
+      - Loyalty
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: listManualAdjustmentActions
+      responses:
+        '200':
+          description: returns manual adjustment actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: manual_adjustment
+                    created_at: '2026-07-07T11:05:37.000-07:00'
+                    points: -100
+                    action_config: null
+                    coupon: null
+                    event: null
+                    user:
+                      account_id: 1
+                      email: aa81@gg.com
+                      id: 1
+                      staff_member: false
+        '400':
+          description: member not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Loyalty member not found
+    post:
+      summary: Adjust loyalty member’s points balance
+      description: 'Adjusts loyalty member’s points balance.
+
+
+        Accepts ``data`` JSON object with ``points`` property and optional ``description``.
+
+
+        E.g. ``{"points": 100}`` or ``{"points": -100, "description": "For cheating"}``.
+
+        '
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: adjustLoyaltyMembersPointsBalance
+      responses:
+        '200':
+          description: balance updated
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  action:
+                    type: manual_adjustment
+                    created_at: '2026-07-07T11:05:39.000-07:00'
+                    points: -100
+                    action_config: null
+                    coupon: null
+                    event: null
+                    user:
+                      account_id: 2
+                      email: api@talkable.com
+                      id: 1
+                      staff_member: false
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+20@example.com
+                    phone_number: null
+                    points_balance: 0
+                    member_dates: []
+        '422':
+          description: balance not updated
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Points adjustment must result in member points balance between 0 and available points limit'
+        '400':
+          description: member not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Loyalty member not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    points:
+                      type: integer
+                      description: Amount of points to add or subtract.
+                      example: -100
+                    description:
+                      type: string
+                      description: A contextual explanation why points amount was adjusted.
+                      example: For cheating
+                  required:
+                  - points
+              required:
+              - site_slug
+              - data
+  /api/v2/loyalty/members/{email}:
+    parameters:
+    - name: email
+      in: path
+      schema:
+        $ref: '#/components/schemas/member_email'
+      required: true
+    get:
+      summary: Find a loyalty member
+      tags:
+      - Loyalty
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: findLoyaltyMember
+      responses:
+        '200':
+          description: member found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+23@example.com
+                    phone_number: null
+                    points_balance: 100
+                    member_dates: []
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+    put:
+      summary: Update a loyalty member
+      description: 'Updates loyalty member data.
+
+
+        Accepts ``data`` JSON object with ``custom_properties`` and ``member_dates`` JSON objects.
+
+
+        E.g. ``{"custom_properties":{"contest_participant":true},"member_dates":{"identifier":"birthday","date":"2004-01-01"}}``.
+
+
+        Note that all values in ``custom_properties`` object will be stored as strings,
+
+        e.g. ``false`` will become ``"f"``, and ``123`` will become ``"123"``.
+
+        '
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: updateLoyaltyMember
+      responses:
+        '200':
+          description: updates member
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  loyalty_member:
+                    custom_properties:
+                      subscribed_at: '2024-01-01'
+                    email: test+25@example.com
+                    phone_number: null
+                    points_balance: 100
+                    member_dates:
+                    - date: '2004-01-01'
+                      identifier: birthday
+        '400':
+          description: invalid member_dates
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Invalid member_dates format, expected an array of objects with `date` and `identifier` keys
+        '422':
+          description: invalid custom property key
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Identifier can contain lowercase letters, numbers and ''_'' only and cannot begin with a number'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    custom_properties:
+                      $ref: ../schemas.yaml#/custom_properties
+                    member_dates:
+                      type: array
+                      description: Array of member dates, each with `identifier` and `date` fields.
+                      items:
+                        type: object
+                        properties:
+                          identifier:
+                            type: string
+                            example: birthday
+                            description: Identifier of the member date, created in rule configuration.
+                          date:
+                            type: string
+                            format: date
+                            example: '2004-01-01'
+                        required:
+                        - identifier
+                        - date
+              required:
+              - site_slug
+              - data
+  /api/v2/loyalty/members/{email}/redeem_actions:
+    parameters:
+    - name: email
+      in: path
+      schema:
+        $ref: '#/components/schemas/member_email'
+      required: true
+    get:
+      summary: List redeem actions
+      tags:
+      - Loyalty
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: listRedeemActions
+      responses:
+        '200':
+          description: returns redeem actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: redeem
+                    created_at: '2026-07-07T11:05:46.000-07:00'
+                    points: -100
+                    action_config: null
+                    coupon:
+                      amount: 10.0
+                      description: 10%
+                      code: COUPON_CODE_18
+                      expires_at: null
+                      id: 1
+                      percentage_discount: true
+                      single_use: true
+                      used: false
+                      active: true
+                      usages: 0
+                      valid_until: null
+                    event: null
+                    user: null
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+    post:
+      summary: Create a redeem action
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: createRedeemAction
+      responses:
+        '200':
+          description: creates redeem action
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  action:
+                    type: redeem
+                    created_at: '2026-07-07T11:05:48.000-07:00'
+                    points: -10
+                    action_config: null
+                    coupon:
+                      amount: 10.0
+                      description: 10%
+                      code: COUPON_CODE_19
+                      expires_at: null
+                      id: 1
+                      percentage_discount: true
+                      single_use: true
+                      used: false
+                      active: true
+                      usages: 0
+                      valid_until: null
+                    event: null
+                    user: null
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+35@example.com
+                    phone_number: null
+                    points_balance: 90
+                    member_dates: []
+        '400':
+          description: member has not enough points
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: not enough points
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  $ref: ../schemas.yaml#/site_slug
+                data:
+                  type: object
+                  properties:
+                    redemption_batch_id:
+                      type: integer
+                      format: int32
+                      minimum: 1
+                      example: 1
+                    traffic_source:
+                      type: string
+                      default: api
+                  required:
+                  - redemption_batch_id
+              required:
+              - site_slug
+              - data
+  /api/v2/loyalty/members/{email}/redemption_batches:
+    get:
+      summary: List redemption batches
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          $ref: '#/components/schemas/member_email'
+        required: true
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      operationId: listRedemptionBatches
+      responses:
+        '200':
+          description: returns redemption batches
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  redemption_batches:
+                  - id: 1
+                    description: description
+                    points_cost: 10
+                    position: 11
+                    available_coupons_count: 1
+                    coupon_list:
+                      amount: 10.0
+                      localized_amount: 10%
+                      name: coupon_list_19
+                      percentage_discount: true
+                      expires_at: null
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  schemas:
+    member_email:
+      type: string
+      format: email
+      example: customer@example.com
+      description: Loyalty member’s email
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

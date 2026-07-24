@@ -1,0 +1,279 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Referral API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Referral
+paths:
+  /your_api_referral_web_hook_path:
+    post:
+      summary: Referral
+      tags:
+      - Referral
+      parameters: []
+      operationId: referral
+      responses:
+        '200':
+          description: Referral Webhook keeps retrying until it gets 2xx HTTP status in response. Only after that rewards associated with the referral can be paid.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: referral_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    offer:
+                      $ref: '#components/schemas/offer'
+                    advocate_rewards:
+                      type: array
+                      description: Array of objects describing the rewards received by Advocate person (except for rewards paid in loyalty points)
+                      items:
+                        $ref: '#/components/schemas/referral_reward'
+                    friend_rewards:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/referral_reward'
+                      description: Array of objects describing the rewards received by Referred person (except for rewards paid in loyalty points)
+                    referrer:
+                      $ref: '#/components/schemas/referral_reward'
+                      description: Advocate referral incentive reward details (optional, absent if reward was paid in loyalty points)
+                    referred:
+                      $ref: '#/components/schemas/referral_reward'
+                      description: Friend referred incentive reward details (optional, absent if reward was paid in loyalty points)
+                    referred_origin:
+                      $ref: '#/components/schemas/origin'
+                      description: Object with referred origin made by Friend that created a referral
+                    share:
+                      type: object
+                      description: Details about share
+                      properties:
+                        channel:
+                          type: string
+                          example: email
+                          description: Sharing channel involved in the referral
+components:
+  schemas:
+    origin:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - AffiliateMember
+          - Purchase
+          - Event
+          example: Purchase
+          description: '*Purchase* for post-purchase placement
+
+
+            *AffiliateMember* for standalone, floating widget, or gleam placements
+
+
+            *Event* for post-event placement (such as a signup/share page which triggers a referral campaign)
+
+            '
+        id:
+          type: integer
+          description: Unique identifier of the origin event
+          example: 1234
+        email:
+          $ref: '#/components/schemas/email'
+          description: Email address of the person
+        phone_number:
+          $ref: '#/components/schemas/phone_number'
+          description: Phone number of the person
+        customer_id:
+          type: string
+          example: AB1234
+          description: Unique external identifier of a customer who triggered the origin event
+        traffic_source:
+          type: string
+          example: post-checkout
+          description: Traffic source of the origin event
+        ip_address:
+          $ref: ../schemas.yaml#/ip_address
+          description: IP address of the origin event
+        order_number:
+          type: string
+          description: Unique identifier of the Purchase (for Purchase only)
+          example: '11111'
+        order_date:
+          $ref: ../schemas.yaml#/date_time
+          description: Date of the Purchase (for Purchase only)
+        subtotal:
+          type: number
+          format: float
+          description: Monetary attribute (for Purchase and Event)
+        currency_iso_code:
+          type: string
+          description: Currency code of the Purchase or Event, defaults to the Site’s currency (for Purchase only)
+          example: USD
+        coupon_code:
+          type: string
+          description: Coupon codes used with the Purchase or Event (separated by ``,`` if multiple) (for Purchase only)
+        event_category:
+          type: string
+          example: app_installed
+          description: Identifier of an action that trigger the Event (for Event only)
+        event_number:
+          type: string
+          description: Unique identifier of the Event within the associated event_category (for Event only)
+        segment1:
+          type: string
+          description: Value for segment1
+        segment2:
+          type: string
+          description: Value for segment2
+        segment3:
+          type: string
+          description: Value for segment3
+        utm_campaign:
+          type: string
+          description: Value for utm_campaign
+        utm_content:
+          type: string
+          description: Value for utm_content
+        utm_medium:
+          type: string
+          description: Value for utm_medium
+        utm_source:
+          type: string
+          description: Value for utm_source
+        utm_term:
+          type: string
+          description: Value for utm_term
+    person:
+      type: object
+      properties:
+        first_name:
+          type: string
+          example: John
+        last_name:
+          type: string
+          example: Doe
+        email:
+          $ref: '#/components/schemas/email'
+        phone_number:
+          $ref: ../schemas.yaml#/phone_number
+        username:
+          type: string
+          example: johndoe1992
+        customer_id:
+          type: string
+          example: '1024'
+        unsubscribed_at:
+          $ref: ../schemas.yaml#/date_time
+        subscribed_at:
+          $ref: ../schemas.yaml#/date_time
+          description: Date person has subscribed (deprecated in favor of ``opted_in_at``)
+        opted_in_at:
+          $ref: ../schemas.yaml#/date_time
+          description: Date person has subscribed
+        phone_opted_in_at:
+          $ref: ../schemas.yaml#/date_time
+        is_loyalty_member:
+          type: boolean
+          example: true
+        loyalty_member:
+          type: object
+          example: {}
+        custom_properties:
+          $ref: ../schemas.yaml#/custom_properties
+        gender:
+          type: string
+          description: '[deprecated]'
+        referral_counts:
+          type: object
+          description: Referral counts of person as Advocate
+          properties:
+            total:
+              type: integer
+              example: 2
+            approved:
+              type: integer
+              example: 1
+            pending:
+              type: integer
+              example: 1
+        sub_choice:
+          type: boolean
+          example: false
+          description: Subscription choice
+    email:
+      type: string
+      format: email
+      example: user@store.com
+    referral_reward:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique reward ID
+        amount:
+          type: string
+          example: '10.0'
+          description: Amount of money to reward (null when non-monetary incentive is used)
+        email:
+          $ref: '#/components/schemas/email'
+          description: Email of the person who got reward
+        person:
+          $ref: '#/components/schemas/person'
+          description: Parameters describing the person who got reward
+        incentive:
+          type: string
+          enum:
+          - rebate
+          - discount_coupon
+          - other
+          example: rebate
+          description: 'Type of incentive reward
+
+
+            *Rebate* (``rebate``) — monetary reward, certain amount of money that should be paid out to a customer with a given email. The merchants’ payment system should handle the payment.
+
+
+            *Coupon code* (``discount_coupon``) — a discount coupon is issued to user. Talkable handles distributing this type of incentives.
+
+
+            *Non-monetary* (``other``) — used when a campaign has a non-monetary rebate like “Free T-shirt” or “One Month Free”. This should be handled on the merchant’s side. More information on the reward is specified in incentive_description.
+
+            '
+        incentive_description:
+          type: string
+          description: Verbose reward explanation
+        reward_coupon_code:
+          type: string
+          description: Coupon code received by person as a reward (present if incentive equals ``discount_coupon``)
+        origin:
+          $ref: '#/components/schemas/origin'
+          description: Contains data about the event that issued the reward
+    phone_number:
+      type: string
+      example: '+12025551111'
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

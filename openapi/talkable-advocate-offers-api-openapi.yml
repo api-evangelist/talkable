@@ -1,0 +1,362 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Advocate Offers
+paths:
+  /api/v2/offers/{short_url_code}:
+    get:
+      summary: Find an advocate offer
+      description: 'Returns advocate offer.
+
+
+        Accepts optional ``sharing_channels`` JSON array with social sharing
+
+        channels for which will be generated sharing links.
+
+
+        Supported channels: ``facebook``, ``twitter``, ``linkedin``, ``sms``, ``other``
+
+        or custom, except ``email``, ``reminder``, ``facebook_sponsored`` and ``coupon``.
+
+        '
+      tags:
+      - Advocate Offers
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - facebook
+      operationId: findAdvocateOffer
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                offer found:
+                  value:
+                    ok: true
+                    result:
+                      offer:
+                        claim_url: https://share.my-store.com/x/vUTmRB
+                        email: null
+                        id: 1
+                        short_url_code: J7bl6a
+                        show_url: https://share.my-store.com/x/IkcuJe
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags: []
+                sharing channels passed:
+                  value:
+                    ok: true
+                    result:
+                      offer:
+                        claim_url: https://share.my-store.com/x/dWpV5t
+                        email: null
+                        id: 1
+                        short_url_code: jLqYF1
+                        show_url: https://share.my-store.com/x/8imqnK
+                        coupon_code: null
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags: []
+                      claim_links:
+                        facebook: https://share.my-store.com/x/01eAMb
+                        custom: https://share.my-store.com/x/obw4Ne
+        '400':
+          description: null
+          content:
+            application/json:
+              examples:
+                offer not found:
+                  value:
+                    ok: false
+                    error_message: No offer found by id.
+                unsupported sharing channels passed:
+                  value:
+                    ok: false
+                    error_message: 'Wrong sharing channel: email'
+  /api/v2/offers/{short_url_code}/claim_url_status:
+    get:
+      summary: Check offer claim link status
+      tags:
+      - Advocate Offers
+      parameters:
+      - $ref: '#/components/parameters/site_slug_in_query_required'
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: claim_url
+        in: query
+        schema:
+          type: string
+      operationId: checkOfferClaimLinkStatus
+      responses:
+        '200':
+          description: null
+          content:
+            application/json:
+              examples:
+                offer claim link is active:
+                  value:
+                    ok: true
+                    result:
+                      active: true
+                offer claim link is inactive:
+                  value:
+                    ok: true
+                    result:
+                      active: false
+        '400':
+          description: Offer not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No offer found by id.
+  /api/v2/offers/{short_url_code}/shares/email:
+    post:
+      summary: Share offer with recipients via email
+      operationId: shareViaEmail
+      tags:
+      - Advocate Offers
+      parameters:
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: sends offer to recipients
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  success: true
+                  validation_only: false
+                  stats:
+                    currently_sent: 3
+                    currently_not_sent: 0
+                    previously_sent: 0
+                    total_sent: 3
+                    sent_limit_exceeded: false
+                    left_emails: 22
+                    advocate_blocked: false
+                  recipients:
+                    recipient_1@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                    recipient_2@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                    recipient_3@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                  reward: null
+                  rewards: []
+        '400':
+          description: returns bad request when missing recipients
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: '`recipients` is required'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reminder:
+                  type: boolean
+                  example: true
+                validation_only:
+                  type: boolean
+                  example: false
+                recipients:
+                  type: string
+                  example: recipient_1@com.com,recipient_2@com.com,recipient_3@com.com
+                subject:
+                  type: string
+                  example: Your friend sent you x% off
+                body:
+                  type: string
+                  example: Your personal message with offer link
+              required:
+              - recipients
+  /api/v2/offers/{short_url_code}/shares/social:
+    post:
+      summary: Share offer with recipients via social channel
+      operationId: shareViaSocialChannel
+      tags:
+      - Advocate Offers
+      parameters:
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: share offer to social channel
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  share:
+                    shared_at: '2026-07-07T11:08:32.000-07:00'
+                    short_url: https://share.my-store.com/x/IyfKJR
+                    channel_identifier: facebook
+                    id: 1
+                    type: SocialOfferShare
+                    offer:
+                      claim_url: https://share.my-store.com/x/0iqOMr
+                      email: signup18@example.com
+                      id: 1
+                      short_url_code: d3BGIz
+                      show_url: https://share.my-store.com/x/Kg4GH7
+                      coupon_code: C1383-8321
+                      incentives:
+                        sharing:
+                          action_type: sharing
+                          amount: 10.0
+                          description: $10
+                          percentage: false
+                          criteria_config:
+                            once_per_person: false
+                            email_shares: null
+                            sharing_channels: null
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: sharing
+                          incentive_type: discount_coupon
+                          coupon_expires_at: null
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age: null
+                      origin_min_age: null
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:08:00.000-07:00'
+                        ends_at: null
+                    friends_count: 0
+                    friend_clicks_count: 0
+                  reward:
+                    amount: 10.0
+                    id: 1
+                    reason: shared
+                    status: Paid
+                    coupon:
+                      amount: 10.0
+                      description: $10
+                      code: C1383-8321
+                      expires_at: null
+                      id: 1
+                      percentage_discount: null
+                      single_use: false
+                      used: false
+                      active: true
+                      usages: null
+                      valid_until: null
+                    coupon_code: C1383-8321
+                    incentive_type: discount_coupon
+                    incentive_description: shared coupon "C1383-8321" for $10 off
+                    incentive_custom_description: null
+        '400':
+          description: returns bad request in the case of wrong social channel name
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: '`channel` is invalid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channel:
+                  type: string
+                  enum:
+                  - facebook
+                  - twitter
+                  - linkedin
+                  - whatsapp
+                  - sms
+                  - other
+                  example: facebook
+              required:
+              - channel
+components:
+  parameters:
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

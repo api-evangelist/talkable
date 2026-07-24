@@ -1,0 +1,137 @@
+openapi: 3.0.3
+info:
+  title: Talkable Advocate Offers Reward API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+servers:
+- url: https://www.talkable.com
+security:
+- api_key: []
+tags:
+- name: Reward
+paths:
+  /your_api_reward_web_hook_path:
+    post:
+      summary: Reward
+      tags:
+      - Reward
+      parameters: []
+      operationId: reward
+      responses:
+        '200':
+          description: Talkable considers a Webhook as "delivered successfully" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                key:
+                  type: string
+                  description: Talkable security key
+                site:
+                  $ref: ../schemas.yaml#/site_slug
+                type:
+                  type: string
+                  example: reward_web_hook
+                extras:
+                  type: object
+                  example: {}
+                payload:
+                  type: object
+                  properties:
+                    campaign:
+                      $ref: '#components/schemas/campaign'
+                    offer:
+                      $ref: '#components/schemas/offer'
+                    person:
+                      $ref: '#components/schemas/person'
+                      description: 'Object describing the person that got reward (note: might be null)'
+                    origin:
+                      $ref: '#components/schemas/origin'
+                      description: Object of data related to the event that issued an offer
+                    reward:
+                      type: object
+                      description: Object of parameters describing the reward itself
+                      properties:
+                        id:
+                          type: integer
+                          description: Unique identifier of the reward
+                        reason:
+                          type: string
+                          description: Reason why this reward was given
+                        status:
+                          type: string
+                          description: Status of the reward (i.e. “Paid”, “Unpaid”, “Voided”)
+                        incentive_type:
+                          type: string
+                          description: Type of incentive (rebate, discount_coupon, other)
+                        incentive_identifier:
+                          type: string
+                          description: Unique human-readable identifier of the incentive
+                        incentive_description:
+                          type: string
+                          description: Description of incentive (human-readable, equals to non monetary description if ``incentive_type`` is ``other``)
+                        incentive_custom_description:
+                          type: string
+                          description: Custom Description of incentive
+                        amount:
+                          type: number
+                          format: float
+                          description: Amount of money to reward (null when ``incentive_type`` is discount_coupon or other)
+                        coupon_code:
+                          type: string
+                          description: Deprecated in favor of ``coupon``
+                        coupon:
+                          type: object
+                          description: Reward coupon details (null when ``incentive_type`` is ``rebate`` or ``other``)
+                          properties:
+                            active:
+                              type: boolean
+                              description: '``true`` if the coupon has not expired yet'
+                            amount:
+                              type: number
+                              format: float
+                              description: Amount of the discount that the coupon provides
+                            code:
+                              type: string
+                              description: Unique coupon code
+                            description:
+                              type: string
+                              example: $15
+                              description: Human-readable representation of the discount (e.g. “$15” or “10%”)
+                            id:
+                              type: integer
+                              description: Unique identifier of the coupon
+                            percentage_discount:
+                              type: boolean
+                              description: '``true`` if the coupon amount is percentage as opposed to a fixed value'
+                            single_use:
+                              type: boolean
+                              description: '``true`` if the coupon is single-use'
+                            usages:
+                              type: integer
+                              description: Number of times the coupon has been used (null if the coupon is multi-use)
+                            used:
+                              type: boolean
+                              description: '``true`` if the coupon has been used'
+                            expires_at:
+                              $ref: ../schemas.yaml#/date_time
+                              description: Expiration time of the coupon (deprecated in favor of ``valid_until``)
+                            valid_until:
+                              $ref: ../schemas.yaml#/date_time
+                              description: Expiration time of the coupon in the site time zone
+                    advocate_origin:
+                      $ref: '#components/schemas/origin'
+                      description: Object of data related to the Advocate origin
+                    friend_origin:
+                      $ref: '#components/schemas/origin'
+                      description: Object of data related to the Friend origin
+components:
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key
