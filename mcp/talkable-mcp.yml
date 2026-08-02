@@ -1,0 +1,119 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://docs.talkable.com/mcp_server/
+server:
+  name: Talkable
+  transport: http            # streamable HTTP
+  url: https://www.talkable.com/mcp
+  docs: https://docs.talkable.com/mcp_server/
+  getting_started: https://docs.talkable.com/mcp_server/getting_started/
+  install: claude mcp add --transport http Talkable https://www.talkable.com/mcp
+  client_config:
+    mcpServers:
+      Talkable:
+        type: http
+        url: https://www.talkable.com/mcp
+authentication:
+  methods:
+    - oauth2.1               # PKCE (S256) + Dynamic Client Registration (RFC 7591)
+    - bearer-api-key         # personal or scoped account/site API key
+  scopes:
+    - mcp:read
+    - mcp:write
+  discovery:
+    - /.well-known/oauth-protected-resource
+    - /.well-known/oauth-authorization-server
+  authorization_endpoint: https://www.talkable.com/oauth/authorize
+  token_endpoint: https://www.talkable.com/oauth/token
+  registration_endpoint: https://www.talkable.com/oauth/register
+  docs: https://docs.talkable.com/mcp_server/authentication/
+notes: >-
+  Customer-facing, account-scoped MCP server. An agent acts as the signed-in
+  user and is gated by both the credential scope (mcp:read / mcp:write) and the
+  user's Talkable role on each site (Admin / Write / CSP / Read). Exposes the
+  same tools as the Talkable AI Assistant.
+tools:
+  # Two helper tools are always present
+  - name: list_sites
+    description: Discover the sites and site_slug values the credential can use.
+    role: Read+
+  - name: prompt_ai_assistant
+    description: Hand a natural-language task to the Talkable AI Assistant.
+    role: Read+
+  # Reporting reads
+  - name: list_campaigns
+    description: List campaigns for a site.
+    role: Read+
+    source_operation: openapi/talkable-v2-openapi-original.yml#listCampaigns
+  - name: get_campaign
+    description: Get details of a campaign.
+    role: Read+
+  - name: list_incentives
+    description: List a campaign's incentives.
+    role: Read+
+  - name: list_placements
+    description: List the site's placements.
+    role: Read+
+  - name: list_split_tests
+    description: List A/B tests for a site.
+    role: Read+
+  - name: list_metrics
+    description: List available metrics.
+    role: Read+
+  - name: calculate_metric
+    description: Calculate a metric with filters and segmentations.
+    role: Read+
+    source_operation: openapi/talkable-v2-openapi-original.yml#calculateMetric
+  - name: list_report_types
+    description: List available grid report types and filters.
+    role: Read+
+  - name: schedule_report_export
+    description: Schedule a CSV export of a grid report.
+    role: Write+
+  - name: list_traffic_sources
+    description: List the site's traffic sources.
+    role: Read+
+    source_operation: openapi/talkable-v2-openapi-original.yml#listTrafficSources
+  - name: list_view_templates
+    description: List a campaign's view templates.
+    role: Read+
+  - name: list_locale_entries
+    description: List a campaign's locale entries (copy/config).
+    role: Read+
+  - name: get_site_settings
+    description: Get site settings, optionally by category.
+    role: Read+
+  - name: list_setting_changes
+    description: List recent setting changes for a site.
+    role: Read+
+  - name: verify_integration
+    description: Verify the site's Talkable JS integration is live.
+    role: Read+
+  # Support lookups
+  - name: find_referral
+    description: Look up a referral by ID.
+    role: Read+ or CSP
+  - name: find_person
+    description: Look up a person by email, or by ID.
+    role: Read+ or CSP
+    source_operation: openapi/talkable-v2-openapi-original.yml#findPerson
+  - name: find_coupon
+    description: Look up a coupon by code, or by ID.
+    role: Read+ or CSP
+    source_operation: openapi/talkable-v2-openapi-original.yml#findCoupon
+  - name: list_coupon_lists
+    description: List the site's coupon lists with code counts.
+    role: Read+ or CSP
+  # Support write actions (require mcp:write scope)
+  - name: approve_or_void_referral
+    description: Approve or void a referral.
+    role: Write+ or CSP
+    source_operation: openapi/talkable-v2-openapi-original.yml#updateReferralStatus
+  - name: manage_person
+    description: Unsubscribe, resubscribe, or anonymize a person.
+    role: Write+ or CSP
+    source_operation: openapi/talkable-v2-openapi-original.yml#anonymizePerson
+  - name: expire_coupon
+    description: Expire a coupon (stops future redemptions).
+    role: Write+ or CSP

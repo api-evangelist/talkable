@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.talkable.com/api_v2/intro/ + openapi/talkable-v2-openapi-original.yml
+docs: https://docs.talkable.com/api_v2/intro/
+summary:
+  types: [http, oauth2]
+  http_schemes: [bearer]
+  oauth2_flows: [authorizationCode]
+schemes:
+  - name: api_key
+    type: http
+    scheme: bearer
+    description: >-
+      REST API v2 authentication. Provide your Talkable API key as a Bearer
+      token in the Authorization header. The API key is managed in
+      Site Settings -> API Integration -> API Key (also in Account Settings).
+      Do not embed the key in browser-side JavaScript.
+    example: 'Authorization: Bearer <API_KEY>'
+    sources: [openapi/talkable-v2-openapi-original.yml]
+    applies_to: REST API v2
+  - name: oauth2
+    type: oauth2
+    description: >-
+      MCP server authentication. OAuth 2.1 with PKCE (S256) and Dynamic Client
+      Registration (RFC 7591). Talkable is both authorization server and
+      resource server; clients self-configure from the well-known discovery
+      documents.
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://www.talkable.com/oauth/authorize
+        tokenUrl: https://www.talkable.com/oauth/token
+        registrationUrl: https://www.talkable.com/oauth/register
+        scopes:
+          mcp:read: Read account and site data over MCP.
+          mcp:write: Create or update Talkable data over MCP.
+    sources: [well-known/talkable-oauth-authorization-server.json]
+    applies_to: MCP server
+    docs: https://docs.talkable.com/mcp_server/authentication/
+  - name: mcp_personal_api_key
+    type: http
+    scheme: bearer
+    description: >-
+      Long-lived personal (or scoped account/site) API key usable as a Bearer
+      token against the MCP endpoint. Created under My Profile -> API Keys.
+    applies_to: MCP server

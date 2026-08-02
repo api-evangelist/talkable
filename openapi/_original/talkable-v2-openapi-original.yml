@@ -1,0 +1,4205 @@
+---
+openapi: 3.0.3
+paths:
+  "/api/v2/assets":
+    get:
+      summary: List assets
+      tags:
+      - Assets
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: content_type
+        in: query
+        required: false
+        description: Filter by content type or its prefix, e.g. `image` or `image/png`.
+        schema:
+          type: string
+          example: image
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+      - name: per_page
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 25
+      operationId: listAssets
+      responses:
+        '200':
+          description: assets list
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  assets:
+                  - content_type: video/mp4
+                    id: 3
+                    name: frog_video_short.mp4
+                    url: https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/3/original/frog_video_short.mp4
+                    size: 281524
+                    width:
+                    height:
+                    fingerprint: f773c1d7bd57e3549a8cd2516fdbdd4e
+                    created_at: '2026-07-07T11:04:57.000-07:00'
+                    updated_at: '2026-07-07T11:04:57.000-07:00'
+                  - content_type: image/png
+                    id: 2
+                    name: closebutton.png
+                    url: https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/2/original/closebutton.png
+                    size: 6600
+                    width: 100
+                    height: 100
+                    fingerprint: 0c406c68a263801c7ce983efda254268
+                    created_at: '2026-07-07T11:04:57.000-07:00'
+                    updated_at: '2026-07-07T11:04:57.000-07:00'
+                  - content_type: image/jpeg
+                    id: 1
+                    name: santa.jpg
+                    url: https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg
+                    size: 121059
+                    width: 960
+                    height: 900
+                    fingerprint: df262c29b6ab5f5a97b6870c3c9ba813
+                    created_at: '2026-07-07T11:04:57.000-07:00'
+                    updated_at: '2026-07-07T11:04:57.000-07:00'
+                  total: 3
+    post:
+      summary: Upload an asset
+      tags:
+      - Assets
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: uploadAsset
+      responses:
+        '201':
+          description: asset uploaded
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  asset:
+                    content_type: image/jpeg
+                    id: 1
+                    name: santa.jpg
+                    url: https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg
+                    size: 121059
+                    width: 960
+                    height: 900
+                    fingerprint: df262c29b6ab5f5a97b6870c3c9ba813
+                    created_at: '2026-07-07T11:05:03.000-07:00'
+                    updated_at: '2026-07-07T11:05:03.000-07:00'
+        '422':
+          description: asset with the same name already exists
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: File name has already been taken'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Asset file. The asset name is derived from the uploaded
+                    file name. Fails if an asset with the same name already exists
+                    on the account.
+              required:
+              - file
+        required: true
+  "/api/v2/assets/{id}":
+    get:
+      summary: Find an asset
+      tags:
+      - Assets
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: findAsset
+      responses:
+        '200':
+          description: asset found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  asset:
+                    content_type: image/jpeg
+                    id: 1
+                    name: santa.jpg
+                    url: https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg
+                    size: 121059
+                    width: 960
+                    height: 900
+                    fingerprint: df262c29b6ab5f5a97b6870c3c9ba813
+                    created_at: '2026-07-07T11:05:10.000-07:00'
+                    updated_at: '2026-07-07T11:05:10.000-07:00'
+        '400':
+          description: asset not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No asset found by `id`.
+  "/api/v2/campaigns":
+    get:
+      summary: List campaigns
+      tags:
+      - Campaigns
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+        name: site_slug
+        in: query
+        schema:
+          type: string
+      operationId: listCampaigns
+      responses:
+        '200':
+          description: returns the list of campaigns
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  campaigns:
+                  - slug: 2
+                    is_active: false
+                    appearance: popup
+                    id: 2
+                    joinable_category_names:
+                    - purchase
+                    name: Deal for friends
+                    origin_max_age:
+                    origin_min_age:
+                    status: Disabled
+                    tag_names: []
+                    live_period:
+                      starts_at: '2026-07-07T11:05:00.000-07:00'
+                      ends_at: '2026-07-07T11:05:00.000-07:00'
+                  - slug: 1
+                    is_active: true
+                    appearance: inline
+                    id: 1
+                    joinable_category_names:
+                    - affiliate_member
+                    name: Deal for friends
+                    origin_max_age:
+                    origin_min_age:
+                    status: Live
+                    tag_names: []
+                    live_period:
+                      starts_at: '2026-07-07T11:05:00.000-07:00'
+                      ends_at:
+  "/api/v2/coupons/{code}":
+    get:
+      summary: Find a coupon
+      description: Returns a coupon.
+      tags:
+      - Coupons
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: code
+        in: path
+        schema:
+          type: string
+        required: true
+      operationId: findCoupon
+      responses:
+        '200':
+          description: coupon found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  talkable_coupon: true
+                  coupon:
+                    amount: 10.0
+                    description: 10%
+                    code: COUPON_CODE_1
+                    expires_at:
+                    id: 1
+                    percentage_discount: true
+                    single_use: true
+                    used: false
+                    active: true
+                    usages: 0
+                    valid_until:
+                  associated_reward:
+  "/api/v2/coupons/{code}/permission/{person_slug}":
+    get:
+      summary: Check if given coupon code belongs to given person
+      tags:
+      - Coupons
+      - People
+      parameters:
+      - name: code
+        in: path
+        schema:
+          type: string
+        required: true
+      - "$ref": "#/components/parameters/person_slug_in_path"
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: checkIfGivenCouponCodeBelongsToGivenPerson
+      responses:
+        '200':
+          description: returns result of check
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  talkable_coupon: true
+                  coupon:
+                    amount: 10.0
+                    description: 10%
+                    code: COUPON_CODE_7
+                    expires_at:
+                    id: 1
+                    percentage_discount: true
+                    single_use: true
+                    used: false
+                    active: true
+                    usages: 0
+                    valid_until:
+                  associated_reward:
+                  allowed: false
+                  error_message: This coupon code has not been issued yet
+                  checks:
+                    coupon_unissued: true
+                    coupon_expired: false
+                    friend_offer_expired: false
+                    different_owner: false
+                    coupon_used: false
+  "/api/v2/loyalty/members/{email}/collect_actions":
+    get:
+      summary: List collect actions
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          "$ref": "#/components/schemas/member_email"
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: listCollectActions
+      responses:
+        '200':
+          description: returns collect actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: dummy
+                    created_at: '2026-07-07T11:05:31.000-07:00'
+                    points: 21
+                    action_config:
+                      name: Name
+                      description: description
+                      points: 21
+                    coupon:
+                    event:
+                    user:
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+    post:
+      summary: Create a collect action
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          "$ref": "#/components/schemas/member_email"
+        required: true
+      operationId: createCollectAction
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              examples:
+                creates collect action:
+                  value:
+                    ok: true
+                    result:
+                      collected: true
+                      loyalty_member:
+                        custom_properties: {}
+                        email: test+11@example.com
+                        phone_number:
+                        points_balance: 121
+                        member_dates: []
+                no action configs matched:
+                  value:
+                    ok: true
+                    result:
+                      collected: false
+                      loyalty_member:
+                        custom_properties: {}
+                        email: test+12@example.com
+                        phone_number:
+                        points_balance: 100
+                        member_dates: []
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                no action configs found by type:
+                  value:
+                    ok: false
+                    error_message: No action configurations found for identifier `random`
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                    traffic_source:
+                      type: string
+                      default: api
+                  required:
+                  - type
+              required:
+              - site_slug
+              - data
+  "/api/v2/loyalty/members/{email}/manual_adjustment_actions":
+    parameters:
+    - name: email
+      in: path
+      schema:
+        "$ref": "#/components/schemas/member_email"
+      required: true
+    get:
+      summary: List manual adjustment actions
+      tags:
+      - Loyalty
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: listManualAdjustmentActions
+      responses:
+        '200':
+          description: returns manual adjustment actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: manual_adjustment
+                    created_at: '2026-07-07T11:05:37.000-07:00'
+                    points: -100
+                    action_config:
+                    coupon:
+                    event:
+                    user:
+                      account_id: 1
+                      email: aa81@gg.com
+                      id: 1
+                      staff_member: false
+        '400':
+          description: member not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Loyalty member not found
+    post:
+      summary: Adjust loyalty member’s points balance
+      description: |
+        Adjusts loyalty member’s points balance.
+
+        Accepts ``data`` JSON object with ``points`` property and optional ``description``.
+
+        E.g. ``{"points": 100}`` or ``{"points": -100, "description": "For cheating"}``.
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: adjustLoyaltyMembersPointsBalance
+      responses:
+        '200':
+          description: balance updated
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  action:
+                    type: manual_adjustment
+                    created_at: '2026-07-07T11:05:39.000-07:00'
+                    points: -100
+                    action_config:
+                    coupon:
+                    event:
+                    user:
+                      account_id: 2
+                      email: api@talkable.com
+                      id: 1
+                      staff_member: false
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+20@example.com
+                    phone_number:
+                    points_balance: 0
+                    member_dates: []
+        '422':
+          description: balance not updated
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Points adjustment must result in
+                  member points balance between 0 and available points limit'
+        '400':
+          description: member not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Loyalty member not found
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    points:
+                      type: integer
+                      description: Amount of points to add or subtract.
+                      example: -100
+                    description:
+                      type: string
+                      description: A contextual explanation why points amount was
+                        adjusted.
+                      example: For cheating
+                  required:
+                  - points
+              required:
+              - site_slug
+              - data
+  "/api/v2/loyalty/members/{email}":
+    parameters:
+    - name: email
+      in: path
+      schema:
+        "$ref": "#/components/schemas/member_email"
+      required: true
+    get:
+      summary: Find a loyalty member
+      tags:
+      - Loyalty
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: findLoyaltyMember
+      responses:
+        '200':
+          description: member found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+23@example.com
+                    phone_number:
+                    points_balance: 100
+                    member_dates: []
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+    put:
+      summary: Update a loyalty member
+      description: |
+        Updates loyalty member data.
+
+        Accepts ``data`` JSON object with ``custom_properties`` and ``member_dates`` JSON objects.
+
+        E.g. ``{"custom_properties":{"contest_participant":true},"member_dates":{"identifier":"birthday","date":"2004-01-01"}}``.
+
+        Note that all values in ``custom_properties`` object will be stored as strings,
+        e.g. ``false`` will become ``"f"``, and ``123`` will become ``"123"``.
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: updateLoyaltyMember
+      responses:
+        '200':
+          description: updates member
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  loyalty_member:
+                    custom_properties:
+                      subscribed_at: '2024-01-01'
+                    email: test+25@example.com
+                    phone_number:
+                    points_balance: 100
+                    member_dates:
+                    - date: '2004-01-01'
+                      identifier: birthday
+        '400':
+          description: invalid member_dates
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Invalid member_dates format, expected an array of objects
+                  with `date` and `identifier` keys
+        '422':
+          description: invalid custom property key
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Identifier can contain lowercase
+                  letters, numbers and ''_'' only and cannot begin with a number'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    member_dates:
+                      type: array
+                      description: Array of member dates, each with `identifier` and
+                        `date` fields.
+                      items:
+                        type: object
+                        properties:
+                          identifier:
+                            type: string
+                            example: birthday
+                            description: Identifier of the member date, created in
+                              rule configuration.
+                          date:
+                            type: string
+                            format: date
+                            example: '2004-01-01'
+                        required:
+                        - identifier
+                        - date
+              required:
+              - site_slug
+              - data
+  "/api/v2/loyalty/members/{email}/redeem_actions":
+    parameters:
+    - name: email
+      in: path
+      schema:
+        "$ref": "#/components/schemas/member_email"
+      required: true
+    get:
+      summary: List redeem actions
+      tags:
+      - Loyalty
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: listRedeemActions
+      responses:
+        '200':
+          description: returns redeem actions
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  actions:
+                  - type: redeem
+                    created_at: '2026-07-07T11:05:46.000-07:00'
+                    points: -100
+                    action_config:
+                    coupon:
+                      amount: 10.0
+                      description: 10%
+                      code: COUPON_CODE_18
+                      expires_at:
+                      id: 1
+                      percentage_discount: true
+                      single_use: true
+                      used: false
+                      active: true
+                      usages: 0
+                      valid_until:
+                    event:
+                    user:
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+    post:
+      summary: Create a redeem action
+      tags:
+      - Loyalty
+      parameters: []
+      operationId: createRedeemAction
+      responses:
+        '200':
+          description: creates redeem action
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  action:
+                    type: redeem
+                    created_at: '2026-07-07T11:05:48.000-07:00'
+                    points: -10
+                    action_config:
+                    coupon:
+                      amount: 10.0
+                      description: 10%
+                      code: COUPON_CODE_19
+                      expires_at:
+                      id: 1
+                      percentage_discount: true
+                      single_use: true
+                      used: false
+                      active: true
+                      usages: 0
+                      valid_until:
+                    event:
+                    user:
+                  loyalty_member:
+                    custom_properties: {}
+                    email: test+35@example.com
+                    phone_number:
+                    points_balance: 90
+                    member_dates: []
+        '400':
+          description: member has not enough points
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: not enough points
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    redemption_batch_id:
+                      type: integer
+                      format: int32
+                      minimum: 1
+                      example: 1
+                    traffic_source:
+                      type: string
+                      default: api
+                  required:
+                  - redemption_batch_id
+              required:
+              - site_slug
+              - data
+  "/api/v2/loyalty/members/{email}/redemption_batches":
+    get:
+      summary: List redemption batches
+      tags:
+      - Loyalty
+      parameters:
+      - name: email
+        in: path
+        schema:
+          "$ref": "#/components/schemas/member_email"
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: listRedemptionBatches
+      responses:
+        '200':
+          description: returns redemption batches
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  redemption_batches:
+                  - id: 1
+                    description: description
+                    points_cost: 10
+                    position: 11
+                    available_coupons_count: 1
+                    coupon_list:
+                      amount: 10.0
+                      localized_amount: 10%
+                      name: coupon_list_19
+                      percentage_discount: true
+                      expires_at:
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                member not found:
+                  value:
+                    ok: false
+                    error_message: Loyalty member not found
+                member is not active:
+                  value:
+                    ok: false
+                    error_message: Loyalty member is not active
+                campaign not found:
+                  value:
+                    ok: false
+                    error_message: No loyalty campaign found for the member
+  "/api/v2/metrics/{metric}":
+    get:
+      summary: Calculate a metric
+      tags:
+      - Metrics
+      parameters:
+      - name: metric
+        in: path
+        schema:
+          type: string
+          example: sharing_rate
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 1/15/2024
+        required: true
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 2/15/2024
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - email
+      - name: traffic_sources[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaign_ids[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        example:
+        - 42
+      - name: campaign_tags[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - default
+      - name: campaign_status
+        in: query
+        schema:
+          type: string
+          example: Live
+      - name: mobile_visitor
+        in: query
+        schema:
+          type: boolean
+          example: true
+        required: false
+      - name: device_type
+        in: query
+        schema:
+          type: string
+          example: mobile
+      - name: precision
+        in: query
+        schema:
+          type: integer
+          example: 0
+      - name: live_campaigns_only
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: exclude_qa_generated
+        in: query
+        schema:
+          type: boolean
+          example: false
+          default: true
+      operationId: calculateMetric
+      responses:
+        '200':
+          description: metric info
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  plain: 2
+                  formatted: '2'
+                  result_type: number
+        '400':
+          description: returns an error when invalid metric passed
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No metric found.
+  "/api/v2/metrics/{metric}/segmentize":
+    get:
+      summary: Calculate a metric with all segmented information
+      tags:
+      - Metrics
+      parameters:
+      - name: metric
+        in: path
+        schema:
+          type: string
+          example: sharing_rate
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: start_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 1/15/2024
+        required: true
+      - name: end_date
+        in: query
+        schema:
+          type: string
+          format: date
+          example: 2/15/2024
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - email
+      - name: traffic_sources[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+      - name: campaign_ids[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: integer
+        example:
+        - 42
+      - name: campaign_tags[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - default
+      - name: campaign_status
+        in: query
+        schema:
+          type: string
+          example: Live
+      - name: mobile_visitor
+        in: query
+        schema:
+          type: boolean
+          example: true
+        required: false
+      - name: device_type
+        in: query
+        schema:
+          type: string
+          example: mobile
+      - name: precision
+        in: query
+        schema:
+          type: integer
+          example: 0
+      - name: live_campaigns_only
+        in: query
+        schema:
+          type: boolean
+          example: true
+      - name: exclude_qa_generated
+        in: query
+        schema:
+          type: boolean
+          example: false
+          default: true
+      - name: segment_by[period]
+        in: query
+        schema:
+          type: string
+          example: week
+      - name: segment_by[campaign_tags]
+        in: query
+        schema:
+          type: array
+        required: false
+      - name: segment_by[sharing_channels]
+        in: query
+        schema:
+          type: boolean
+        required: false
+      - name: segment_by[campaign_types]
+        in: query
+        schema:
+          type: boolean
+        required: false
+      description: Returns a metric value which includes plain value, formatted value,
+        result’s type and all segmented information
+      operationId: calculateMetricWithAllSegmentedInformation
+      responses:
+        '200':
+          description: metric segmented
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  segmented:
+                  - plain: 0
+                    formatted: '0'
+                    result_type: number
+                    period: 6/7/26 - 6/30/26
+                  - plain: 3
+                    formatted: '3'
+                    result_type: number
+                    period: 7/1/26 - 7/7/26
+        '400':
+          description: returns an error when invalid segment_by
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Unsupported option for period segmentation. Supported
+                  options: day, week, month, quarter, year'
+  "/api/v2/offer_claims":
+    post:
+      summary: Share and claim an offer
+      tags:
+      - Offer Claims
+      - Rewards
+      - Shares
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: advocate_email
+        in: query
+        schema:
+          type: string
+          format: email
+          example: advocate@example.com
+        required: true
+      - name: friend_email
+        in: query
+        schema:
+          type: string
+          format: email
+          example: friend@example.com
+        required: true
+      operationId: shareAndClaimOffer
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              examples:
+                friend rewarded:
+                  value:
+                    ok: true
+                    result:
+                      friend_reward:
+                        amount: 10.0
+                        id: 1
+                        reason: click
+                        status: Paid
+                        coupon:
+                          amount: 10.0
+                          description: "$10"
+                          code: COUPON_CODE_29
+                          expires_at:
+                          id: 1
+                          percentage_discount: false
+                          single_use: true
+                          used: false
+                          active: true
+                          usages: 0
+                          valid_until:
+                        coupon_code: COUPON_CODE_29
+                        incentive_type: discount_coupon
+                        incentive_description: single use coupon for $10 off
+                        incentive_custom_description:
+                      friend_unredeem_reason:
+                      friend_human_unredeem_reason:
+                friend not rewarded:
+                  value:
+                    ok: true
+                    result:
+                      friend_reward:
+                      friend_unredeem_reason: SELF_REFERRAL
+                      friend_human_unredeem_reason: Self Referral
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                invalid email for Advocate:
+                  value:
+                    ok: false
+                    error_message: Invalid `advocate_email`.
+                invalid email for Friend:
+                  value:
+                    ok: false
+                    error_message: Invalid `friend_email`.
+                no campaign found:
+                  value:
+                    ok: false
+                    error_message: No campaign found.
+  "/api/v2/offers/{short_url_code}":
+    get:
+      summary: Find an advocate offer
+      description: |
+        Returns advocate offer.
+
+        Accepts optional ``sharing_channels`` JSON array with social sharing
+        channels for which will be generated sharing links.
+
+        Supported channels: ``facebook``, ``twitter``, ``linkedin``, ``sms``, ``other``
+        or custom, except ``email``, ``reminder``, ``facebook_sponsored`` and ``coupon``.
+      tags:
+      - Advocate Offers
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: sharing_channels[]
+        collectionFormat: multi
+        in: query
+        schema:
+          type: array
+          items:
+            type: string
+        example:
+        - facebook
+      operationId: findAdvocateOffer
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              examples:
+                offer found:
+                  value:
+                    ok: true
+                    result:
+                      offer:
+                        claim_url: https://share.my-store.com/x/vUTmRB
+                        email:
+                        id: 1
+                        short_url_code: J7bl6a
+                        show_url: https://share.my-store.com/x/IkcuJe
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags: []
+                sharing channels passed:
+                  value:
+                    ok: true
+                    result:
+                      offer:
+                        claim_url: https://share.my-store.com/x/dWpV5t
+                        email:
+                        id: 1
+                        short_url_code: jLqYF1
+                        show_url: https://share.my-store.com/x/8imqnK
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags: []
+                      claim_links:
+                        facebook: https://share.my-store.com/x/01eAMb
+                        custom: https://share.my-store.com/x/obw4Ne
+        '400':
+          description:
+          content:
+            application/json:
+              examples:
+                offer not found:
+                  value:
+                    ok: false
+                    error_message: No offer found by id.
+                unsupported sharing channels passed:
+                  value:
+                    ok: false
+                    error_message: 'Wrong sharing channel: email'
+  "/api/v2/offers/{short_url_code}/claim_url_status":
+    get:
+      summary: Check offer claim link status
+      tags:
+      - Advocate Offers
+      - Claim Links
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      - name: claim_url
+        in: query
+        schema:
+          type: string
+      operationId: checkOfferClaimLinkStatus
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              examples:
+                offer claim link is active:
+                  value:
+                    ok: true
+                    result:
+                      active: true
+                offer claim link is inactive:
+                  value:
+                    ok: true
+                    result:
+                      active: false
+        '400':
+          description: Offer not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No offer found by id.
+  "/api/v2/origins":
+    post:
+      summary: Create an origin
+      tags:
+      - Origins
+      parameters: []
+      operationId: createOrigin
+      responses:
+        '201':
+          description: purchase created
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  origin:
+                    subtotal: 100.44
+                    customer_id: '1024'
+                    email: customer@store.com
+                    id: 1
+                    ip_address: 192.0.2.255
+                    order_number: '20'
+                    refunded_at:
+                    type: Purchase
+                    segment1:
+                    segment2:
+                    segment3:
+                    utm_campaign:
+                    utm_content:
+                    utm_medium:
+                    utm_source:
+                    utm_term:
+                    order_date: '2026-07-07T11:06:14.000-07:00'
+                    partially_refunded: false
+                    refund_subtotal:
+                    coupon_code: C0001,C0002
+                  offer:
+                    claim_url: https://share.my-store.com/x/BCR7w2
+                    email: customer@store.com
+                    id: 1
+                    short_url_code: gWQ3y4
+                    show_url: https://share.my-store.com/x/52Ea09
+                    coupon_code:
+                    incentives: {}
+                    trigger_widget: false
+                    campaign_tags:
+                    - post-purchase
+        '400':
+          description: wrong type
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: '`type` must be within ["AffiliateMember", "Purchase",
+                  "Event"]'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                type:
+                  type: string
+                  enum:
+                  - AffiliateMember
+                  - Purchase
+                  - Event
+                  example: Purchase
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: customer@store.com
+                    order_number:
+                      type: string
+                      example: '20'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    phone_number:
+                      "$ref": "../schemas.yaml#/phone_number"
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      "$ref": "../schemas.yaml#/ip_address"
+                    uuid:
+                      "$ref": "#/components/schemas/visitor_uuid"
+                    created_at:
+                      "$ref": "../schemas.yaml#/date_time"
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      "$ref": "#/components/schemas/coupon_codes"
+                    currency_iso_code:
+                      "$ref": "#/components/schemas/currency_code"
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina,
+                        29860, United States
+                      description: Full address of the order, make sure to strictly
+                        follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 25.11
+                          quantity:
+                            type: integer
+                            example: 4
+                          product_id:
+                            type: string
+                            example: TSHIRT
+                  required:
+                  - email
+                  - order_number
+                  - subtotal
+              required:
+              - site_slug
+              - type
+              - data
+  "/api/v2/origins/affiliate_member":
+    post:
+      summary: Create an affiliate member
+      tags:
+      - Origins
+      parameters: []
+      operationId: createAffiliateMember
+      responses:
+        '201':
+          description:
+          content:
+            application/json:
+              examples:
+                affiliate member created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                      offer:
+                        claim_url: https://share.my-store.com/x/m5RhOw
+                        email: affiliate@store.com
+                        id: 1
+                        short_url_code: 4t6kTY
+                        show_url: https://share.my-store.com/x/CoEMvb
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - invite
+                      claim_links:
+                        facebook: https://share.my-store.com/x/CyABj6
+                        custom: https://share.my-store.com/x/ZeqzxQ
+                affiliate member created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                      offer:
+                        claim_url: https://share.my-store.com/x/pBsXly
+                        email: affiliate@store.com
+                        id: 1
+                        short_url_code: hlsUt5
+                        show_url: https://share.my-store.com/x/PRuHS9
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - invite
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        customer_id: '1024'
+                        email: affiliate@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        type: AffiliateMember
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                      offer:
+        '400':
+          description: bad request
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Email isn't valid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: affiliate@store.com
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    phone_number:
+                      "$ref": "../schemas.yaml#/phone_number"
+                    campaign_tags:
+                      type: string
+                      example: invite
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      "$ref": "../schemas.yaml#/ip_address"
+                    uuid:
+                      "$ref": "#/components/schemas/visitor_uuid"
+                    created_at:
+                      "$ref": "../schemas.yaml#/date_time"
+                    traffic_source:
+                      type: string
+                      example: article-1
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: article-1
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                  required:
+                  - email
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/event":
+    post:
+      summary: Create an event
+      tags:
+      - Origins
+      parameters: []
+      operationId: createEvent
+      responses:
+        '201':
+          description:
+          content:
+            application/json:
+              examples:
+                event created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at:
+                        type: Event
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal:
+                      offer:
+                        claim_url: https://share.my-store.com/x/1qj4Go
+                        email: user@store.com
+                        id: 1
+                        short_url_code: Q9nRug
+                        show_url: https://share.my-store.com/x/e3TfVg
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                      claim_links:
+                        facebook: https://share.my-store.com/x/7smUy5
+                        custom: https://share.my-store.com/x/gRrQuG
+                event created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at:
+                        type: Event
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal:
+                      offer:
+                        claim_url: https://share.my-store.com/x/tlbPKT
+                        email: user@store.com
+                        id: 1
+                        short_url_code: ZSCnxh
+                        show_url: https://share.my-store.com/x/AHdUvB
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: user@store.com
+                        event_number: '42'
+                        id: 1
+                        ip_address: 192.0.2.255
+                        refunded_at:
+                        type: Event
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        event_category: newsletter_subscription
+                        coupon_code: C0001,C0002
+                        partially_refunded: false
+                        refund_subtotal:
+                      offer:
+        '400':
+          description: event with different data exists
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Duplicate entity: Talkable already has existing Event
+                  with the same event_number but different data
+
+                  '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: user@store.com
+                    event_category:
+                      type: string
+                      example: newsletter_subscription
+                    event_number:
+                      type: string
+                      example: '42'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    phone_number:
+                      "$ref": "../schemas.yaml#/phone_number"
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      "$ref": "../schemas.yaml#/ip_address"
+                    uuid:
+                      "$ref": "#/components/schemas/visitor_uuid"
+                    created_at:
+                      "$ref": "../schemas.yaml#/date_time"
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      "$ref": "#/components/schemas/coupon_codes"
+                    currency_iso_code:
+                      "$ref": "#/components/schemas/currency_code"
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina,
+                        29860, United States
+                      description: Full address of the order, make sure to strictly
+                        follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 100.44
+                          quantity:
+                            type: integer
+                            example: 1
+                          product_id:
+                            type: string
+                            example: SUBSCRIPTION
+                  required:
+                  - email
+                  - event_category
+                  - event_number
+                  - subtotal
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/purchase":
+    post:
+      summary: Create a purchase
+      tags:
+      - Origins
+      parameters: []
+      operationId: createPurchase
+      responses:
+        '201':
+          description:
+          content:
+            application/json:
+              examples:
+                purchase created (with claim links for sharing channels):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at:
+                        type: Purchase
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        order_date: '2026-07-07T11:06:25.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal:
+                        coupon_code: C0001,C0002
+                      offer:
+                        claim_url: https://share.my-store.com/x/Q9wV8X
+                        email: customer@store.com
+                        id: 1
+                        short_url_code: mwCn1l
+                        show_url: https://share.my-store.com/x/FLMxKE
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                      claim_links:
+                        facebook: https://share.my-store.com/x/js3raT
+                        custom: https://share.my-store.com/x/F6tKyP
+                purchase created (no sharing channels passed):
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at:
+                        type: Purchase
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        order_date: '2026-07-07T11:06:26.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal:
+                        coupon_code: C0001,C0002
+                      offer:
+                        claim_url: https://share.my-store.com/x/39fxBo
+                        email: customer@store.com
+                        id: 1
+                        short_url_code: K0H3JG
+                        show_url: https://share.my-store.com/x/T518et
+                        coupon_code:
+                        incentives: {}
+                        trigger_widget: false
+                        campaign_tags:
+                        - post-purchase
+                no campaign matched to create an advocate offer:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id: '1024'
+                        email: customer@store.com
+                        id: 1
+                        ip_address: 192.0.2.255
+                        order_number: '20'
+                        refunded_at:
+                        type: Purchase
+                        segment1:
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        order_date: '2026-07-07T11:06:28.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal:
+                        coupon_code: C0001,C0002
+                      offer:
+        '400':
+          description: purchase with different data exists
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Duplicate entity: Talkable already has existing Purchase
+                  with the same order_number but different data
+
+                  '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                      format: email
+                      example: customer@store.com
+                    order_number:
+                      type: string
+                      example: '20'
+                    subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    phone_number:
+                      "$ref": "../schemas.yaml#/phone_number"
+                    campaign_tags:
+                      type: string
+                      example: post-purchase
+                    sharing_channels:
+                      type: array
+                      items:
+                        type: string
+                      example:
+                      - facebook
+                      - custom
+                      description: Used to generate unique Friend Claim Page links
+                    ip_address:
+                      "$ref": "../schemas.yaml#/ip_address"
+                    uuid:
+                      "$ref": "#/components/schemas/visitor_uuid"
+                    created_at:
+                      "$ref": "../schemas.yaml#/date_time"
+                    traffic_source:
+                      type: string
+                      example: in-store
+                    segment1:
+                      type: string
+                      example: CA
+                    segment2:
+                      type: string
+                      example: male
+                    segment3:
+                      type: string
+                      example: in-store
+                    utm_source:
+                      type: string
+                      example: facebook
+                    utm_medium:
+                      type: string
+                      example: example_medium
+                    utm_campaign:
+                      type: string
+                      example: example_campaign
+                    utm_term:
+                      type: string
+                      example: example_term
+                    utm_content:
+                      type: string
+                      example: example_content
+                    coupon_codes:
+                      "$ref": "#/components/schemas/coupon_codes"
+                    currency_iso_code:
+                      "$ref": "#/components/schemas/currency_code"
+                    shipping_address:
+                      type: string
+                      example: 456 White Finch St., North Augusta, South Carolina,
+                        29860, United States
+                      description: Full address of the order, make sure to strictly
+                        follow a format
+                    shipping_zip:
+                      type: string
+                      example: '29860'
+                      description: Used for fraud protection by address
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          price:
+                            type: number
+                            format: float
+                            example: 25.11
+                          quantity:
+                            type: integer
+                            example: 4
+                          product_id:
+                            type: string
+                            example: TSHIRT
+                  required:
+                  - email
+                  - order_number
+                  - subtotal
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/batch/affiliate_members":
+    post:
+      summary: Create batch of affiliate members
+      description: |
+        **EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+        The validation is done asynchronously, API does not respond with error
+        messages in case of invalid payload.
+
+        The records are created asynchronously by a scheduled job. This can take
+        some time.
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfAffiliateMembers
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: affiliate@store.com
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        "$ref": "../schemas.yaml#/custom_properties"
+                      phone_number:
+                        "$ref": "../schemas.yaml#/phone_number"
+                      campaign_tags:
+                        type: string
+                        example: invite
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        "$ref": "../schemas.yaml#/ip_address"
+                      uuid:
+                        "$ref": "#/components/schemas/visitor_uuid"
+                      created_at:
+                        "$ref": "../schemas.yaml#/date_time"
+                      traffic_source:
+                        type: string
+                        example: article-1
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: article-1
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                    required:
+                    - email
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/batch/events":
+    post:
+      summary: Create batch of events
+      description: |
+        **EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+        The validation is done asynchronously, API does not respond with error
+        messages in case of invalid payload.
+
+        The records are created asynchronously by a scheduled job. This can take
+        some time.
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfEvents
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: user@store.com
+                      event_category:
+                        type: string
+                        example: newsletter_subscription
+                      event_number:
+                        type: string
+                        example: '42'
+                      subtotal:
+                        type: number
+                        format: float
+                        example: 100.44
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        "$ref": "../schemas.yaml#/custom_properties"
+                      phone_number:
+                        "$ref": "../schemas.yaml#/phone_number"
+                      campaign_tags:
+                        type: string
+                        example: post-purchase
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        "$ref": "../schemas.yaml#/ip_address"
+                      uuid:
+                        "$ref": "#/components/schemas/visitor_uuid"
+                      created_at:
+                        "$ref": "../schemas.yaml#/date_time"
+                      traffic_source:
+                        type: string
+                        example: in-store
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: in-store
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                      coupon_codes:
+                        "$ref": "#/components/schemas/coupon_codes"
+                      currency_iso_code:
+                        "$ref": "#/components/schemas/currency_code"
+                      shipping_address:
+                        type: string
+                        example: 456 White Finch St., North Augusta, South Carolina,
+                          29860, United States
+                        description: Full address of the order, make sure to strictly
+                          follow a format
+                      shipping_zip:
+                        type: string
+                        example: '29860'
+                        description: Used for fraud protection by address
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              format: float
+                              example: 100.44
+                            quantity:
+                              type: integer
+                              example: 1
+                            product_id:
+                              type: string
+                              example: SUBSCRIPTION
+                    required:
+                    - email
+                    - event_category
+                    - event_number
+                    - subtotal
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/batch/purchases":
+    post:
+      summary: Create batch of purchases
+      description: |
+        **EXPERIMENTAL.** This API is subject to change or removal without notice.
+
+        The validation is done asynchronously, API does not respond with error
+        messages in case of invalid payload.
+
+        The records are created asynchronously by a scheduled job. This can take
+        some time.
+      tags:
+      - Origins
+      parameters: []
+      operationId: createBatchOfPurchases
+      responses:
+        '200':
+          description: accepted
+          content:
+            application/json:
+              example:
+                ok: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      email:
+                        type: string
+                        format: email
+                        example: customer@store.com
+                      order_number:
+                        type: string
+                        example: '20'
+                      subtotal:
+                        type: number
+                        format: float
+                        example: 100.44
+                      first_name:
+                        type: string
+                        example: John
+                      last_name:
+                        type: string
+                        example: Doe
+                      username:
+                        type: string
+                        example: johndoe1992
+                      customer_id:
+                        type: string
+                        example: '1024'
+                      custom_properties:
+                        "$ref": "../schemas.yaml#/custom_properties"
+                      phone_number:
+                        "$ref": "../schemas.yaml#/phone_number"
+                      campaign_tags:
+                        type: string
+                        example: post-purchase
+                      sharing_channels:
+                        type: array
+                        items:
+                          type: string
+                        example:
+                        - facebook
+                        - custom
+                        description: Used to generate unique Friend Claim Page links
+                      ip_address:
+                        "$ref": "../schemas.yaml#/ip_address"
+                      uuid:
+                        "$ref": "#/components/schemas/visitor_uuid"
+                      created_at:
+                        "$ref": "../schemas.yaml#/date_time"
+                      traffic_source:
+                        type: string
+                        example: in-store
+                      segment1:
+                        type: string
+                        example: CA
+                      segment2:
+                        type: string
+                        example: male
+                      segment3:
+                        type: string
+                        example: in-store
+                      utm_source:
+                        type: string
+                        example: facebook
+                      utm_medium:
+                        type: string
+                        example: example_medium
+                      utm_campaign:
+                        type: string
+                        example: example_campaign
+                      utm_term:
+                        type: string
+                        example: example_term
+                      utm_content:
+                        type: string
+                        example: example_content
+                      coupon_codes:
+                        "$ref": "#/components/schemas/coupon_codes"
+                      currency_iso_code:
+                        "$ref": "#/components/schemas/currency_code"
+                      shipping_address:
+                        type: string
+                        example: 456 White Finch St., North Augusta, South Carolina,
+                          29860, United States
+                        description: Full address of the order, make sure to strictly
+                          follow a format
+                      shipping_zip:
+                        type: string
+                        example: '29860'
+                        description: Used for fraud protection by address
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            price:
+                              type: number
+                              format: float
+                              example: 25.11
+                            quantity:
+                              type: integer
+                              example: 4
+                            product_id:
+                              type: string
+                              example: TSHIRT
+                    required:
+                    - email
+                    - order_number
+                    - subtotal
+                create_offers:
+                  type: boolean
+                  example: false
+              required:
+              - site_slug
+              - data
+  "/api/v2/people/{person_slug}":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Find a person
+      description: Returns a person.
+      tags:
+      - People
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: findPerson
+      responses:
+        '200':
+          description: person found by email
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at:
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at:
+                    personal_claim_url: https://share.my-store.com/by/johndoe1992
+                    phone_number: "+12025551111"
+                    phone_opted_in_at:
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at:
+                    username: johndoe1992
+                    gender:
+                    last_invited_by:
+                    referred_by:
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+    put:
+      summary: Update a person
+      description: Updates an existing person or creates one if it does not exist.
+      tags:
+      - People
+      parameters: []
+      operationId: updatePerson
+      responses:
+        '200':
+          description: person updated by email
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at:
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at:
+                    personal_claim_url: https://share.my-store.com/by/lizard_king
+                    phone_number: "+12025551111"
+                    phone_opted_in_at:
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at:
+                    username: lizard_king
+                    gender:
+                    last_invited_by:
+                    referred_by:
+        '400':
+          description: invalid argument
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'found unpermitted parameter: :foo'
+        '422':
+          description: username is taken
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Username has already been taken.
+                  Please try another one.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    first_name:
+                      type: string
+                      example: John
+                    last_name:
+                      type: string
+                      example: Doe
+                    email:
+                      type: string
+                      format: email
+                      example: user@store.com
+                    phone_number:
+                      "$ref": "../schemas.yaml#/phone_number"
+                    username:
+                      type: string
+                      example: johndoe1992
+                    customer_id:
+                      type: string
+                      example: '1024'
+                    identifier_hash:
+                      type: string
+                      example: '1986893236229857347'
+                    custom_properties:
+                      "$ref": "../schemas.yaml#/custom_properties"
+                    gated_param_subscribed:
+                      type: boolean
+                      example: false
+                      description: Opted in for receiving marketing email letters
+                    unsubscribed:
+                      type: boolean
+                      example: true
+                    unsubscribed_at:
+                      "$ref": "../schemas.yaml#/date_time"
+              required:
+              - site_slug
+              - data
+  "/api/v2/people/{person_slug}/referrals_as_advocate":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Get Friends referred by Advocate
+      description: Returns referrals where person is an advocate.
+      tags:
+      - People
+      - Referrals
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: getFriendsReferredByAdvocate
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details:
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 1
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 2
+                    status: approved
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1025
+                      email: alice@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 1
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: "$10"
+                        code: COUPON_CODE_37
+                        expires_at:
+                        id: 1
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until:
+                      coupon_code: COUPON_CODE_37
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description:
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details:
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 3
+                    status: pending
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1026
+                      email: bob@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Unpaid
+                      coupon:
+                      coupon_code:
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description:
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:11.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:11.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  "/api/v2/people/{person_slug}/referrals_as_friend":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Get Advocates who referred the Friend
+      description: Returns referrals where person is a friend.
+      tags:
+      - People
+      - Referrals
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: getAdvocatesWhoReferredFriend
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referrals:
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details:
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 2
+                    offer_id: 2
+                    qa_generated: false
+                    referred_origin_id: 4
+                    status: approved
+                    track_method: coupon
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1026
+                      email: signup1@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 2
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                        amount: 10.0
+                        description: "$10"
+                        code: COUPON_CODE_42
+                        expires_at:
+                        id: 2
+                        percentage_discount: false
+                        single_use: true
+                        used: false
+                        active: true
+                        usages: 0
+                        valid_until:
+                      coupon_code: COUPON_CODE_42
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description:
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details:
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Matching Email or Cookie on Friend Purchase
+                      - Similar Email Match
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Matching Phone Number on Friend Purchase
+                      - Friend and Advocate Refer Each Other
+                    id: 3
+                    offer_id: 3
+                    qa_generated: false
+                    referred_origin_id: 6
+                    status: pending
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1027
+                      email: signup2@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 3
+                      reason: referrer
+                      status: Unpaid
+                      coupon:
+                      coupon_code:
+                      incentive_type: discount_coupon
+                      incentive_description: single use coupon for $10 off
+                      incentive_custom_description:
+                    friend_rewards: []
+                  - referred_subtotal: 100.0
+                    ad_rewarded: false
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:16.000-07:00'
+                    fraud_details: Self Referral
+                    fraud_policies_status:
+                      blocked:
+                      - Matching Email or Cookie on Friend Purchase
+                      flagged:
+                      - Similar Email Match
+                      - Matching Phone Number on Friend Purchase
+                      skipped: []
+                      passed:
+                      - Matching Shipping Address
+                      - Matching by Combination of IP Address & User Agent
+                      - Matching by IP Address only
+                      - Friend and Advocate Refer Each Other
+                    id: 4
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 7
+                    status: blocked
+                    track_method: cookie
+                    updated_at: '2026-07-07T11:07:16.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    friend_person:
+                      id: 1
+                      email: customer@example.com
+                      phone_number: "+12025551111"
+                      first_name: John
+                      last_name: Doe
+                    advocate_rewards: []
+                    friend_rewards: []
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  "/api/v2/people/{person_slug}/rewards":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Get rewards received by person
+      description: Returns rewards that person has earned in referral program.
+      tags:
+      - People
+      - Rewards
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: getRewardsReceivedByPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  rewards:
+                  - amount: 10.0
+                    id: 1
+                    reason: referrer
+                    status: Unpaid
+                    coupon:
+                    coupon_code:
+                    incentive_type: discount_coupon
+                    incentive_description: single use coupon for $10 off
+                    incentive_custom_description:
+                  - amount: 10.0
+                    id: 2
+                    reason: click
+                    status: Paid
+                    coupon:
+                      amount: 10.0
+                      description: "$10"
+                      code: C1383-8321
+                      expires_at:
+                      id: 3
+                      percentage_discount:
+                      single_use: false
+                      used: false
+                      active: true
+                      usages:
+                      valid_until:
+                    coupon_code: C1383-8321
+                    incentive_type: discount_coupon
+                    incentive_description: shared coupon "C1383-8321" for $10 off
+                    incentive_custom_description:
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  "/api/v2/people/{person_slug}/shares_by":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Get shares made by person
+      description: Returns shares that person made.
+      tags:
+      - People
+      - Shares
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: getSharesMadeByPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  shares:
+                  - shared_at: '2026-07-07T11:07:26.000-07:00'
+                    short_url: https://share.my-store.com/x/HZRpFC
+                    channel_identifier: facebook
+                    id: 1
+                    type: SocialOfferShare
+                    offer:
+                      claim_url: https://share.my-store.com/x/GbnMfD
+                      email: customer@example.com
+                      id: 1
+                      short_url_code: dy8h95
+                      show_url: https://share.my-store.com/x/8tp5sj
+                      coupon_code:
+                      incentives:
+                        referrer:
+                          action_type: referrer
+                          amount: 10.0
+                          description: "$10"
+                          percentage: false
+                          criteria_config:
+                            new_customer:
+                            new_optin: false
+                            subtotal_min:
+                            subtotal_max:
+                            referrals_min:
+                            referrals_max:
+                            referrals_divisible_by:
+                            referrals_not_divisible_by:
+                            reward_uniqueness: once_per_friend
+                            friend_event_category:
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: referrer
+                          incentive_type: discount_coupon
+                          coupon_expires_at:
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age:
+                      origin_min_age:
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:07:00.000-07:00'
+                        ends_at:
+                    friends_count: 0
+                    friend_clicks_count: 0
+                  - shared_at: '2026-07-07T11:07:26.000-07:00'
+                    short_url: https://share.my-store.com/x/cNjpnJ
+                    channel_identifier: email
+                    id: 2
+                    type: EmailOfferShare
+                    email: test+62@example.com
+                    offer:
+                      claim_url: https://share.my-store.com/x/GbnMfD
+                      email: customer@example.com
+                      id: 1
+                      short_url_code: dy8h95
+                      show_url: https://share.my-store.com/x/8tp5sj
+                      coupon_code:
+                      incentives:
+                        referrer:
+                          action_type: referrer
+                          amount: 10.0
+                          description: "$10"
+                          percentage: false
+                          criteria_config:
+                            new_customer:
+                            new_optin: false
+                            subtotal_min:
+                            subtotal_max:
+                            referrals_min:
+                            referrals_max:
+                            referrals_divisible_by:
+                            referrals_not_divisible_by:
+                            reward_uniqueness: once_per_friend
+                            friend_event_category:
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: referrer
+                          incentive_type: discount_coupon
+                          coupon_expires_at:
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age:
+                      origin_min_age:
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:07:00.000-07:00'
+                        ends_at:
+                    friends_count: 0
+                    friend_clicks_count: 0
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  "/api/v2/people/{person_slug}/anonymize":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    post:
+      summary: Anonymize a person
+      description: Removes or obscures all personal data.
+      tags:
+      - People
+      parameters: []
+      operationId: anonymizePerson
+      responses:
+        '200':
+          description: person anonymized
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties: {}
+                    sub_choice: false
+                    subscribed_at:
+                    customer_id:
+                    email: a7086f75-2da0-4ea8-afca-df1147425be9@anonymized.email
+                    events_count: 0
+                    first_name:
+                    last_name:
+                    opted_in_at:
+                    personal_claim_url:
+                    phone_number:
+                    phone_opted_in_at:
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at:
+                    username:
+                    gender:
+                    last_invited_by:
+                    referred_by:
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+              required:
+              - site_slug
+  "/api/v2/people/{person_slug}/personal_data":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    get:
+      summary: Get personal information about a person
+      description: Returns personal data.
+      tags:
+      - People
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: getPersonalInformationAboutPerson
+      responses:
+        '200':
+          description: person found
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    created_at: '2026-07-07T11:07:31.000-07:00'
+                    customer_id: '1024'
+                    email: customer@example.com
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at:
+                    phone_opted_in_at:
+                    unsubscribed_at:
+                    username: johndoe1992
+                    origins:
+                    - type: Purchase
+                      created_at: '2026-07-07T11:07:31.000-07:00'
+                      ip_address: 1.2.3.4
+                      order_number: B00K2EOONI
+                      subtotal: 123.45
+        '400':
+          description: person not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No person found by `person_slug`.
+  "/api/v2/people/{person_slug}/unsubscribe":
+    parameters:
+    - name: person_slug
+      in: path
+      schema:
+        "$ref": "#/components/schemas/person_slug"
+      required: true
+    post:
+      summary: Unsubscribe a person
+      description: Unsubscribes a person from receiving emails.
+      tags:
+      - People
+      parameters: []
+      operationId: unsubscribePerson
+      responses:
+        '200':
+          description: person unsubscribed
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  person:
+                    custom_properties:
+                      country: US
+                      eye_color: brown
+                      person_occupation: marketing
+                    sub_choice: false
+                    subscribed_at:
+                    customer_id: '1024'
+                    email: customer@example.com
+                    events_count: 0
+                    first_name: John
+                    last_name: Doe
+                    opted_in_at:
+                    personal_claim_url: https://share.my-store.com/by/johndoe1992
+                    phone_number: "+12025551111"
+                    phone_opted_in_at:
+                    referral_counts:
+                      total: 0
+                      approved: 0
+                      pending: 0
+                    reward_counts:
+                      total: 0
+                    share_counts:
+                      total: 0
+                    unsubscribed_at: '2026-07-07T11:07:33.000-07:00'
+                    username: johndoe1992
+                    gender:
+                    last_invited_by:
+                    referred_by:
+        '422':
+          description: slug is not an existing username nor a valid email
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: 'Validation failed: Email isn''t valid'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+              required:
+              - site_slug
+  "/api/v2/origins/{origin_slug}/referral":
+    put:
+      summary: Update referral status
+      description: 'Note that approved or voided referrals cannot be changed to the
+        opposite state.
+
+        '
+      tags:
+      - Referrals
+      parameters:
+      - name: origin_slug
+        in: path
+        schema:
+          "$ref": "#/components/schemas/origin_slug"
+        required: true
+      operationId: updateReferralStatus
+      responses:
+        '200':
+          description: referral status updated to approved
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  referral:
+                    referred_subtotal: 100.0
+                    ad_rewarded: true
+                    campaign_id: 1
+                    created_at: '2026-07-07T11:07:40.000-07:00'
+                    fraud_details:
+                    fraud_policies_status:
+                      blocked: []
+                      flagged: []
+                      skipped: []
+                      passed:
+                      - Friend and Advocate Refer Each Other
+                    id: 1
+                    offer_id: 1
+                    qa_generated: false
+                    referred_origin_id: 2
+                    status: approved
+                    track_method: manually_generated
+                    updated_at: '2026-07-07T11:07:40.000-07:00'
+                    advocate_person:
+                      id: 1
+                      email: signup7@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    friend_person:
+                      id: 2
+                      email: test+64@example.com
+                      phone_number:
+                      first_name:
+                      last_name:
+                    advocate_rewards:
+                    - amount: 10.0
+                      id: 1
+                      reason: referrer
+                      status: Paid
+                      coupon:
+                      coupon_code:
+                      incentive_type: rebate
+                      incentive_description: "$10 back"
+                      incentive_custom_description:
+                    friend_rewards: []
+        '400':
+          description: bad request
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No origin found by `origin_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                      enum:
+                      - pending
+                      - flagged
+                      - approved
+                      - voided
+                      - blocked
+                      example: approved
+              required:
+              - site_slug
+              - data
+  "/api/v2/origins/{origin_slug}/refund":
+    post:
+      summary: Mark origin as refunded
+      tags:
+      - Origins
+      - Refunds
+      parameters:
+      - name: origin_slug
+        in: path
+        schema:
+          "$ref": "#/components/schemas/origin_slug"
+        required: true
+      operationId: markOriginAsRefunded
+      responses:
+        '200':
+          description:
+          content:
+            application/json:
+              examples:
+                origin marked as fully refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id:
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:44.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        order_date: '2026-07-07T11:07:44.000-07:00'
+                        partially_refunded: false
+                        refund_subtotal: 100.44
+                        coupon_code: ''
+                origin marked as partially refunded:
+                  value:
+                    ok: true
+                    result:
+                      origin:
+                        subtotal: 100.44
+                        customer_id:
+                        email: customer@example.com
+                        id: 1
+                        ip_address: 1.2.3.4
+                        order_number: B00K2EOONI
+                        refunded_at: '2026-07-07T11:07:45.000-07:00'
+                        type: Purchase
+                        segment1: test
+                        segment2:
+                        segment3:
+                        utm_campaign:
+                        utm_content:
+                        utm_medium:
+                        utm_source:
+                        utm_term:
+                        order_date: '2026-07-07T11:07:45.000-07:00'
+                        partially_refunded: true
+                        refund_subtotal: 25.11
+                        coupon_code: ''
+        '400':
+          description: origin has already been refunded
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: Origin has already been refunded
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    refunded_at:
+                      "$ref": "../schemas.yaml#/date_time"
+                    refund_subtotal:
+                      type: number
+                      format: float
+                      example: 100.44
+              required:
+              - site_slug
+  "/api/v2/rewards":
+    get:
+      summary: List rewards
+      tags:
+      - Rewards
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      - name: visitor_uuid
+        in: query
+        schema:
+          "$ref": "#/components/schemas/visitor_uuid"
+        required: true
+      operationId: listRewards
+      responses:
+        '200':
+          description: returns the list of rewards
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  rewards:
+                  - amount: 10.0
+                    id: 1
+                    reason: referrer
+                    status: Paid
+                    coupon:
+                    coupon_code:
+                    incentive_type: rebate
+                    incentive_description: "$10 back"
+                    incentive_custom_description:
+  "/api/v2/offers/{short_url_code}/shares/email":
+    post:
+      summary: Share offer with recipients via email
+      operationId: shareViaEmail
+      tags:
+      - Advocate Offers
+      - Shares
+      parameters:
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: sends offer to recipients
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  success: true
+                  validation_only: false
+                  stats:
+                    currently_sent: 3
+                    currently_not_sent: 0
+                    previously_sent: 0
+                    total_sent: 3
+                    sent_limit_exceeded: false
+                    left_emails: 22
+                    advocate_blocked: false
+                  recipients:
+                    recipient_1@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                    recipient_2@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                    recipient_3@com.com:
+                      currently_sent: true
+                      previously_sent: false
+                      email_valid: true
+                      self_referral: false
+                      unsubscribed: false
+                      blocklisted: false
+                      blacklisted: false
+                      meets_criteria: true
+                      sharable: true
+                  reward:
+                  rewards: []
+        '400':
+          description: returns bad request when missing recipients
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: "`recipients` is required"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reminder:
+                  type: boolean
+                  example: true
+                validation_only:
+                  type: boolean
+                  example: false
+                recipients:
+                  type: string
+                  example: recipient_1@com.com,recipient_2@com.com,recipient_3@com.com
+                subject:
+                  type: string
+                  example: Your friend sent you x% off
+                body:
+                  type: string
+                  example: Your personal message with offer link
+              required:
+              - recipients
+  "/api/v2/offers/{short_url_code}/shares/social":
+    post:
+      summary: Share offer with recipients via social channel
+      operationId: shareViaSocialChannel
+      tags:
+      - Advocate Offers
+      - Shares
+      parameters:
+      - name: short_url_code
+        in: path
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: share offer to social channel
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  share:
+                    shared_at: '2026-07-07T11:08:32.000-07:00'
+                    short_url: https://share.my-store.com/x/IyfKJR
+                    channel_identifier: facebook
+                    id: 1
+                    type: SocialOfferShare
+                    offer:
+                      claim_url: https://share.my-store.com/x/0iqOMr
+                      email: signup18@example.com
+                      id: 1
+                      short_url_code: d3BGIz
+                      show_url: https://share.my-store.com/x/Kg4GH7
+                      coupon_code: C1383-8321
+                      incentives:
+                        sharing:
+                          action_type: sharing
+                          amount: 10.0
+                          description: "$10"
+                          percentage: false
+                          criteria_config:
+                            once_per_person: false
+                            email_shares:
+                            sharing_channels:
+                            has_liquid_criteria: false
+                          for_advocate: true
+                          for_friend: false
+                          highest_amount: true
+                          identifier: sharing
+                          incentive_type: discount_coupon
+                          coupon_expires_at:
+                      trigger_widget: false
+                      campaign_tags: []
+                    campaign:
+                      slug: 1
+                      is_active: true
+                      appearance: inline
+                      id: 1
+                      joinable_category_names:
+                      - affiliate_member
+                      name: Deal for friends
+                      origin_max_age:
+                      origin_min_age:
+                      status: Live
+                      tag_names: []
+                      live_period:
+                        starts_at: '2026-07-07T11:08:00.000-07:00'
+                        ends_at:
+                    friends_count: 0
+                    friend_clicks_count: 0
+                  reward:
+                    amount: 10.0
+                    id: 1
+                    reason: shared
+                    status: Paid
+                    coupon:
+                      amount: 10.0
+                      description: "$10"
+                      code: C1383-8321
+                      expires_at:
+                      id: 1
+                      percentage_discount:
+                      single_use: false
+                      used: false
+                      active: true
+                      usages:
+                      valid_until:
+                    coupon_code: C1383-8321
+                    incentive_type: discount_coupon
+                    incentive_description: shared coupon "C1383-8321" for $10 off
+                    incentive_custom_description:
+        '400':
+          description: returns bad request in the case of wrong social channel name
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: "`channel` is invalid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                channel:
+                  type: string
+                  enum:
+                  - facebook
+                  - twitter
+                  - linkedin
+                  - whatsapp
+                  - sms
+                  - other
+                  example: facebook
+              required:
+              - channel
+  "/api/v2/traffic_sources":
+    get:
+      summary: List traffic sources
+      tags:
+      - Traffic Sources
+      parameters:
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: listTrafficSources
+      responses:
+        '200':
+          description: traffic sources
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                - identifier: traffic_source_11
+                - identifier: traffic_source_12
+                - identifier: traffic_source_13
+  "/api/v2/visitor_offers/{id}/track_visit":
+    put:
+      summary: Mark visitor offer as visited
+      tags:
+      - Friend Offers
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - "$ref": "#/components/parameters/site_slug_in_query_required"
+      operationId: markVisitorOfferAsVisited
+      responses:
+        '200':
+          description: sends update
+          content:
+            application/json:
+              example:
+                ok: true
+        '400':
+          description: no visitor offer found by id
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No visitor offer found by id.
+  "/api/v2/visitors":
+    post:
+      summary: Create a visitor
+      tags:
+      - Visitors
+      parameters: []
+      operationId: createVisitor
+      responses:
+        '200':
+          description: visitor created
+          content:
+            application/json:
+              example:
+                ok: true
+                result:
+                  uuid: 123e4567-e89b-32d1-a456-426614174000
+        '400':
+          description: site not found
+          content:
+            application/json:
+              example:
+                ok: false
+                error_message: No site found by `site_slug`.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                site_slug:
+                  "$ref": "../schemas.yaml#/site_slug"
+                data:
+                  type: object
+                  properties:
+                    uuid:
+                      "$ref": "#/components/schemas/visitor_uuid"
+                  required:
+                  - uuid
+              required:
+              - site_slug
+              - data
+servers:
+- url: https://www.talkable.com
+info:
+  title: Talkable API
+  version: '2.0'
+  contact:
+    name: API Reference
+    url: https://docs.talkable.com/api_v2/
+components:
+  schemas:
+    coupon_codes:
+      type: array
+      items:
+        type: string
+      example:
+      - C0001
+      - C0002
+    currency_code:
+      type: string
+      enum:
+      - USD
+      - EUR
+      - GBP
+      - AUD
+      - CAD
+      - AED
+      - AFN
+      - ALL
+      - AMD
+      - ANG
+      - AOA
+      - ARS
+      - AWG
+      - AZN
+      - BAM
+      - BBD
+      - BDT
+      - BGN
+      - BHD
+      - BIF
+      - BMD
+      - BND
+      - BOB
+      - BRL
+      - BSD
+      - BTN
+      - BWP
+      - BYN
+      - BZD
+      - CDF
+      - CHF
+      - CLP
+      - CNY
+      - COP
+      - CRC
+      - CUP
+      - CVE
+      - CZK
+      - DJF
+      - DKK
+      - DOP
+      - DZD
+      - EGP
+      - ERN
+      - ETB
+      - FJD
+      - FKP
+      - GEL
+      - GGP
+      - GHS
+      - GIP
+      - GMD
+      - GNF
+      - GTQ
+      - GYD
+      - HKD
+      - HNL
+      - HRK
+      - HTG
+      - HUF
+      - IDR
+      - ILS
+      - IMP
+      - INR
+      - IQD
+      - IRR
+      - ISK
+      - JEP
+      - JMD
+      - JOD
+      - JPY
+      - KES
+      - KGS
+      - KHR
+      - KMF
+      - KPW
+      - KRW
+      - KWD
+      - KYD
+      - KZT
+      - LAK
+      - LBP
+      - LKR
+      - LRD
+      - LSL
+      - LYD
+      - MAD
+      - MDL
+      - MGA
+      - MKD
+      - MMK
+      - MNT
+      - MOP
+      - MRU
+      - MUR
+      - MVR
+      - MWK
+      - MXN
+      - MYR
+      - MZN
+      - NAD
+      - NGN
+      - NIO
+      - NOK
+      - NPR
+      - NZD
+      - OMR
+      - PAB
+      - PEN
+      - PGK
+      - PHP
+      - PKR
+      - PLN
+      - PYG
+      - QAR
+      - RON
+      - RSD
+      - RUB
+      - RWF
+      - SAR
+      - SBD
+      - SCR
+      - SDG
+      - SEK
+      - SGD
+      - SHP
+      - SLL
+      - SOS
+      - SRD
+      - SSP
+      - STD
+      - SVC
+      - SYP
+      - SZL
+      - THB
+      - TJS
+      - TMT
+      - TND
+      - TOP
+      - TRY
+      - TTD
+      - TWD
+      - TZS
+      - UAH
+      - UGX
+      - UYU
+      - UZS
+      - VES
+      - VND
+      - VUV
+      - WST
+      - XAF
+      - XCD
+      - XOF
+      - XPF
+      - YER
+      - ZAR
+      - ZMW
+      - ZWL
+      example: USD
+      description: Required for multi-currency sites
+    member_email:
+      type: string
+      format: email
+      example: customer@example.com
+      description: Loyalty member’s email
+    origin_slug:
+      type: string
+      example: B00K2EOONI
+      description: |
+        If origin is a ***Purchase***:
+
+        `order_number`, e.g.: `"B00K2EOONI"`
+
+        If origin is an ***Event***:
+
+        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
+    visitor_uuid:
+      type: string
+      format: uuid
+      example: 123e4567-e89b-32d1-a456-426614174000
+  parameters:
+    person_slug_in_path:
+      name: person_slug
+      in: path
+      required: true
+      schema:
+        type: string
+      examples:
+        email:
+          value: person@example.com
+          summary: Email
+        phone_number:
+          value: "+12025551111"
+          summary: Phone number in e164 format
+        customer_id:
+          value: 357811823
+          summary: ID of the customer on the merchant site
+        username:
+          value: lizard_wizard__42
+          summary: Username
+      description: Person’s email, phone number, customer ID, or username
+    site_slug_in_query_required:
+      name: site_slug
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Your Talkable Site ID. You can get this from your Talkable dashboard
+        after you log in and create a site.
+      example: my-store
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      description: Please provide here your API key, you can find it in Site Settings
+        -> API Integration -> API Key
+security:
+- api_key: []

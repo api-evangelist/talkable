@@ -1,0 +1,20 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/talkable-v2-openapi-original.yml + conventions/talkable-conventions.yml
+skills:
+  - file: talkable-referral-origins-flow.md
+    name: Register an off-site purchase or event to close a referral
+    api: openapi/talkable-v2-openapi-original.yml
+    operations: [createOrigin, createPurchase, createEvent, updateReferralStatus, markOriginAsRefunded]
+  - file: talkable-customer-support-person.md
+    name: Look up and manage a customer (person) for support
+    api: openapi/talkable-v2-openapi-original.yml
+    operations: [findPerson, getPersonalInformationAboutPerson, unsubscribePerson, anonymizePerson, updateReferralStatus]
+  - file: talkable-loyalty-points.md
+    name: Manage a loyalty member's points balance
+    api: openapi/talkable-v2-openapi-original.yml
+    operations: [findLoyaltyMember, listCollectActions, createCollectAction, adjustLoyaltyMembersPointsBalance, createRedeemAction]
+  - file: talkable-share-offer.md
+    name: Share an advocate offer via email or social channel
+    api: openapi/talkable-v2-openapi-original.yml
+    operations: [findAdvocateOffer, shareViaEmail, shareViaSocialChannel, shareAndClaimOffer]

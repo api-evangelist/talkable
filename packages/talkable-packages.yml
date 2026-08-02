@@ -1,0 +1,34 @@
+generated: '2026-07-21'
+method: searched
+source: https://rubygems.org/gems/talkable + https://github.com/talkable
+packages:
+  - language: ruby
+    registry: rubygems
+    name: talkable
+    url: https://rubygems.org/gems/talkable
+    install: gem install talkable
+    version: 1.3.0
+    official: true
+    description: Talkable Ruby Gem to build your own referral program in Sinatra or Rails apps.
+    source_code: https://github.com/talkable/talkable-ruby
+  - language: swift
+    registry: github
+    name: talkable/ios-sdk
+    url: https://github.com/talkable/ios-sdk
+    install: 'pod ''Talkable'''
+    official: true
+    description: Talkable iOS SDK (Objective-C) for embedding referral campaigns in native iOS apps.
+  - language: java
+    registry: jitpack
+    name: com.github.talkable:android-sdk
+    url: https://github.com/talkable/android-sdk
+    install: 'implementation ''com.github.talkable:android-sdk:<version>'''
+    official: true
+    description: Talkable Android SDK for embedding referral campaigns in native Android apps; distributed via JitPack.
+  - language: javascript
+    registry: github
+    name: analytics.js-integration-talkable
+    url: https://github.com/talkable/analytics.js-integration-talkable
+    install: null
+    official: true
+    description: Segment analytics.js integration for Talkable.

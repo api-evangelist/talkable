@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.talkable.com/api_v2/intro/ + openapi/talkable-v2-openapi-original.yml
+api: REST API v2
+base_url: https://www.talkable.com/api/v2
+authentication:
+  style: bearer-api-key
+  header: 'Authorization: Bearer <API_KEY>'
+  ref: authentication/talkable-authentication.yml
+response_envelope:
+  success: '{ "ok": true, "result": ... }'
+  error: '{ "ok": false, "error_message": "Message describing the error" }'
+  notes: Every successful response is wrapped in an ok/result envelope; content-type application/json.
+serialization:
+  format: json
+  content_type: application/json
+  date_format: ISO 8601
+  date_example: '2022-02-16T02:43:58.797-07:00'
+pagination:
+  style: page-number
+  params:
+    page: { in: query, default: 1, minimum: 1 }
+    per_page: { in: query, default: 25, minimum: 1, maximum: 100 }
+  applies_to: [listAssets, and other collection endpoints]
+tenancy:
+  param: site_slug
+  notes: Most endpoints are site-scoped and require a site_slug query parameter identifying the Talkable site.
+idempotency:
+  supported: false
+  notes: Talkable does not document an idempotency-key header for the REST API v2. Batch origin endpoints exist for bulk submission but no idempotency contract is published.
+versioning:
+  scheme: uri-path
+  current: v2
+  ref: lifecycle/talkable-lifecycle.yml
+errors:
+  format: envelope
+  ref: errors/talkable-problem-types.yml
+  http_status_codes:
+    '200,201': Everything worked as expected.
+    '400': Bad Request - often a missing required parameter.
+    '401': Unauthorized - no valid API key provided.
+    '404': Not Found - the requested item does not exist.
+    '422': Unprocessable Entity - the request was well-formed but could not be processed.
+rate_limiting:
+  documented: false
+webhooks:
+  ref: openapi/talkable-webhooks-openapi-original.yml

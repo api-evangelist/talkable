@@ -1,0 +1,37 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/talkable-v2-openapi-original.yml + well-known/ + https://docs.talkable.com/mcp_server/
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: MCP server uses OAuth 2.1 authorization/token endpoints (well-known/talkable-oauth-authorization-server.json).
+  - id: oauth2.1-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported = [S256]; interactive clients use PKCE.
+  - id: rfc7591-dynamic-client-registration
+    conforms: true
+    evidence: registration_endpoint https://www.talkable.com/oauth/register advertised.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server returns 200 with issuer/endpoints.
+  - id: rfc9728-oauth-protected-resource-metadata
+    conforms: true
+    evidence: /.well-known/oauth-protected-resource returns 200 with resource + authorization_servers.
+  - id: model-context-protocol
+    conforms: true
+    evidence: Published hosted MCP server over streamable HTTP at https://www.talkable.com/mcp.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use an ok/error_message envelope, not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: Collection endpoints use page/per_page query parameters.
+  - id: idempotency
+    conforms: false
+    evidence: No idempotency-key header documented for REST API v2.
+  - id: bearer-token-auth
+    conforms: true
+    evidence: REST API v2 securityScheme api_key (http bearer).

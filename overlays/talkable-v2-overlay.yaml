@@ -1,0 +1,27 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Talkable API v2
+  version: 1.0.0
+extends: openapi/talkable-v2-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      description: >-
+        Talkable REST API v2 — referral marketing and loyalty platform. Site-scoped
+        endpoints for origins (off-site purchase/event ingestion), offers and shares,
+        referrals, people, coupons, loyalty members, metrics, assets, and traffic
+        sources. Bearer API-key auth; responses use an ok/result envelope.
+      x-apievangelist-rating: 4
+      x-apievangelist-agent-ready: true
+  - target: $.info
+    update:
+      contact:
+        name: Talkable API Documentation
+        url: https://docs.talkable.com/api_v2/intro/
+  - target: $
+    update:
+      x-apievangelist-conventions: conventions/talkable-conventions.yml
+      x-apievangelist-errors: errors/talkable-problem-types.yml
+      x-apievangelist-authentication: authentication/talkable-authentication.yml
+      x-apievangelist-mcp: mcp/talkable-mcp.yml
+      x-apievangelist-webhooks: openapi/talkable-webhooks-openapi-original.yml

@@ -1,0 +1,51 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.talkable.com/web_hooks/ + https://www.talkable.com/api-docs/webhooks/openapi.yaml
+spec_type: Webhooks
+spec: openapi/talkable-webhooks-openapi-original.yml
+docs: https://docs.talkable.com/web_hooks/
+transport: http-callback
+delivery: >-
+  Each webhook is configured in the Talkable dashboard (Menu -> Webhooks -> Create
+  New Webhook) with a client-hosted HTTP endpoint URL that receives a POST payload
+  when the event fires. Talkable also offers a newer Custom App integration that
+  supersedes classic webhooks with centralized config and customizable payloads.
+webhooks:
+  - name: create_coupon
+    event: Create Coupon
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/create_coupon/
+  - name: advocate_signup
+    event: Advocate Signup (offer signup)
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/offer_signup/
+  - name: friend_email_gating
+    event: Friend Email Gating (claim signup)
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/claim_signup/
+  - name: post_share
+    event: Post Share
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/post_share/
+  - name: event
+    event: Event
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/event/
+  - name: referral
+    event: Referral
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/referral/
+  - name: reward
+    event: Reward
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/reward/
+    note: Only sends when an associated incentive is configured.
+  - name: unsubscribe
+    event: Unsubscribe
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/unsubscribe/
+  - name: check_unsubscribe
+    event: Check Unsubscribe
+    method: POST
+    docs: https://docs.talkable.com/web_hooks/check_unsubscribe/
+payload_schemas: [campaign, offer, person, generic_origin, event, origin, referral_reward, email, phone_number]

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: searched
+source: well-known/talkable-oauth-authorization-server.json
+docs: https://docs.talkable.com/mcp_server/authentication/
+note: >-
+  OAuth scopes apply to the Talkable MCP server (OAuth 2.1), not the REST API v2
+  (which uses a Bearer API key). Scopes are a ceiling: a credential can still
+  only do what the acting user's Talkable role permits on each site.
+schemes:
+  - name: oauth2
+    source: well-known/talkable-oauth-authorization-server.json
+    flows:
+      - flow: authorizationCode
+        authorizationUrl: https://www.talkable.com/oauth/authorize
+        tokenUrl: https://www.talkable.com/oauth/token
+        registrationUrl: https://www.talkable.com/oauth/register
+        pkce: S256
+scopes:
+  - scope: mcp:read
+    description: Call MCP tools that read account and site data (list campaigns, look up a referral or person, read metrics).
+    flows: [authorizationCode]
+  - scope: mcp:write
+    description: Call MCP tools that create or update Talkable data (approve a referral, expire a coupon, schedule an export).
+    flows: [authorizationCode]
+  - scope: browser_control
+    description: Advertised in the authorization-server metadata (scopes_supported); reserved for browser-control agent capabilities.
+    flows: [authorizationCode]

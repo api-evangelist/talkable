@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.talkable.com/ + https://status.talkable.com/
+versioning:
+  scheme: uri-path
+  current: v2
+  docs: https://docs.talkable.com/api_v2/intro/
+  notes: >-
+    The REST API is versioned in the path (/api/v2/). A behavior change was noted
+    for accounts created after April 2025 (API requests now auto-generate an
+    Activity); older accounts can migrate via their account manager.
+status_page: https://status.talkable.com/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: >-
+    Talkable recommends migrating legacy Webhooks to the newer Custom App
+    integration for centralized configuration and customizable payloads, but
+    publishes no formal RFC 8594 Sunset/Deprecation header policy.
+sla:
+  url: null
+deprecated_operations: []

@@ -1,0 +1,36 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/talkable-v2-openapi-original.yml + https://docs.talkable.com/api_v2/intro/
+format: envelope
+envelope:
+  shape: '{ "ok": false, "error_message": "..." }'
+  field: error_message
+  note: >-
+    Talkable does not use RFC 9457 application/problem+json. Errors are returned
+    in the standard ok/error_message envelope with a standard HTTP status code.
+    Most error messages are not meant to be shown to end users.
+problems:
+  - status: 400
+    title: Bad Request
+    meaning: Often a missing required parameter.
+    action: Check required parameters (e.g. site_slug) and request body shape.
+  - status: 401
+    title: Unauthorized
+    meaning: No valid API key provided.
+    action: Provide a valid Bearer API key in the Authorization header.
+  - status: 404
+    title: Not Found
+    meaning: The requested item does not exist.
+    action: Verify the resource identifier (person_slug, coupon code, offer short_url_code, etc.).
+  - status: 422
+    title: Unprocessable Entity
+    meaning: The request was well-formed but could not be processed (validation failed).
+    action: Inspect error_message and correct the submitted values.
+observed_status_codes_by_operation:
+  listAssets: [200]
+  uploadAsset: [201, 422]
+  findAsset: [200, 400]
+  createOrigin: [201, 400]
+  updatePerson: [200, 400, 422]
+  adjustLoyaltyMembersPointsBalance: [200, 422, 400]
+  unsubscribePerson: [200, 422]

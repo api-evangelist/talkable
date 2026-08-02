@@ -1,0 +1,18 @@
+generated: '2026-07-21'
+method: searched
+host: https://www.talkable.com
+documents:
+  - path: /.well-known/oauth-authorization-server   # RFC 8414 — used by the MCP OAuth 2.1 flow
+    status: 200
+    file: talkable-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource     # RFC 9728 — MCP resource metadata
+    status: 200
+    file: talkable-oauth-protected-resource.json
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt                 # RFC 9116
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404

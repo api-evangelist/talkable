@@ -1,0 +1,74 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/talkable-v2-openapi-original.yml + openapi/talkable-webhooks-openapi-original.yml
+note: >-
+  Entity graph derived from Talkable REST API v2 paths, id-reference parameters
+  (site_slug, person_slug, short_url_code, origin_slug, coupon code, member email)
+  and webhook payload schemas. Talkable is a referral-marketing and loyalty
+  platform; Person plays two roles in a referral: Advocate (referrer) and Friend.
+entities:
+  - name: site
+    key: site_slug
+    description: A Talkable-integrated store/service; nearly every endpoint is site-scoped.
+  - name: campaign
+    key: id
+    description: A referral or loyalty campaign on a site.
+    relationships:
+      - { type: belongs_to, target: site, via: site_slug }
+      - { type: has_many, target: incentive }
+      - { type: has_many, target: placement }
+      - { type: has_many, target: view_template }
+  - name: person
+    key: person_slug
+    description: A customer; acts as Advocate and/or Friend in referrals.
+    relationships:
+      - { type: has_many, target: referral, via: referrals_as_advocate }
+      - { type: has_many, target: referral, via: referrals_as_friend }
+      - { type: has_many, target: reward }
+      - { type: has_many, target: share, via: shares_by }
+  - name: offer
+    key: short_url_code
+    description: An advocate's shareable referral offer.
+    relationships:
+      - { type: belongs_to, target: person, via: advocate }
+      - { type: has_many, target: share }
+      - { type: has_one, target: visitor_offer }
+  - name: origin
+    key: origin_slug
+    description: An off-site/backend purchase or event fed to Talkable to trigger the referral flow.
+    subtypes: [purchase, event, affiliate_member]
+    relationships:
+      - { type: has_one, target: referral }
+  - name: referral
+    key: id
+    description: A completed referral chain linking Advocate offer to a Friend origin; can be approved or voided.
+    relationships:
+      - { type: belongs_to, target: origin, via: origin_slug }
+      - { type: has_many, target: reward }
+  - name: reward
+    description: An incentive paid to a person for a referral action.
+    relationships:
+      - { type: belongs_to, target: person }
+  - name: coupon
+    key: code
+    description: A coupon code, grouped in coupon lists, redeemable by a person.
+    relationships:
+      - { type: belongs_to, target: person, via: permission }
+  - name: loyalty_member
+    key: email
+    description: A loyalty-program member with a points balance and collect/redeem/adjustment actions.
+    relationships:
+      - { type: has_many, target: collect_action }
+      - { type: has_many, target: redeem_action }
+      - { type: has_many, target: manual_adjustment_action }
+      - { type: has_many, target: redemption_batch }
+  - name: visitor
+    key: uuid
+    description: A tracked site visitor; links a Friend's site actions back to an offer.
+  - name: asset
+    key: id
+    description: A static media asset (image/video) uploaded for campaign use.
+  - name: metric
+    description: A computed reporting metric, optionally segmented.
+  - name: traffic_source
+    description: A configured traffic source for a site.
