@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Offer Claims API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offer Claims",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Share and claim an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offer_claims",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "advocate_email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "friend_email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Share and claim an offer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

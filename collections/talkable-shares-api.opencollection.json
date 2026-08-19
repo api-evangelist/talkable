@@ -1,0 +1,121 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Shares API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shares",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Share and claim an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offer_claims",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "advocate_email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "friend_email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Share and claim an offer"
+        },
+        {
+          "info": {
+            "name": "Get shares made by person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/shares_by",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns shares that person made."
+        },
+        {
+          "info": {
+            "name": "Share offer with recipients via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code/shares/email",
+            "params": [
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Share offer with recipients via email"
+        },
+        {
+          "info": {
+            "name": "Share offer with recipients via social channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code/shares/social",
+            "params": [
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Share offer with recipients via social channel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,56 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.talkable.com/product-updates
+url: https://www.talkable.com/product-updates
+scheme: dated-posts
+current_version: null
+note: >-
+  Talkable publishes a dated Product Updates stream on its marketing site rather
+  than a semver release log. There are no version numbers and no numbered
+  releases; each entry is an individually dated, permalinked post. 174 entries
+  across 35 pages of archive at the time of capture. No RSS/Atom feed is served
+  (/product-updates/feed returns the HTML page, not a feed). The REST API v2 path
+  version (v2) has not changed across this window — see lifecycle/.
+feed: null
+entry_count_archived: 174
+entries:
+  - title: Measure the Real Impact of Wallet Notifications
+    date: '2026-07-16'
+    url: https://www.talkable.com/product-updates/measure-the-real-impact-of-wallet-notifications
+    type: addition
+    breaking: false
+    highlight: Attribution windows now determine how Wallet interactions connect to subsequent purchases.
+  - title: Compare Wallet Push Notification Performance in MAR
+    date: '2026-07-02'
+    url: https://www.talkable.com/product-updates/compare-wallet-push-notification-performance-in-mar
+    type: addition
+    breaking: false
+    highlight: Push-notification effectiveness can be analyzed inside the Wallet experience reporting.
+  - title: HubSpot Integration Updated for the Latest CRM APIs
+    date: '2026-06-23'
+    url: https://www.talkable.com/product-updates/hubspot-integration-updated-latest-crm-apis
+    type: change
+    breaking: false
+    highlight: The HubSpot integration was moved onto HubSpot's current CRM APIs for email opt-in syncing.
+  - title: Talkable Data, Native in Klaviyo
+    date: '2026-05-26'
+    url: https://www.talkable.com/product-updates/expanded-klaviyo-integration
+    type: addition
+    breaking: false
+    highlight: Referral activity flows automatically into Klaviyo as profile properties and segments.
+  - title: Track More Wallet Pass Clicks by Default
+    date: '2026-05-21'
+    url: https://www.talkable.com/product-updates/track-more-wallet-pass-clicks-by-default
+    type: change
+    breaking: false
+    highlight: Standard Wallet theme links now record clicks automatically without extra configuration.
+related:
+  lifecycle: lifecycle/talkable-lifecycle.yml
+x-evidence:
+  - url: https://www.talkable.com/product-updates
+    http_status: 200
+    fetched: '2026-08-13'
+  - url: https://www.talkable.com/product-updates/measure-the-real-impact-of-wallet-notifications
+    http_status: 200
+    fetched: '2026-08-13'
+    note: dates read from the page's schema.org datePublished

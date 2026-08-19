@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Visitors API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Visitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a visitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/visitors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a visitor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,208 @@
+{
+  "item": [
+    {
+      "id": "5f637e13-c7d4-4c47-b5a4-0484a0e3c407",
+      "name": "Offer Claims",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cfdcf3b2-b8ce-4ec9-9eae-45beb77e0841",
+          "name": "Share and claim an offer",
+          "request": {
+            "name": "Share and claim an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "offer_claims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "advocate_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "friend_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe307aa9-7531-4553-85d2-626db0462830",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"friend_reward\": {\n      \"amount\": 10,\n      \"id\": 1,\n      \"reason\": \"click\",\n      \"status\": \"Paid\",\n      \"coupon\": {\n        \"amount\": 10,\n        \"description\": \"$10\",\n        \"code\": \"COUPON_CODE_29\",\n        \"expires_at\": null,\n        \"id\": 1,\n        \"percentage_discount\": false,\n        \"single_use\": true,\n        \"used\": false,\n        \"active\": true,\n        \"usages\": 0,\n        \"valid_until\": null\n      },\n      \"coupon_code\": \"COUPON_CODE_29\",\n      \"incentive_type\": \"discount_coupon\",\n      \"incentive_description\": \"single use coupon for $10 off\",\n      \"incentive_custom_description\": null\n    },\n    \"friend_unredeem_reason\": null,\n    \"friend_human_unredeem_reason\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8493aa64-b87f-4e0e-870e-81f59a628881",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Invalid `advocate_email`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "36646eca-cee1-480d-bdb4-b409d386a5b7",
+    "name": "Talkable Advocate Offers Offer Claims API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,1162 @@
+{
+  "item": [
+    {
+      "id": "93d7fdee-7a09-48f8-a6b3-1392c15b364e",
+      "name": "Origins",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1bb3fce6-9196-4dd4-8473-39b726226db9",
+          "name": "Create an origin",
+          "request": {
+            "name": "Create an origin",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"data\": {\n    \"email\": \"<email>\",\n    \"order_number\": \"<string>\",\n    \"subtotal\": \"<float>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"<string>\",\n    \"sharing_channels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"<uuid>\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"<string>\",\n    \"segment1\": \"<string>\",\n    \"segment2\": \"<string>\",\n    \"segment3\": \"<string>\",\n    \"utm_source\": \"<string>\",\n    \"utm_medium\": \"<string>\",\n    \"utm_campaign\": \"<string>\",\n    \"utm_term\": \"<string>\",\n    \"utm_content\": \"<string>\",\n    \"coupon_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"currency_iso_code\": \"<string>\",\n    \"shipping_address\": \"<string>\",\n    \"shipping_zip\": \"<string>\",\n    \"items\": [\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      },\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ade6329-92c3-4042-9467-0a12ad17e8f0",
+              "name": "purchase created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"Purchase\",\n  \"data\": {\n    \"email\": \"customer@store.com\",\n    \"order_number\": \"20\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      },\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"subtotal\": 100.44,\n      \"customer_id\": \"1024\",\n      \"email\": \"customer@store.com\",\n      \"id\": 1,\n      \"ip_address\": \"192.0.2.255\",\n      \"order_number\": \"20\",\n      \"refunded_at\": null,\n      \"type\": \"Purchase\",\n      \"segment1\": null,\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null,\n      \"order_date\": \"2026-07-07T11:06:14.000-07:00\",\n      \"partially_refunded\": false,\n      \"refund_subtotal\": null,\n      \"coupon_code\": \"C0001,C0002\"\n    },\n    \"offer\": {\n      \"claim_url\": \"https://share.my-store.com/x/BCR7w2\",\n      \"email\": \"customer@store.com\",\n      \"id\": 1,\n      \"short_url_code\": \"gWQ3y4\",\n      \"show_url\": \"https://share.my-store.com/x/52Ea09\",\n      \"coupon_code\": null,\n      \"incentives\": {},\n      \"trigger_widget\": false,\n      \"campaign_tags\": [\n        \"post-purchase\"\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c043feb-8270-481b-b5ab-659ec3709608",
+              "name": "wrong type",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"Purchase\",\n  \"data\": {\n    \"email\": \"customer@store.com\",\n    \"order_number\": \"20\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      },\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"`type` must be within [\\\"AffiliateMember\\\", \\\"Purchase\\\", \\\"Event\\\"]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "669c2b33-42e0-4b78-96cf-72039f56a3e9",
+          "name": "Create an affiliate member",
+          "request": {
+            "name": "Create an affiliate member",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "affiliate_member"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"<email>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"<string>\",\n    \"sharing_channels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"<uuid>\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"<string>\",\n    \"segment1\": \"<string>\",\n    \"segment2\": \"<string>\",\n    \"segment3\": \"<string>\",\n    \"utm_source\": \"<string>\",\n    \"utm_medium\": \"<string>\",\n    \"utm_campaign\": \"<string>\",\n    \"utm_term\": \"<string>\",\n    \"utm_content\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "52151301-8bd4-4ea2-bd75-72822735ba5b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "affiliate_member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"affiliate@store.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"invite\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"article-1\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"article-1\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"customer_id\": \"1024\",\n      \"email\": \"affiliate@store.com\",\n      \"id\": 1,\n      \"ip_address\": \"192.0.2.255\",\n      \"type\": \"AffiliateMember\",\n      \"segment1\": null,\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null\n    },\n    \"offer\": {\n      \"claim_url\": \"https://share.my-store.com/x/m5RhOw\",\n      \"email\": \"affiliate@store.com\",\n      \"id\": 1,\n      \"short_url_code\": \"4t6kTY\",\n      \"show_url\": \"https://share.my-store.com/x/CoEMvb\",\n      \"coupon_code\": null,\n      \"incentives\": {},\n      \"trigger_widget\": false,\n      \"campaign_tags\": [\n        \"invite\"\n      ]\n    },\n    \"claim_links\": {\n      \"facebook\": \"https://share.my-store.com/x/CyABj6\",\n      \"custom\": \"https://share.my-store.com/x/ZeqzxQ\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9f72a83e-c049-4c46-9fa8-001c518066be",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "affiliate_member"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"affiliate@store.com\",\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"invite\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"article-1\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"article-1\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Email isn't valid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e680f269-f8e7-4e89-aea3-2e80cbbf618b",
+          "name": "Create an event",
+          "request": {
+            "name": "Create an event",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "event"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"<email>\",\n    \"event_category\": \"<string>\",\n    \"event_number\": \"<string>\",\n    \"subtotal\": \"<float>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"<string>\",\n    \"sharing_channels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"<uuid>\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"<string>\",\n    \"segment1\": \"<string>\",\n    \"segment2\": \"<string>\",\n    \"segment3\": \"<string>\",\n    \"utm_source\": \"<string>\",\n    \"utm_medium\": \"<string>\",\n    \"utm_campaign\": \"<string>\",\n    \"utm_term\": \"<string>\",\n    \"utm_content\": \"<string>\",\n    \"coupon_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"currency_iso_code\": \"<string>\",\n    \"shipping_address\": \"<string>\",\n    \"shipping_zip\": \"<string>\",\n    \"items\": [\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      },\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce62dac2-ce31-4c6a-897c-94ddd1246b98",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"user@store.com\",\n    \"event_category\": \"newsletter_subscription\",\n    \"event_number\": \"42\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 100.44,\n        \"quantity\": 1,\n        \"product_id\": \"SUBSCRIPTION\"\n      },\n      {\n        \"price\": 100.44,\n        \"quantity\": 1,\n        \"product_id\": \"SUBSCRIPTION\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"subtotal\": 100.44,\n      \"customer_id\": \"1024\",\n      \"email\": \"user@store.com\",\n      \"event_number\": \"42\",\n      \"id\": 1,\n      \"ip_address\": \"192.0.2.255\",\n      \"refunded_at\": null,\n      \"type\": \"Event\",\n      \"segment1\": null,\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null,\n      \"event_category\": \"newsletter_subscription\",\n      \"coupon_code\": \"C0001,C0002\",\n      \"partially_refunded\": false,\n      \"refund_subtotal\": null\n    },\n    \"offer\": {\n      \"claim_url\": \"https://share.my-store.com/x/1qj4Go\",\n      \"email\": \"user@store.com\",\n      \"id\": 1,\n      \"short_url_code\": \"Q9nRug\",\n      \"show_url\": \"https://share.my-store.com/x/e3TfVg\",\n      \"coupon_code\": null,\n      \"incentives\": {},\n      \"trigger_widget\": false,\n      \"campaign_tags\": [\n        \"post-purchase\"\n      ]\n    },\n    \"claim_links\": {\n      \"facebook\": \"https://share.my-store.com/x/7smUy5\",\n      \"custom\": \"https://share.my-store.com/x/gRrQuG\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc2d9cdb-cde2-426b-806c-8206719cbd71",
+              "name": "event with different data exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "event"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"user@store.com\",\n    \"event_category\": \"newsletter_subscription\",\n    \"event_number\": \"42\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 100.44,\n        \"quantity\": 1,\n        \"product_id\": \"SUBSCRIPTION\"\n      },\n      {\n        \"price\": 100.44,\n        \"quantity\": 1,\n        \"product_id\": \"SUBSCRIPTION\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Duplicate entity: Talkable already has existing Event with the same event_number but different data\\n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1d2e7506-c3d4-44d7-9468-12ed4e0d3543",
+          "name": "Create a purchase",
+          "request": {
+            "name": "Create a purchase",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "purchase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"<email>\",\n    \"order_number\": \"<string>\",\n    \"subtotal\": \"<float>\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"customer_id\": \"<string>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"<string>\",\n    \"sharing_channels\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"<uuid>\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"<string>\",\n    \"segment1\": \"<string>\",\n    \"segment2\": \"<string>\",\n    \"segment3\": \"<string>\",\n    \"utm_source\": \"<string>\",\n    \"utm_medium\": \"<string>\",\n    \"utm_campaign\": \"<string>\",\n    \"utm_term\": \"<string>\",\n    \"utm_content\": \"<string>\",\n    \"coupon_codes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"currency_iso_code\": \"<string>\",\n    \"shipping_address\": \"<string>\",\n    \"shipping_zip\": \"<string>\",\n    \"items\": [\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      },\n      {\n        \"price\": \"<float>\",\n        \"quantity\": \"<integer>\",\n        \"product_id\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "019986ad-13e5-46de-8f2b-ab54dc0aa0eb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"customer@store.com\",\n    \"order_number\": \"20\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      },\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"subtotal\": 100.44,\n      \"customer_id\": \"1024\",\n      \"email\": \"customer@store.com\",\n      \"id\": 1,\n      \"ip_address\": \"192.0.2.255\",\n      \"order_number\": \"20\",\n      \"refunded_at\": null,\n      \"type\": \"Purchase\",\n      \"segment1\": null,\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null,\n      \"order_date\": \"2026-07-07T11:06:25.000-07:00\",\n      \"partially_refunded\": false,\n      \"refund_subtotal\": null,\n      \"coupon_code\": \"C0001,C0002\"\n    },\n    \"offer\": {\n      \"claim_url\": \"https://share.my-store.com/x/Q9wV8X\",\n      \"email\": \"customer@store.com\",\n      \"id\": 1,\n      \"short_url_code\": \"mwCn1l\",\n      \"show_url\": \"https://share.my-store.com/x/FLMxKE\",\n      \"coupon_code\": null,\n      \"incentives\": {},\n      \"trigger_widget\": false,\n      \"campaign_tags\": [\n        \"post-purchase\"\n      ]\n    },\n    \"claim_links\": {\n      \"facebook\": \"https://share.my-store.com/x/js3raT\",\n      \"custom\": \"https://share.my-store.com/x/F6tKyP\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d05079a-ec02-4845-a112-8a8f021792f0",
+              "name": "purchase with different data exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "purchase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"email\": \"customer@store.com\",\n    \"order_number\": \"20\",\n    \"subtotal\": 100.44,\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"customer_id\": \"1024\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"campaign_tags\": \"post-purchase\",\n    \"sharing_channels\": [\n      \"facebook\",\n      \"custom\"\n    ],\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    },\n    \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n    \"created_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"traffic_source\": \"in-store\",\n    \"segment1\": \"CA\",\n    \"segment2\": \"male\",\n    \"segment3\": \"in-store\",\n    \"utm_source\": \"facebook\",\n    \"utm_medium\": \"example_medium\",\n    \"utm_campaign\": \"example_campaign\",\n    \"utm_term\": \"example_term\",\n    \"utm_content\": \"example_content\",\n    \"coupon_codes\": [\n      \"C0001\",\n      \"C0002\"\n    ],\n    \"currency_iso_code\": \"USD\",\n    \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n    \"shipping_zip\": \"29860\",\n    \"items\": [\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      },\n      {\n        \"price\": 25.11,\n        \"quantity\": 4,\n        \"product_id\": \"TSHIRT\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Duplicate entity: Talkable already has existing Purchase with the same order_number but different data\\n\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bde2153-be10-411e-bc5f-366f49a2c31b",
+          "name": "Create batch of affiliate members",
+          "request": {
+            "name": "Create batch of affiliate members",
+            "description": {
+              "content": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "batch",
+                "affiliate_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\"\n    }\n  ],\n  \"create_offers\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c7acd832-715e-4456-9844-195ad2c8b076",
+              "name": "accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "batch",
+                    "affiliate_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"affiliate@store.com\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"invite\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"article-1\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"article-1\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\"\n    },\n    {\n      \"email\": \"affiliate@store.com\",\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"invite\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"article-1\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"article-1\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\"\n    }\n  ],\n  \"create_offers\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba6c5dbc-0af4-4ba2-9c7f-af2ba84fdb3b",
+          "name": "Create batch of events",
+          "request": {
+            "name": "Create batch of events",
+            "description": {
+              "content": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "batch",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"<email>\",\n      \"event_category\": \"<string>\",\n      \"event_number\": \"<string>\",\n      \"subtotal\": \"<float>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"coupon_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currency_iso_code\": \"<string>\",\n      \"shipping_address\": \"<string>\",\n      \"shipping_zip\": \"<string>\",\n      \"items\": [\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"email\": \"<email>\",\n      \"event_category\": \"<string>\",\n      \"event_number\": \"<string>\",\n      \"subtotal\": \"<float>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"coupon_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currency_iso_code\": \"<string>\",\n      \"shipping_address\": \"<string>\",\n      \"shipping_zip\": \"<string>\",\n      \"items\": [\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"create_offers\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7493d3d9-eec3-4f4c-8391-2283511d1c05",
+              "name": "accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "batch",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"user@store.com\",\n      \"event_category\": \"newsletter_subscription\",\n      \"event_number\": \"42\",\n      \"subtotal\": 100.44,\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"post-purchase\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"in-store\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"in-store\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\",\n      \"coupon_codes\": [\n        \"C0001\",\n        \"C0002\"\n      ],\n      \"currency_iso_code\": \"USD\",\n      \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n      \"shipping_zip\": \"29860\",\n      \"items\": [\n        {\n          \"price\": 100.44,\n          \"quantity\": 1,\n          \"product_id\": \"SUBSCRIPTION\"\n        },\n        {\n          \"price\": 100.44,\n          \"quantity\": 1,\n          \"product_id\": \"SUBSCRIPTION\"\n        }\n      ]\n    },\n    {\n      \"email\": \"user@store.com\",\n      \"event_category\": \"newsletter_subscription\",\n      \"event_number\": \"42\",\n      \"subtotal\": 100.44,\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"post-purchase\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"in-store\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"in-store\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\",\n      \"coupon_codes\": [\n        \"C0001\",\n        \"C0002\"\n      ],\n      \"currency_iso_code\": \"USD\",\n      \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n      \"shipping_zip\": \"29860\",\n      \"items\": [\n        {\n          \"price\": 100.44,\n          \"quantity\": 1,\n          \"product_id\": \"SUBSCRIPTION\"\n        },\n        {\n          \"price\": 100.44,\n          \"quantity\": 1,\n          \"product_id\": \"SUBSCRIPTION\"\n        }\n      ]\n    }\n  ],\n  \"create_offers\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4013b561-4a55-4d76-9119-f2fca30811fa",
+          "name": "Create batch of purchases",
+          "request": {
+            "name": "Create batch of purchases",
+            "description": {
+              "content": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                "batch",
+                "purchases"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"<email>\",\n      \"order_number\": \"<string>\",\n      \"subtotal\": \"<float>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"coupon_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currency_iso_code\": \"<string>\",\n      \"shipping_address\": \"<string>\",\n      \"shipping_zip\": \"<string>\",\n      \"items\": [\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"email\": \"<email>\",\n      \"order_number\": \"<string>\",\n      \"subtotal\": \"<float>\",\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"<string>\",\n      \"sharing_channels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"<uuid>\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"coupon_codes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"currency_iso_code\": \"<string>\",\n      \"shipping_address\": \"<string>\",\n      \"shipping_zip\": \"<string>\",\n      \"items\": [\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        },\n        {\n          \"price\": \"<float>\",\n          \"quantity\": \"<integer>\",\n          \"product_id\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"create_offers\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "787b9f85-da5e-4ccf-b922-14edd9f2012d",
+              "name": "accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    "batch",
+                    "purchases"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": [\n    {\n      \"email\": \"customer@store.com\",\n      \"order_number\": \"20\",\n      \"subtotal\": 100.44,\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"post-purchase\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"in-store\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"in-store\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\",\n      \"coupon_codes\": [\n        \"C0001\",\n        \"C0002\"\n      ],\n      \"currency_iso_code\": \"USD\",\n      \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n      \"shipping_zip\": \"29860\",\n      \"items\": [\n        {\n          \"price\": 25.11,\n          \"quantity\": 4,\n          \"product_id\": \"TSHIRT\"\n        },\n        {\n          \"price\": 25.11,\n          \"quantity\": 4,\n          \"product_id\": \"TSHIRT\"\n        }\n      ]\n    },\n    {\n      \"email\": \"customer@store.com\",\n      \"order_number\": \"20\",\n      \"subtotal\": 100.44,\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"campaign_tags\": \"post-purchase\",\n      \"sharing_channels\": [\n        \"facebook\",\n        \"custom\"\n      ],\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"uuid\": \"123e4567-e89b-32d1-a456-426614174000\",\n      \"created_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"traffic_source\": \"in-store\",\n      \"segment1\": \"CA\",\n      \"segment2\": \"male\",\n      \"segment3\": \"in-store\",\n      \"utm_source\": \"facebook\",\n      \"utm_medium\": \"example_medium\",\n      \"utm_campaign\": \"example_campaign\",\n      \"utm_term\": \"example_term\",\n      \"utm_content\": \"example_content\",\n      \"coupon_codes\": [\n        \"C0001\",\n        \"C0002\"\n      ],\n      \"currency_iso_code\": \"USD\",\n      \"shipping_address\": \"456 White Finch St., North Augusta, South Carolina, 29860, United States\",\n      \"shipping_zip\": \"29860\",\n      \"items\": [\n        {\n          \"price\": 25.11,\n          \"quantity\": 4,\n          \"product_id\": \"TSHIRT\"\n        },\n        {\n          \"price\": 25.11,\n          \"quantity\": 4,\n          \"product_id\": \"TSHIRT\"\n        }\n      ]\n    }\n  ],\n  \"create_offers\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "381b3885-2bdd-4f2b-89f4-b680d97955b1",
+          "name": "Mark origin as refunded",
+          "request": {
+            "name": "Mark origin as refunded",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                ":origin_slug",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": \"<float>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2729fb02-ce78-4b22-9678-a5219937d1a5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": 100.44\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"subtotal\": 100.44,\n      \"customer_id\": null,\n      \"email\": \"customer@example.com\",\n      \"id\": 1,\n      \"ip_address\": \"1.2.3.4\",\n      \"order_number\": \"B00K2EOONI\",\n      \"refunded_at\": \"2026-07-07T11:07:44.000-07:00\",\n      \"type\": \"Purchase\",\n      \"segment1\": \"test\",\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null,\n      \"order_date\": \"2026-07-07T11:07:44.000-07:00\",\n      \"partially_refunded\": false,\n      \"refund_subtotal\": 100.44,\n      \"coupon_code\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1182f2b-ea2d-4ad5-9b40-bd4a70945a83",
+              "name": "origin has already been refunded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": 100.44\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Origin has already been refunded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f74f6926-02e5-472c-87f7-18f7d68456cd",
+    "name": "Talkable Advocate Offers Origins API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Coupons API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Coupons",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find a coupon",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/coupons/:code",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a coupon."
+        },
+        {
+          "info": {
+            "name": "Check if given coupon code belongs to given person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/coupons/:code/permission/:person_slug",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path",
+                "description": "Person’s email, phone number, customer ID, or username"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Check if given coupon code belongs to given person"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

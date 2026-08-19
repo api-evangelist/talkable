@@ -1,6 +1,12 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 host: https://www.talkable.com
+note: >-
+  Two real RFC-defined discovery documents are served (both re-probed 2026-08-13),
+  which is what earns the WellKnown pointer. Everything else 404s. Talkable's MCP
+  401 challenge points at the path-scoped resource-metadata variant, so that is
+  captured too. No security.txt, no api-catalog, no OIDC discovery, and no agent
+  card at either well-known path.
 documents:
   - path: /.well-known/oauth-authorization-server   # RFC 8414 — used by the MCP OAuth 2.1 flow
     status: 200
@@ -8,6 +14,13 @@ documents:
   - path: /.well-known/oauth-protected-resource     # RFC 9728 — MCP resource metadata
     status: 200
     file: talkable-oauth-protected-resource.json
+  - path: /.well-known/oauth-protected-resource/mcp # RFC 9728 — path-scoped variant named in the MCP 401 WWW-Authenticate challenge
+    status: 200
+    file: talkable-oauth-protected-resource-mcp.json
+  - path: /.well-known/agent-card.json              # A2A 1.0.0
+    status: 404
+  - path: /.well-known/agent.json                   # A2A pre-0.3 legacy path
+    status: 404
   - path: /.well-known/openid-configuration
     status: 404
   - path: /.well-known/security.txt                 # RFC 9116

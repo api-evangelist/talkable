@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "d299ee38-fe58-4ac3-b37e-9f774309aa95",
+      "name": "Post Share",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "974166a4-f9fc-4df8-9c4a-813016e33cf9",
+          "name": "Post Share",
+          "request": {
+            "name": "Post Share",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_post_share_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"share_type\": \"<string>\",\n    \"share_info\": {\n      \"recipients\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"sharer_info\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"share_link\": \"<string>\",\n    \"origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ed4c656-b345-4c83-b56c-581b2c365c39",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_post_share_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"post_share_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"share_type\": \"facebook\",\n    \"share_info\": {\n      \"recipients\": [\n        \"recipient1@b.com\",\n        \"recipient2@b.com\"\n      ]\n    },\n    \"sharer_info\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"share_link\": \"<string>\",\n    \"origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d892f2d0-4347-4d1c-9792-cce38b1d652e",
+    "name": "Talkable Advocate Offers Post Share API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

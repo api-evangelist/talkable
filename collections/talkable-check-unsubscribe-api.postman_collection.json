@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "9a60f8be-7786-4be1-b53e-315f9c51d9a6",
+      "name": "Check Unsubscribe",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "677480de-ccb5-4c49-beb5-74a5f54dabcd",
+          "name": "Check Unsubscribe",
+          "request": {
+            "name": "Check Unsubscribe",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_check_unsubscribe_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"recipient\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"email_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "232718e6-7874-494e-b2ea-8d5ebc337927",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_check_unsubscribe_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"check_unsubscribe_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"recipient\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"email_type\": \"notifier_offers_email\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0bb42762-a7af-4b4a-b889-ee0bbf995156",
+    "name": "Talkable Advocate Offers Check Unsubscribe API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

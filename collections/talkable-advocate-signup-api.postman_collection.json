@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "54d1744c-615f-420c-ae0c-8478eb6f2179",
+      "name": "Advocate Signup",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ca02712b-0adc-41f1-9fe5-20c174c0fd93",
+          "name": "Advocate Signup",
+          "request": {
+            "name": "Advocate Signup",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_offer_signup_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"unsubscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"subscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"phone_opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"is_loyalty_member\": \"<boolean>\",\n    \"loyalty_member\": \"<object>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"gender\": \"<string>\",\n    \"referral_counts\": {\n      \"total\": \"<integer>\",\n      \"approved\": \"<integer>\",\n      \"pending\": \"<integer>\"\n    },\n    \"sub_choice\": \"<boolean>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d495f9e8-648a-4aad-9767-10a168264b2a",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_offer_signup_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"offer_signup_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"unsubscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"subscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"phone_opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"is_loyalty_member\": true,\n    \"loyalty_member\": {},\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"gender\": \"<string>\",\n    \"referral_counts\": {\n      \"total\": 2,\n      \"approved\": 1,\n      \"pending\": 1\n    },\n    \"sub_choice\": false\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "afc04712-6803-4e0a-a67c-3c8f118e243d",
+    "name": "Talkable Advocate Offers Advocate Signup API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

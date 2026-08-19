@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Advocate Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find an advocate offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "sharing_channels[]",
+                "value": "facebook",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns advocate offer.\n\nAccepts optional ``sharing_channels`` JSON array with social sharing\nchannels for which will be generated sharing links.\n\nSupported channels: ``facebook``, ``twitter``, ``linkedin``, ``sms``, ``other``\nor custom, except ``email``, ``reminder``, ``facebook_sponsored`` and ``coupon``.\n"
+        },
+        {
+          "info": {
+            "name": "Check offer claim link status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code/claim_url_status",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "claim_url",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Check offer claim link status"
+        },
+        {
+          "info": {
+            "name": "Share offer with recipients via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code/shares/email",
+            "params": [
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Share offer with recipients via email"
+        },
+        {
+          "info": {
+            "name": "Share offer with recipients via social channel",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offers/:short_url_code/shares/social",
+            "params": [
+              {
+                "name": "short_url_code",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Share offer with recipients via social channel"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

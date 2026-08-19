@@ -1,0 +1,232 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Loyalty API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Loyalty",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List collect actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/collect_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "List collect actions"
+        },
+        {
+          "info": {
+            "name": "Create a collect action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/collect_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a collect action"
+        },
+        {
+          "info": {
+            "name": "List manual adjustment actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/manual_adjustment_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "List manual adjustment actions"
+        },
+        {
+          "info": {
+            "name": "Adjust loyalty member’s points balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/manual_adjustment_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adjusts loyalty member’s points balance.\n\nAccepts ``data`` JSON object with ``points`` property and optional ``description``.\n\nE.g. ``{\"points\": 100}`` or ``{\"points\": -100, \"description\": \"For cheating\"}``.\n"
+        },
+        {
+          "info": {
+            "name": "Find a loyalty member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Find a loyalty member"
+        },
+        {
+          "info": {
+            "name": "Update a loyalty member",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates loyalty member data.\n\nAccepts ``data`` JSON object with ``custom_properties`` and ``member_dates`` JSON objects.\n\nE.g. ``{\"custom_properties\":{\"contest_participant\":true},\"member_dates\":{\"identifier\":\"birthday\",\"date\":\"2004-01-01\"}}``.\n\nNote that all values in ``custom_properties`` object will be stored as strings,\ne.g. ``false`` will become ``\"f\"``, and ``123`` will become ``\"123\"``.\n"
+        },
+        {
+          "info": {
+            "name": "List redeem actions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/redeem_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "List redeem actions"
+        },
+        {
+          "info": {
+            "name": "Create a redeem action",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/redeem_actions",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a redeem action"
+        },
+        {
+          "info": {
+            "name": "List redemption batches",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/loyalty/members/:email/redemption_batches",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "List redemption batches"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

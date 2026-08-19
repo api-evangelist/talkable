@@ -1,0 +1,754 @@
+{
+  "item": [
+    {
+      "id": "b8268d8f-66f8-434d-9109-253c00ace38d",
+      "name": "Shares",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5edf4fd0-d733-4e92-9204-3dd55d9a99b0",
+          "name": "Share and claim an offer",
+          "request": {
+            "name": "Share and claim an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "offer_claims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "advocate_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "friend_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e4c83bd-f323-4522-9807-fb8a3d49a467",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"friend_reward\": {\n      \"amount\": 10,\n      \"id\": 1,\n      \"reason\": \"click\",\n      \"status\": \"Paid\",\n      \"coupon\": {\n        \"amount\": 10,\n        \"description\": \"$10\",\n        \"code\": \"COUPON_CODE_29\",\n        \"expires_at\": null,\n        \"id\": 1,\n        \"percentage_discount\": false,\n        \"single_use\": true,\n        \"used\": false,\n        \"active\": true,\n        \"usages\": 0,\n        \"valid_until\": null\n      },\n      \"coupon_code\": \"COUPON_CODE_29\",\n      \"incentive_type\": \"discount_coupon\",\n      \"incentive_description\": \"single use coupon for $10 off\",\n      \"incentive_custom_description\": null\n    },\n    \"friend_unredeem_reason\": null,\n    \"friend_human_unredeem_reason\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1dba5565-dd1e-437e-8ff0-354e6eef8c3d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Invalid `advocate_email`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68e7e302-68f7-4722-989e-bbca0b5f3c35",
+          "name": "Get shares made by person",
+          "request": {
+            "name": "Get shares made by person",
+            "description": {
+              "content": "Returns shares that person made.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "people",
+                ":person_slug",
+                "shares_by"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "person_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06447677-2d6f-4026-85b6-399e73aff3a4",
+              "name": "person found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "shares_by"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"shares\": [\n      {\n        \"shared_at\": \"2026-07-07T11:07:26.000-07:00\",\n        \"short_url\": \"https://share.my-store.com/x/HZRpFC\",\n        \"channel_identifier\": \"facebook\",\n        \"id\": 1,\n        \"type\": \"SocialOfferShare\",\n        \"offer\": {\n          \"claim_url\": \"https://share.my-store.com/x/GbnMfD\",\n          \"email\": \"customer@example.com\",\n          \"id\": 1,\n          \"short_url_code\": \"dy8h95\",\n          \"show_url\": \"https://share.my-store.com/x/8tp5sj\",\n          \"coupon_code\": null,\n          \"incentives\": {\n            \"referrer\": {\n              \"action_type\": \"referrer\",\n              \"amount\": 10,\n              \"description\": \"$10\",\n              \"percentage\": false,\n              \"criteria_config\": {\n                \"new_customer\": null,\n                \"new_optin\": false,\n                \"subtotal_min\": null,\n                \"subtotal_max\": null,\n                \"referrals_min\": null,\n                \"referrals_max\": null,\n                \"referrals_divisible_by\": null,\n                \"referrals_not_divisible_by\": null,\n                \"reward_uniqueness\": \"once_per_friend\",\n                \"friend_event_category\": null,\n                \"has_liquid_criteria\": false\n              },\n              \"for_advocate\": true,\n              \"for_friend\": false,\n              \"highest_amount\": true,\n              \"identifier\": \"referrer\",\n              \"incentive_type\": \"discount_coupon\",\n              \"coupon_expires_at\": null\n            }\n          },\n          \"trigger_widget\": false,\n          \"campaign_tags\": []\n        },\n        \"campaign\": {\n          \"slug\": 1,\n          \"is_active\": true,\n          \"appearance\": \"inline\",\n          \"id\": 1,\n          \"joinable_category_names\": [\n            \"affiliate_member\"\n          ],\n          \"name\": \"Deal for friends\",\n          \"origin_max_age\": null,\n          \"origin_min_age\": null,\n          \"status\": \"Live\",\n          \"tag_names\": [],\n          \"live_period\": {\n            \"starts_at\": \"2026-07-07T11:07:00.000-07:00\",\n            \"ends_at\": null\n          }\n        },\n        \"friends_count\": 0,\n        \"friend_clicks_count\": 0\n      },\n      {\n        \"shared_at\": \"2026-07-07T11:07:26.000-07:00\",\n        \"short_url\": \"https://share.my-store.com/x/cNjpnJ\",\n        \"channel_identifier\": \"email\",\n        \"id\": 2,\n        \"type\": \"EmailOfferShare\",\n        \"email\": \"test+62@example.com\",\n        \"offer\": {\n          \"claim_url\": \"https://share.my-store.com/x/GbnMfD\",\n          \"email\": \"customer@example.com\",\n          \"id\": 1,\n          \"short_url_code\": \"dy8h95\",\n          \"show_url\": \"https://share.my-store.com/x/8tp5sj\",\n          \"coupon_code\": null,\n          \"incentives\": {\n            \"referrer\": {\n              \"action_type\": \"referrer\",\n              \"amount\": 10,\n              \"description\": \"$10\",\n              \"percentage\": false,\n              \"criteria_config\": {\n                \"new_customer\": null,\n                \"new_optin\": false,\n                \"subtotal_min\": null,\n                \"subtotal_max\": null,\n                \"referrals_min\": null,\n                \"referrals_max\": null,\n                \"referrals_divisible_by\": null,\n                \"referrals_not_divisible_by\": null,\n                \"reward_uniqueness\": \"once_per_friend\",\n                \"friend_event_category\": null,\n                \"has_liquid_criteria\": false\n              },\n              \"for_advocate\": true,\n              \"for_friend\": false,\n              \"highest_amount\": true,\n              \"identifier\": \"referrer\",\n              \"incentive_type\": \"discount_coupon\",\n              \"coupon_expires_at\": null\n            }\n          },\n          \"trigger_widget\": false,\n          \"campaign_tags\": []\n        },\n        \"campaign\": {\n          \"slug\": 1,\n          \"is_active\": true,\n          \"appearance\": \"inline\",\n          \"id\": 1,\n          \"joinable_category_names\": [\n            \"affiliate_member\"\n          ],\n          \"name\": \"Deal for friends\",\n          \"origin_max_age\": null,\n          \"origin_min_age\": null,\n          \"status\": \"Live\",\n          \"tag_names\": [],\n          \"live_period\": {\n            \"starts_at\": \"2026-07-07T11:07:00.000-07:00\",\n            \"ends_at\": null\n          }\n        },\n        \"friends_count\": 0,\n        \"friend_clicks_count\": 0\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b572ca9b-56a3-4a62-95a7-d9017523b0d1",
+              "name": "person not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "shares_by"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No person found by `person_slug`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c160320-3a34-477a-b57e-949fbd772073",
+          "name": "Share offer with recipients via email",
+          "request": {
+            "name": "Share offer with recipients via email",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "offers",
+                ":short_url_code",
+                "shares",
+                "email"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "short_url_code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"recipients\": \"<string>\",\n  \"reminder\": \"<boolean>\",\n  \"validation_only\": \"<boolean>\",\n  \"subject\": \"<string>\",\n  \"body\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "30cc175d-c7fa-4a50-a2f0-45362c02e86b",
+              "name": "sends offer to recipients",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offers",
+                    ":short_url_code",
+                    "shares",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_url_code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": \"recipient_1@com.com,recipient_2@com.com,recipient_3@com.com\",\n  \"reminder\": true,\n  \"validation_only\": false,\n  \"subject\": \"Your friend sent you x% off\",\n  \"body\": \"Your personal message with offer link\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"success\": true,\n    \"validation_only\": false,\n    \"stats\": {\n      \"currently_sent\": 3,\n      \"currently_not_sent\": 0,\n      \"previously_sent\": 0,\n      \"total_sent\": 3,\n      \"sent_limit_exceeded\": false,\n      \"left_emails\": 22,\n      \"advocate_blocked\": false\n    },\n    \"recipients\": {\n      \"recipient_1@com.com\": {\n        \"currently_sent\": true,\n        \"previously_sent\": false,\n        \"email_valid\": true,\n        \"self_referral\": false,\n        \"unsubscribed\": false,\n        \"blocklisted\": false,\n        \"blacklisted\": false,\n        \"meets_criteria\": true,\n        \"sharable\": true\n      },\n      \"recipient_2@com.com\": {\n        \"currently_sent\": true,\n        \"previously_sent\": false,\n        \"email_valid\": true,\n        \"self_referral\": false,\n        \"unsubscribed\": false,\n        \"blocklisted\": false,\n        \"blacklisted\": false,\n        \"meets_criteria\": true,\n        \"sharable\": true\n      },\n      \"recipient_3@com.com\": {\n        \"currently_sent\": true,\n        \"previously_sent\": false,\n        \"email_valid\": true,\n        \"self_referral\": false,\n        \"unsubscribed\": false,\n        \"blocklisted\": false,\n        \"blacklisted\": false,\n        \"meets_criteria\": true,\n        \"sharable\": true\n      }\n    },\n    \"reward\": null,\n    \"rewards\": []\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a02d61-bf6c-436d-a770-6d436bab51e2",
+              "name": "returns bad request when missing recipients",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offers",
+                    ":short_url_code",
+                    "shares",
+                    "email"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_url_code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"recipients\": \"recipient_1@com.com,recipient_2@com.com,recipient_3@com.com\",\n  \"reminder\": true,\n  \"validation_only\": false,\n  \"subject\": \"Your friend sent you x% off\",\n  \"body\": \"Your personal message with offer link\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"`recipients` is required\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dde7f3bb-26b6-4fdf-b633-c461e09237ec",
+          "name": "Share offer with recipients via social channel",
+          "request": {
+            "name": "Share offer with recipients via social channel",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "offers",
+                ":short_url_code",
+                "shares",
+                "social"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "short_url_code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6de09e61-41e9-4bdf-a931-19bbda82ca80",
+              "name": "share offer to social channel",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offers",
+                    ":short_url_code",
+                    "shares",
+                    "social"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_url_code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"facebook\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"share\": {\n      \"shared_at\": \"2026-07-07T11:08:32.000-07:00\",\n      \"short_url\": \"https://share.my-store.com/x/IyfKJR\",\n      \"channel_identifier\": \"facebook\",\n      \"id\": 1,\n      \"type\": \"SocialOfferShare\",\n      \"offer\": {\n        \"claim_url\": \"https://share.my-store.com/x/0iqOMr\",\n        \"email\": \"signup18@example.com\",\n        \"id\": 1,\n        \"short_url_code\": \"d3BGIz\",\n        \"show_url\": \"https://share.my-store.com/x/Kg4GH7\",\n        \"coupon_code\": \"C1383-8321\",\n        \"incentives\": {\n          \"sharing\": {\n            \"action_type\": \"sharing\",\n            \"amount\": 10,\n            \"description\": \"$10\",\n            \"percentage\": false,\n            \"criteria_config\": {\n              \"once_per_person\": false,\n              \"email_shares\": null,\n              \"sharing_channels\": null,\n              \"has_liquid_criteria\": false\n            },\n            \"for_advocate\": true,\n            \"for_friend\": false,\n            \"highest_amount\": true,\n            \"identifier\": \"sharing\",\n            \"incentive_type\": \"discount_coupon\",\n            \"coupon_expires_at\": null\n          }\n        },\n        \"trigger_widget\": false,\n        \"campaign_tags\": []\n      },\n      \"campaign\": {\n        \"slug\": 1,\n        \"is_active\": true,\n        \"appearance\": \"inline\",\n        \"id\": 1,\n        \"joinable_category_names\": [\n          \"affiliate_member\"\n        ],\n        \"name\": \"Deal for friends\",\n        \"origin_max_age\": null,\n        \"origin_min_age\": null,\n        \"status\": \"Live\",\n        \"tag_names\": [],\n        \"live_period\": {\n          \"starts_at\": \"2026-07-07T11:08:00.000-07:00\",\n          \"ends_at\": null\n        }\n      },\n      \"friends_count\": 0,\n      \"friend_clicks_count\": 0\n    },\n    \"reward\": {\n      \"amount\": 10,\n      \"id\": 1,\n      \"reason\": \"shared\",\n      \"status\": \"Paid\",\n      \"coupon\": {\n        \"amount\": 10,\n        \"description\": \"$10\",\n        \"code\": \"C1383-8321\",\n        \"expires_at\": null,\n        \"id\": 1,\n        \"percentage_discount\": null,\n        \"single_use\": false,\n        \"used\": false,\n        \"active\": true,\n        \"usages\": null,\n        \"valid_until\": null\n      },\n      \"coupon_code\": \"C1383-8321\",\n      \"incentive_type\": \"discount_coupon\",\n      \"incentive_description\": \"shared coupon \\\"C1383-8321\\\" for $10 off\",\n      \"incentive_custom_description\": null\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b83068df-d919-481c-a593-3bece792b933",
+              "name": "returns bad request in the case of wrong social channel name",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offers",
+                    ":short_url_code",
+                    "shares",
+                    "social"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "short_url_code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channel\": \"facebook\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"`channel` is invalid\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "093d9db1-2005-4124-830c-2b84f2c3897a",
+    "name": "Talkable Advocate Offers Shares API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

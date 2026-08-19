@@ -1,6 +1,16 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://rubygems.org/gems/talkable + https://github.com/talkable
+source: >-
+  https://rubygems.org/api/v1/versions/talkable.json + https://api.github.com/orgs/talkable/repos
+  + https://trunk.cocoapods.org/api/v1/pods/Talkable
+note: >-
+  Currency was re-read from the registries on 2026-08-13. Only the Ruby gem has a
+  real package-registry entry; the mobile SDKs and cartridges are distributed from
+  GitHub (tags / JitPack / CocoaPods podspec in-repo), so `version` is read from
+  the repository's latest git tag and `published` from that tag's release date
+  where one exists. The `Talkable` pod on the CocoaPods trunk registry is a
+  DIFFERENT, unrelated 2015 pod (last version 0.2.0, 2015-01-16) and is not
+  recorded as a Talkable package.
 packages:
   - language: ruby
     registry: rubygems
@@ -8,27 +18,87 @@ packages:
     url: https://rubygems.org/gems/talkable
     install: gem install talkable
     version: 1.3.0
+    published: '2025-04-09'
+    downloads: 383531
     official: true
     description: Talkable Ruby Gem to build your own referral program in Sinatra or Rails apps.
     source_code: https://github.com/talkable/talkable-ruby
+    note: >-
+      Latest of three published versions (1.1.0 2022-03-25, 1.2.0 2024-05-28,
+      1.3.0 2025-04-09). Repo last pushed 2025-11-13, so the gem trails the repo
+      by roughly seven months.
   - language: swift
     registry: github
     name: talkable/ios-sdk
     url: https://github.com/talkable/ios-sdk
-    install: 'pod ''Talkable'''
+    install: "pod 'Talkable'"
+    version: 1.5.1
+    published: null
     official: true
     description: Talkable iOS SDK (Objective-C) for embedding referral campaigns in native iOS apps.
+    note: >-
+      Distributed from the repo's own podspec, not from the CocoaPods trunk
+      registry, so there is no registry metadata endpoint to date the release.
+      version read from the latest git tag (1.5.1); published is null because the
+      tag carries no dated release. Repo last pushed 2026-03-10.
   - language: java
     registry: jitpack
     name: com.github.talkable:android-sdk
     url: https://github.com/talkable/android-sdk
-    install: 'implementation ''com.github.talkable:android-sdk:<version>'''
+    install: "implementation 'com.github.talkable:android-sdk:0.5.14'"
+    version: 0.5.14
+    published: null
     official: true
     description: Talkable Android SDK for embedding referral campaigns in native Android apps; distributed via JitPack.
+    note: >-
+      JitPack builds on demand from a git tag and exposes no release-date metadata
+      endpoint, so published is null. version is the latest tag (0.5.14). This is
+      the most actively maintained client — repo last pushed 2026-08-12.
   - language: javascript
-    registry: github
+    registry: npm
     name: analytics.js-integration-talkable
     url: https://github.com/talkable/analytics.js-integration-talkable
     install: null
+    version: null
+    published: null
     official: true
-    description: Segment analytics.js integration for Talkable.
+    description: Segment analytics.js integration for Talkable (originally the Curebit integration).
+    note: >-
+      Checked registry.npmjs.org/analytics.js-integration-talkable — no dist-tags
+      and no time entries, i.e. never published to npm. Source-only, and dormant:
+      repo last pushed 2018-09-11.
+  - language: javascript
+    registry: github
+    name: talkable/talkable-b2c-commerce
+    url: https://github.com/talkable/talkable-b2c-commerce
+    install: null
+    version: null
+    published: null
+    official: true
+    description: Salesforce B2C Commerce Cloud integration cartridge.
+    note: >-
+      No git tags and no registry entry — the cartridge is consumed as a repo
+      checkout, so a consumer cannot pin a version. Repo last pushed 2023-04-18.
+      Docs reference integration guide version 22.1.0.
+  - language: php
+    registry: github
+    name: talkable/talkable-magento
+    url: https://github.com/talkable/talkable-magento
+    install: null
+    version: null
+    published: null
+    official: true
+    description: Magento integration extension.
+    note: >-
+      Not on Packagist; distributed as a repo checkout with no tags. Repo last
+      pushed 2017-12-28 — effectively abandoned.
+currency_summary:
+  registry_backed: 1
+  repo_distributed: 5
+  latest_release: '2025-04-09'
+  finding: >-
+    Talkable ships exactly one package a dependency manager can resolve and date —
+    the Ruby gem, last released 2025-04-09. Every other client is a GitHub
+    checkout or a JitPack tag with no dated release metadata, so a consumer cannot
+    tell from any registry what they are getting. The Android SDK is the only
+    actively developed client (pushed 2026-08-12).

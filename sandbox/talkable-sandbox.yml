@@ -1,0 +1,73 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.talkable.com/android_sdk/testing/ + https://docs.talkable.com/api_v2/intro/
+docs: https://docs.talkable.com/android_sdk/testing/
+summary: >-
+  Talkable ships NO separate sandbox host, no test-mode API key prefix, and no
+  test/live key separation for REST API v2 — API keys are single-mode and hit
+  production. What Talkable does publish is a mobile SDK DEBUG MODE that solves
+  the same testing problem the referral domain actually has: the platform assigns
+  each device a permanent ID to block repeat registrations (fraud control), which
+  makes it impossible to re-run a referral cycle from one device. Debug mode
+  re-issues a new device ID on every initialize and accepts a caller-supplied
+  device ID, so one phone can pose as advocate and friend in turn. There are no
+  magic test card numbers or hosted test tokens — Talkable does not take payment.
+test_live_separation:
+  supported: false
+  key_prefixes: []
+  note: >-
+    One API key per site (Site Settings -> API Integration -> API Key). No test
+    key, no test host, no mode flag on the REST API. Testing against API v2 writes
+    real records into the site.
+sandbox_host: null
+modes:
+  - name: SDK debug mode
+    applies_to: [ios-sdk, android-sdk]
+    docs: https://docs.talkable.com/android_sdk/testing/
+    how: >-
+      Pass debug=true to the full form of Talkable.initialize. In debug mode the
+      SDK assigns a new device ID at each initialization, so the app registers as
+      a brand-new visitor every launch.
+    example: |
+      String initialSiteId = null;   // null uses the Site ID from the manifest
+      boolean debug = true;
+      Talkable.initialize(this, initialSiteId, debug, null);
+    warning: >-
+      Talkable states debug mode MUST be off in release builds — leaving it on
+      breaks the referral cycle and exposes the site to fraud.
+  - name: Custom device identity
+    applies_to: [ios-sdk, android-sdk]
+    docs: https://docs.talkable.com/android_sdk/testing/
+    how: >-
+      The fourth initialize parameter takes a caller-chosen device ID, applied
+      only when debug is true, letting a single device switch between identities
+      to replay advocate/friend scenarios.
+    example: |
+      Talkable.initialize(this, null, true, "qa-advocate-007");
+fixtures:
+  test_cards: []
+  test_accounts: []
+  note: >-
+    Not applicable — Talkable is not a payments processor. Purchases reach Talkable
+    as origin records (createPurchase / createOrigin) from the merchant's own
+    checkout, so test data is whatever the merchant submits.
+integration_verification:
+  - name: Verify the JS integration
+    docs: https://docs.talkable.com/integration/verify/
+  - name: Validating the Integration
+    docs: https://docs.talkable.com/integration/standard/validating_integration/
+  - name: verify_integration MCP tool
+    surface: mcp/talkable-mcp.yml
+    note: The hosted MCP server exposes a verify_integration tool that checks the site's Talkable JS is live.
+  - name: Swagger UI "Try it out"
+    url: https://www.talkable.com/api-docs/
+    note: >-
+      Talkable's API reference is an interactive Swagger UI that executes real
+      calls against production once an API key is entered via Authorize.
+x-evidence:
+  - url: https://docs.talkable.com/android_sdk/testing.md
+    http_status: 200
+    fetched: '2026-08-13'
+  - url: https://www.talkable.com/api-docs/
+    http_status: 200
+    fetched: '2026-08-13'

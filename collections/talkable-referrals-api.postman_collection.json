@@ -1,0 +1,575 @@
+{
+  "item": [
+    {
+      "id": "460a06ac-c77f-4959-a839-2dee13a11e63",
+      "name": "Referrals",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "45bd5a40-bcab-43c3-a424-af7431393aba",
+          "name": "Get Friends referred by Advocate",
+          "request": {
+            "name": "Get Friends referred by Advocate",
+            "description": {
+              "content": "Returns referrals where person is an advocate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "people",
+                ":person_slug",
+                "referrals_as_advocate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "person_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ce969a8-a26d-43ed-9df0-7d032d0ac3c3",
+              "name": "person found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "referrals_as_advocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"referrals\": [\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": true,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"fraud_details\": null,\n        \"fraud_policies_status\": {\n          \"blocked\": [],\n          \"flagged\": [],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Email or Cookie on Friend Purchase\",\n            \"Similar Email Match\",\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Matching Phone Number on Friend Purchase\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 1,\n        \"offer_id\": 1,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 2,\n        \"status\": \"approved\",\n        \"track_method\": \"cookie\",\n        \"updated_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"friend_person\": {\n          \"id\": 1025,\n          \"email\": \"alice@example.com\",\n          \"phone_number\": null,\n          \"first_name\": null,\n          \"last_name\": null\n        },\n        \"advocate_rewards\": [\n          {\n            \"amount\": 10,\n            \"id\": 1,\n            \"reason\": \"referrer\",\n            \"status\": \"Paid\",\n            \"coupon\": {\n              \"amount\": 10,\n              \"description\": \"$10\",\n              \"code\": \"COUPON_CODE_37\",\n              \"expires_at\": null,\n              \"id\": 1,\n              \"percentage_discount\": false,\n              \"single_use\": true,\n              \"used\": false,\n              \"active\": true,\n              \"usages\": 0,\n              \"valid_until\": null\n            },\n            \"coupon_code\": \"COUPON_CODE_37\",\n            \"incentive_type\": \"discount_coupon\",\n            \"incentive_description\": \"single use coupon for $10 off\",\n            \"incentive_custom_description\": null\n          }\n        ],\n        \"friend_rewards\": []\n      },\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": true,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"fraud_details\": null,\n        \"fraud_policies_status\": {\n          \"blocked\": [],\n          \"flagged\": [],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Email or Cookie on Friend Purchase\",\n            \"Similar Email Match\",\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Matching Phone Number on Friend Purchase\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 2,\n        \"offer_id\": 1,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 3,\n        \"status\": \"pending\",\n        \"track_method\": \"coupon\",\n        \"updated_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"friend_person\": {\n          \"id\": 1026,\n          \"email\": \"bob@example.com\",\n          \"phone_number\": null,\n          \"first_name\": null,\n          \"last_name\": null\n        },\n        \"advocate_rewards\": [\n          {\n            \"amount\": 10,\n            \"id\": 2,\n            \"reason\": \"referrer\",\n            \"status\": \"Unpaid\",\n            \"coupon\": null,\n            \"coupon_code\": null,\n            \"incentive_type\": \"discount_coupon\",\n            \"incentive_description\": \"single use coupon for $10 off\",\n            \"incentive_custom_description\": null\n          }\n        ],\n        \"friend_rewards\": []\n      },\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": false,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"fraud_details\": \"Self Referral\",\n        \"fraud_policies_status\": {\n          \"blocked\": [\n            \"Matching Email or Cookie on Friend Purchase\"\n          ],\n          \"flagged\": [\n            \"Similar Email Match\",\n            \"Matching Phone Number on Friend Purchase\"\n          ],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 3,\n        \"offer_id\": 1,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 4,\n        \"status\": \"blocked\",\n        \"track_method\": \"cookie\",\n        \"updated_at\": \"2026-07-07T11:07:11.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"friend_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"advocate_rewards\": [],\n        \"friend_rewards\": []\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598f10a5-ef72-491f-b942-3942e72dd130",
+              "name": "person not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "referrals_as_advocate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No person found by `person_slug`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a7c590d-2a8d-49cb-84da-e11689ec7f89",
+          "name": "Get Advocates who referred the Friend",
+          "request": {
+            "name": "Get Advocates who referred the Friend",
+            "description": {
+              "content": "Returns referrals where person is a friend.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "people",
+                ":person_slug",
+                "referrals_as_friend"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "person_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e0ea3221-5e79-45a1-a275-766e34c04be9",
+              "name": "person found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "referrals_as_friend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"referrals\": [\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": true,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"fraud_details\": null,\n        \"fraud_policies_status\": {\n          \"blocked\": [],\n          \"flagged\": [],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Email or Cookie on Friend Purchase\",\n            \"Similar Email Match\",\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Matching Phone Number on Friend Purchase\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 2,\n        \"offer_id\": 2,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 4,\n        \"status\": \"approved\",\n        \"track_method\": \"coupon\",\n        \"updated_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1026,\n          \"email\": \"signup1@example.com\",\n          \"phone_number\": null,\n          \"first_name\": null,\n          \"last_name\": null\n        },\n        \"friend_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"advocate_rewards\": [\n          {\n            \"amount\": 10,\n            \"id\": 2,\n            \"reason\": \"referrer\",\n            \"status\": \"Paid\",\n            \"coupon\": {\n              \"amount\": 10,\n              \"description\": \"$10\",\n              \"code\": \"COUPON_CODE_42\",\n              \"expires_at\": null,\n              \"id\": 2,\n              \"percentage_discount\": false,\n              \"single_use\": true,\n              \"used\": false,\n              \"active\": true,\n              \"usages\": 0,\n              \"valid_until\": null\n            },\n            \"coupon_code\": \"COUPON_CODE_42\",\n            \"incentive_type\": \"discount_coupon\",\n            \"incentive_description\": \"single use coupon for $10 off\",\n            \"incentive_custom_description\": null\n          }\n        ],\n        \"friend_rewards\": []\n      },\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": true,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"fraud_details\": null,\n        \"fraud_policies_status\": {\n          \"blocked\": [],\n          \"flagged\": [],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Email or Cookie on Friend Purchase\",\n            \"Similar Email Match\",\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Matching Phone Number on Friend Purchase\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 3,\n        \"offer_id\": 3,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 6,\n        \"status\": \"pending\",\n        \"track_method\": \"cookie\",\n        \"updated_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1027,\n          \"email\": \"signup2@example.com\",\n          \"phone_number\": null,\n          \"first_name\": null,\n          \"last_name\": null\n        },\n        \"friend_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"advocate_rewards\": [\n          {\n            \"amount\": 10,\n            \"id\": 3,\n            \"reason\": \"referrer\",\n            \"status\": \"Unpaid\",\n            \"coupon\": null,\n            \"coupon_code\": null,\n            \"incentive_type\": \"discount_coupon\",\n            \"incentive_description\": \"single use coupon for $10 off\",\n            \"incentive_custom_description\": null\n          }\n        ],\n        \"friend_rewards\": []\n      },\n      {\n        \"referred_subtotal\": 100,\n        \"ad_rewarded\": false,\n        \"campaign_id\": 1,\n        \"created_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"fraud_details\": \"Self Referral\",\n        \"fraud_policies_status\": {\n          \"blocked\": [\n            \"Matching Email or Cookie on Friend Purchase\"\n          ],\n          \"flagged\": [\n            \"Similar Email Match\",\n            \"Matching Phone Number on Friend Purchase\"\n          ],\n          \"skipped\": [],\n          \"passed\": [\n            \"Matching Shipping Address\",\n            \"Matching by Combination of IP Address & User Agent\",\n            \"Matching by IP Address only\",\n            \"Friend and Advocate Refer Each Other\"\n          ]\n        },\n        \"id\": 4,\n        \"offer_id\": 1,\n        \"qa_generated\": false,\n        \"referred_origin_id\": 7,\n        \"status\": \"blocked\",\n        \"track_method\": \"cookie\",\n        \"updated_at\": \"2026-07-07T11:07:16.000-07:00\",\n        \"advocate_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"friend_person\": {\n          \"id\": 1,\n          \"email\": \"customer@example.com\",\n          \"phone_number\": \"+12025551111\",\n          \"first_name\": \"John\",\n          \"last_name\": \"Doe\"\n        },\n        \"advocate_rewards\": [],\n        \"friend_rewards\": []\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c29ff8de-e948-4868-bb1e-5e3533dcde67",
+              "name": "person not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "referrals_as_friend"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No person found by `person_slug`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "643cd14a-4f8c-41d3-bfc6-893ad27e436f",
+          "name": "Update referral status",
+          "request": {
+            "name": "Update referral status",
+            "description": {
+              "content": "Note that approved or voided referrals cannot be changed to the opposite state.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                ":origin_slug",
+                "referral"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"status\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3447ec1a-bb1d-4f82-9122-216931b61379",
+              "name": "referral status updated to approved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "referral"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"status\": \"approved\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"referral\": {\n      \"referred_subtotal\": 100,\n      \"ad_rewarded\": true,\n      \"campaign_id\": 1,\n      \"created_at\": \"2026-07-07T11:07:40.000-07:00\",\n      \"fraud_details\": null,\n      \"fraud_policies_status\": {\n        \"blocked\": [],\n        \"flagged\": [],\n        \"skipped\": [],\n        \"passed\": [\n          \"Friend and Advocate Refer Each Other\"\n        ]\n      },\n      \"id\": 1,\n      \"offer_id\": 1,\n      \"qa_generated\": false,\n      \"referred_origin_id\": 2,\n      \"status\": \"approved\",\n      \"track_method\": \"manually_generated\",\n      \"updated_at\": \"2026-07-07T11:07:40.000-07:00\",\n      \"advocate_person\": {\n        \"id\": 1,\n        \"email\": \"signup7@example.com\",\n        \"phone_number\": null,\n        \"first_name\": null,\n        \"last_name\": null\n      },\n      \"friend_person\": {\n        \"id\": 2,\n        \"email\": \"test+64@example.com\",\n        \"phone_number\": null,\n        \"first_name\": null,\n        \"last_name\": null\n      },\n      \"advocate_rewards\": [\n        {\n          \"amount\": 10,\n          \"id\": 1,\n          \"reason\": \"referrer\",\n          \"status\": \"Paid\",\n          \"coupon\": null,\n          \"coupon_code\": null,\n          \"incentive_type\": \"rebate\",\n          \"incentive_description\": \"$10 back\",\n          \"incentive_custom_description\": null\n        }\n      ],\n      \"friend_rewards\": []\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90adf948-787d-4a08-99e0-47e9e70109ef",
+              "name": "bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "referral"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"status\": \"approved\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No origin found by `origin_slug`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0610b5e-b7e9-41d8-810b-7f64a74766a2",
+    "name": "Talkable Advocate Offers Referrals API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

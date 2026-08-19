@@ -1,0 +1,75 @@
+generated: '2026-08-13'
+method: searched
+source: https://www.talkable.com/pricing
+docs: https://www.talkable.com/pricing
+currency: null
+billing_period: annual
+plan_count: 4
+pricing_model: quote-only
+note: >-
+  Talkable names four tiers on its public pricing page but publishes NO prices for
+  any of them. The page asks the visitor to select an annual-revenue bracket
+  ($4-20m, $20-40m, $50m+) and routes to a sales conversation. Every tier is
+  therefore quote-only: the plan NAMES and the service entitlements below are
+  published, the money is not. Recorded as 4 plans with price null rather than
+  omitted — the tiers are real and differentiated, only the pricing is gated.
+contract:
+  term: 12 months
+  implementation_fee: >-
+    An implementation fee equal to one month of the plan price, adjustable for
+    customization scope.
+sales_gate:
+  quote_url: https://www.talkable.com/lets-talk-referral
+  segmentation: annual revenue bracket ($4-20m, $20-40m, $50m+)
+plans:
+  - name: Light
+    price: null
+    currency: null
+    billing_period: annual
+    audience: Smaller businesses
+    entitlements:
+      managed_launch: limited
+      dedicated_success_team: false
+      check_in_frequency: none
+      managed_campaign_placements: 0
+      professional_services_hours_per_quarter: 0
+  - name: Standard
+    price: null
+    currency: null
+    billing_period: annual
+    audience: Mid-sized companies
+    entitlements:
+      managed_launch: included
+      dedicated_success_team: true
+      check_in_frequency: monthly
+      managed_campaign_placements: 4
+      professional_services_hours_per_quarter: 5
+  - name: Plus
+    price: null
+    currency: null
+    billing_period: annual
+    entitlements:
+      managed_launch: included
+      dedicated_success_team: true
+      check_in_frequency: bi-weekly
+      managed_campaign_placements: 6
+      professional_services_hours_per_quarter: 16
+  - name: Premium
+    price: null
+    currency: null
+    billing_period: annual
+    entitlements:
+      managed_launch: included
+      dedicated_success_team: true
+      check_in_frequency: weekly
+      managed_campaign_placements: 10
+      professional_services_hours_per_quarter: 30
+api_access:
+  note: >-
+    Talkable does not scope REST API v2 or MCP access by pricing tier on the public
+    pricing page; API keys are managed in Site/Account Settings for any account.
+    No published per-tier API quota.
+x-evidence:
+  - url: https://www.talkable.com/pricing
+    http_status: 200
+    fetched: '2026-08-13'

@@ -1,0 +1,151 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Origins API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Origins",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an origin",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an origin"
+        },
+        {
+          "info": {
+            "name": "Create an affiliate member",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/affiliate_member",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an affiliate member"
+        },
+        {
+          "info": {
+            "name": "Create an event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/event",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an event"
+        },
+        {
+          "info": {
+            "name": "Create a purchase",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/purchase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a purchase"
+        },
+        {
+          "info": {
+            "name": "Create batch of affiliate members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/batch/affiliate_members",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n"
+        },
+        {
+          "info": {
+            "name": "Create batch of events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/batch/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n"
+        },
+        {
+          "info": {
+            "name": "Create batch of purchases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/batch/purchases",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "**EXPERIMENTAL.** This API is subject to change or removal without notice.\n\nThe validation is done asynchronously, API does not respond with error\nmessages in case of invalid payload.\n\nThe records are created asynchronously by a scheduled job. This can take\nsome time.\n"
+        },
+        {
+          "info": {
+            "name": "Mark origin as refunded",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/origins/:origin_slug/refund",
+            "params": [
+              {
+                "name": "origin_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Mark origin as refunded"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

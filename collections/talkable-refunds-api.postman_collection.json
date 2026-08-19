@@ -1,0 +1,223 @@
+{
+  "item": [
+    {
+      "id": "2a03f6e6-ee99-41c5-86b7-4399e578ed25",
+      "name": "Refunds",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "61f49bf6-8b36-4547-a317-4b96537b0b7f",
+          "name": "Mark origin as refunded",
+          "request": {
+            "name": "Mark origin as refunded",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "origins",
+                ":origin_slug",
+                "refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "origin_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": \"<float>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f8d96059-d7a7-4077-aec8-994cb43eb4db",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": 100.44\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"origin\": {\n      \"subtotal\": 100.44,\n      \"customer_id\": null,\n      \"email\": \"customer@example.com\",\n      \"id\": 1,\n      \"ip_address\": \"1.2.3.4\",\n      \"order_number\": \"B00K2EOONI\",\n      \"refunded_at\": \"2026-07-07T11:07:44.000-07:00\",\n      \"type\": \"Purchase\",\n      \"segment1\": \"test\",\n      \"segment2\": null,\n      \"segment3\": null,\n      \"utm_campaign\": null,\n      \"utm_content\": null,\n      \"utm_medium\": null,\n      \"utm_source\": null,\n      \"utm_term\": null,\n      \"order_date\": \"2026-07-07T11:07:44.000-07:00\",\n      \"partially_refunded\": false,\n      \"refund_subtotal\": 100.44,\n      \"coupon_code\": \"\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d20e9049-6203-4b6b-a4e7-fb77354e158e",
+              "name": "origin has already been refunded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "origins",
+                    ":origin_slug",
+                    "refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "origin_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"site_slug\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"data\": {\n    \"refunded_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"refund_subtotal\": 100.44\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Origin has already been refunded\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "86d8f90f-b1cf-4fe5-a5a6-6a9e312a25b5",
+    "name": "Talkable Advocate Offers Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

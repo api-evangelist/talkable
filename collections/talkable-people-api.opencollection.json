@@ -1,0 +1,264 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers People API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check if given coupon code belongs to given person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/coupons/:code/permission/:person_slug",
+            "params": [
+              {
+                "name": "code",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path",
+                "description": "Person’s email, phone number, customer ID, or username"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Check if given coupon code belongs to given person"
+        },
+        {
+          "info": {
+            "name": "Find a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns a person."
+        },
+        {
+          "info": {
+            "name": "Update a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing person or creates one if it does not exist."
+        },
+        {
+          "info": {
+            "name": "Get Friends referred by Advocate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/referrals_as_advocate",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns referrals where person is an advocate."
+        },
+        {
+          "info": {
+            "name": "Get Advocates who referred the Friend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/referrals_as_friend",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns referrals where person is a friend."
+        },
+        {
+          "info": {
+            "name": "Get rewards received by person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/rewards",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns rewards that person has earned in referral program."
+        },
+        {
+          "info": {
+            "name": "Get shares made by person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/shares_by",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns shares that person made."
+        },
+        {
+          "info": {
+            "name": "Anonymize a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/anonymize",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes or obscures all personal data."
+        },
+        {
+          "info": {
+            "name": "Get personal information about a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/personal_data",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns personal data."
+        },
+        {
+          "info": {
+            "name": "Unsubscribe a person",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/unsubscribe",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Unsubscribes a person from receiving emails."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

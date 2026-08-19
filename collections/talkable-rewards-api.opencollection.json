@@ -1,0 +1,101 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Rewards API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Share and claim an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/api/v2/offer_claims",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "advocate_email",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "friend_email",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Share and claim an offer"
+        },
+        {
+          "info": {
+            "name": "Get rewards received by person",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/rewards",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns rewards that person has earned in referral program."
+        },
+        {
+          "info": {
+            "name": "List rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/rewards",
+            "params": [
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "visitor_uuid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List rewards"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

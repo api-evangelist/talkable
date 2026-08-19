@@ -1,0 +1,88 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.talkable.com/integration/standard/integration_components/
+docs: https://docs.talkable.com/integration/standard/
+summary: >-
+  Talkable's primary consumer surface is not an SDK — it is a client-side
+  JavaScript integration that injects hosted campaign UI into the merchant's own
+  pages. Scripts capture identity and purchase data; container DIVs mark where
+  Talkable renders. The rendered campaign content is served by Talkable in an
+  iframe, and the merchant page subscribes to iframe events to react. These are
+  embeddable UI components, distinct from the server-side packages in packages/.
+loader:
+  name: Talkable Initialization Script
+  placement: head template, or any template spanning every page
+  note: Every other integration component depends on the init script having fired.
+  docs: https://docs.talkable.com/integration/standard/integration_components/
+families:
+  - family: Data-capture scripts
+    components:
+      - name: Initialization Script
+        role: Bootstraps Talkable and passes logged-in visitor identity.
+        captures: [email, phone_number, first_name, last_name]
+        docs: https://docs.talkable.com/integration/standard/integration_components/
+      - name: Post Purchase Script
+        role: Fires on the checkout confirmation page to register a purchase origin.
+        placement: checkout confirmation page, after the init script
+        captures:
+          - email
+          - order_number
+          - subtotal (pre-tax, post-discount)
+          - coupon_codes (array supported)
+          - currency ISO code (required for multi-currency sites)
+          - shipping_address (optional, fraud protection)
+          - cart line items (optional, for cart-content segmentation)
+          - segment1 / segment2 / segment3 (optional custom segmentation)
+        docs: https://docs.talkable.com/integration/standard/integration_components/
+  - family: Hosted campaign placements (container DIVs)
+    note: >-
+      The merchant creates a page and adds a Talkable container DIV; Talkable
+      injects the campaign UI into it.
+    components:
+      - name: Advocate Landing Page
+        role: Standalone share page (conventionally at /share) carrying the site header/footer plus the Talkable container.
+        docs: https://docs.talkable.com/integration/standard/integration_components/
+      - name: Referral Dashboard
+        role: In-account referral dashboard rendered into a container DIV, linked from the user-account menu.
+        docs: https://docs.talkable.com/integration/standard/integration_components/
+      - name: Campaign placements
+        role: Popup / embedded / floating campaign placements targeted by URL and on-site criteria.
+        docs: https://docs.talkable.com/campaigns/
+  - family: Loyalty
+    components:
+      - name: Loyalty integration components
+        role: Client-side components for loyalty enrollment, balance display and redemption.
+        docs: https://docs.talkable.com/integration/loyalty/integration_components/
+  - family: Custom App
+    components:
+      - name: Custom App integration
+        role: >-
+          Talkable's newer, centrally configured integration surface with
+          customizable payloads; supersedes classic webhooks and carries the
+          loyalty custom-app variant.
+        docs: https://docs.talkable.com/integration/loyalty/custom_app/
+events:
+  name: Iframe events
+  role: The host page subscribes to events emitted by the Talkable iframe to react to campaign state.
+  docs: https://docs.talkable.com/advanced_features/subscribing_to_events/
+platform_cartridges:
+  - name: Salesforce B2C Commerce Cloud cartridge
+    repo: https://github.com/talkable/talkable-b2c-commerce
+    docs: https://docs.talkable.com/integration/ecommerce_platforms/sfcc/
+  - name: Shopify app
+    docs: https://docs.talkable.com/integration/ecommerce_platforms/shopify/
+  - name: BigCommerce
+    docs: https://docs.talkable.com/integration/ecommerce_platforms/bigcommerce/
+  - name: Magento extension
+    repo: https://github.com/talkable/talkable-magento
+    docs: https://docs.talkable.com/integration/ecommerce_platforms/magento/
+verification:
+  docs: https://docs.talkable.com/integration/verify/
+  note: Talkable publishes an integration verification flow; the MCP server exposes the same check as verify_integration.
+x-evidence:
+  - url: https://docs.talkable.com/integration/standard/integration_components.md
+    http_status: 200
+    fetched: '2026-08-13'
+  - url: https://docs.talkable.com/llms.txt
+    http_status: 200
+    fetched: '2026-08-13'

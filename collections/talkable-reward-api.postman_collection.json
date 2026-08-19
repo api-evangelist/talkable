@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "04d7ee09-ad08-4fdc-9265-b9ce178345e3",
+      "name": "Reward",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "24051c1f-1b44-4610-b361-b62cb3920445",
+          "name": "Reward",
+          "request": {
+            "name": "Reward",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_reward_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"person\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    },\n    \"reward\": {\n      \"id\": \"<integer>\",\n      \"reason\": \"<string>\",\n      \"status\": \"<string>\",\n      \"incentive_type\": \"<string>\",\n      \"incentive_identifier\": \"<string>\",\n      \"incentive_description\": \"<string>\",\n      \"incentive_custom_description\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"coupon_code\": \"<string>\",\n      \"coupon\": {\n        \"active\": \"<boolean>\",\n        \"amount\": \"<float>\",\n        \"code\": \"<string>\",\n        \"description\": \"<string>\",\n        \"id\": \"<integer>\",\n        \"percentage_discount\": \"<boolean>\",\n        \"single_use\": \"<boolean>\",\n        \"usages\": \"<integer>\",\n        \"used\": \"<boolean>\",\n        \"expires_at\": {\n          \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n        },\n        \"valid_until\": {\n          \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"advocate_origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    },\n    \"friend_origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c4c89455-3cab-4895-a118-e48967572344",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_reward_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"reward_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"person\": {\n      \"value\": \"reference #components/schemas/person not found in the OpenAPI spec\"\n    },\n    \"origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    },\n    \"reward\": {\n      \"id\": \"<integer>\",\n      \"reason\": \"<string>\",\n      \"status\": \"<string>\",\n      \"incentive_type\": \"<string>\",\n      \"incentive_identifier\": \"<string>\",\n      \"incentive_description\": \"<string>\",\n      \"incentive_custom_description\": \"<string>\",\n      \"amount\": \"<float>\",\n      \"coupon_code\": \"<string>\",\n      \"coupon\": {\n        \"active\": \"<boolean>\",\n        \"amount\": \"<float>\",\n        \"code\": \"<string>\",\n        \"description\": \"$15\",\n        \"id\": \"<integer>\",\n        \"percentage_discount\": \"<boolean>\",\n        \"single_use\": \"<boolean>\",\n        \"usages\": \"<integer>\",\n        \"used\": \"<boolean>\",\n        \"expires_at\": {\n          \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n        },\n        \"valid_until\": {\n          \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n        }\n      }\n    },\n    \"advocate_origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    },\n    \"friend_origin\": {\n      \"value\": \"reference #components/schemas/origin not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7a36c1a6-2f8a-45a0-9380-52e30774ad0c",
+    "name": "Talkable Advocate Offers Reward API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

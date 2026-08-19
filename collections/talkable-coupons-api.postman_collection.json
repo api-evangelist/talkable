@@ -1,0 +1,280 @@
+{
+  "item": [
+    {
+      "id": "c89f5d6f-bad8-4dcd-87b4-0d2bcea05386",
+      "name": "Coupons",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "747e8a12-738f-4484-b73d-c5c3420336e2",
+          "name": "Find a coupon",
+          "request": {
+            "name": "Find a coupon",
+            "description": {
+              "content": "Returns a coupon.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "coupons",
+                ":code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7764df2b-c460-4a3b-bf54-2b1b0769d805",
+              "name": "coupon found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "coupons",
+                    ":code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"talkable_coupon\": true,\n    \"coupon\": {\n      \"amount\": 10,\n      \"description\": \"10%\",\n      \"code\": \"COUPON_CODE_1\",\n      \"expires_at\": null,\n      \"id\": 1,\n      \"percentage_discount\": true,\n      \"single_use\": true,\n      \"used\": false,\n      \"active\": true,\n      \"usages\": 0,\n      \"valid_until\": null\n    },\n    \"associated_reward\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6523926d-ab61-41f3-9c23-2dd0ee55f03a",
+          "name": "Check if given coupon code belongs to given person",
+          "request": {
+            "name": "Check if given coupon code belongs to given person",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "coupons",
+                ":code",
+                "permission",
+                ":person_slug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "code",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "person_slug",
+                  "description": "(Required) Person’s email, phone number, customer ID, or username"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e249417-8c51-40c2-bb52-b06abd42041a",
+              "name": "returns result of check",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "coupons",
+                    ":code",
+                    "permission",
+                    ":person_slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "code",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) Person’s email, phone number, customer ID, or username"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"talkable_coupon\": true,\n    \"coupon\": {\n      \"amount\": 10,\n      \"description\": \"10%\",\n      \"code\": \"COUPON_CODE_7\",\n      \"expires_at\": null,\n      \"id\": 1,\n      \"percentage_discount\": true,\n      \"single_use\": true,\n      \"used\": false,\n      \"active\": true,\n      \"usages\": 0,\n      \"valid_until\": null\n    },\n    \"associated_reward\": null,\n    \"allowed\": false,\n    \"error_message\": \"This coupon code has not been issued yet\",\n    \"checks\": {\n      \"coupon_unissued\": true,\n      \"coupon_expired\": false,\n      \"friend_offer_expired\": false,\n      \"different_owner\": false,\n      \"coupon_used\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a52a7cae-0a1e-40b9-87b2-028873f91eb6",
+    "name": "Talkable Advocate Offers Coupons API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

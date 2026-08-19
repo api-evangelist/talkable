@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "16f48b4d-6fa3-4b24-9ed1-e6f28ad20a35",
+      "name": "Event",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f1e50d0e-a699-451f-a3ac-6db5a2275c46",
+          "name": "Event",
+          "request": {
+            "name": "Event",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_event_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"person\": {\n      \"first_name\": \"<string>\",\n      \"last_name\": \"<string>\",\n      \"email\": \"<email>\",\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"username\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"unsubscribed_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"subscribed_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"opted_in_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"phone_opted_in_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"is_loyalty_member\": \"<boolean>\",\n      \"loyalty_member\": \"<object>\",\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"gender\": \"<string>\",\n      \"referral_counts\": {\n        \"total\": \"<integer>\",\n        \"approved\": \"<integer>\",\n        \"pending\": \"<integer>\"\n      },\n      \"sub_choice\": \"<boolean>\"\n    },\n    \"origin\": {\n      \"id\": \"<integer>\",\n      \"email\": \"<email>\",\n      \"phone_number\": \"<string>\",\n      \"customer_id\": \"<string>\",\n      \"traffic_source\": \"<string>\",\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"subtotal\": \"<float>\",\n      \"coupon_code\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"currency_iso_code\": \"<string>\",\n      \"type\": \"<string>\",\n      \"event_category\": \"<string>\",\n      \"event_number\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9fa0cfc-361c-45d7-8177-9e3560b67659",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_event_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"event_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"person\": {\n      \"first_name\": \"John\",\n      \"last_name\": \"Doe\",\n      \"email\": \"user@store.com\",\n      \"phone_number\": {\n        \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n      },\n      \"username\": \"johndoe1992\",\n      \"customer_id\": \"1024\",\n      \"unsubscribed_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"subscribed_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"opted_in_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"phone_opted_in_at\": {\n        \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n      },\n      \"is_loyalty_member\": true,\n      \"loyalty_member\": {},\n      \"custom_properties\": {\n        \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n      },\n      \"gender\": \"<string>\",\n      \"referral_counts\": {\n        \"total\": 2,\n        \"approved\": 1,\n        \"pending\": 1\n      },\n      \"sub_choice\": false\n    },\n    \"origin\": {\n      \"id\": 1234,\n      \"email\": \"user@store.com\",\n      \"phone_number\": \"+12025551111\",\n      \"customer_id\": \"AB1234\",\n      \"traffic_source\": \"post-checkout\",\n      \"ip_address\": {\n        \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n      },\n      \"subtotal\": \"<float>\",\n      \"coupon_code\": \"<string>\",\n      \"segment1\": \"<string>\",\n      \"segment2\": \"<string>\",\n      \"segment3\": \"<string>\",\n      \"utm_campaign\": \"<string>\",\n      \"utm_content\": \"<string>\",\n      \"utm_medium\": \"<string>\",\n      \"utm_source\": \"<string>\",\n      \"utm_term\": \"<string>\",\n      \"currency_iso_code\": \"USD\",\n      \"type\": \"Event\",\n      \"event_category\": \"app_installed\",\n      \"event_number\": \"subscription_12345\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de309a45-d4c9-4c8e-b01c-8902ca8594f3",
+    "name": "Talkable Advocate Offers Event API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

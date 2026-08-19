@@ -1,0 +1,509 @@
+{
+  "item": [
+    {
+      "id": "9a62ff07-665d-4302-8e8a-11df8ebe88c6",
+      "name": "Assets",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ebe2b8ed-e259-4894-820d-a38d8f3edf40",
+          "name": "List assets",
+          "request": {
+            "name": "List assets",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "content_type",
+                  "value": "<string>",
+                  "description": "Filter by content type or its prefix, e.g. `image` or `image/png`."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "25"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdb212a4-c0e3-4f09-bda3-6418ed69a0e8",
+              "name": "assets list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "content_type",
+                      "value": "image"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "25"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"assets\": [\n      {\n        \"content_type\": \"video/mp4\",\n        \"id\": 3,\n        \"name\": \"frog_video_short.mp4\",\n        \"url\": \"https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/3/original/frog_video_short.mp4\",\n        \"size\": 281524,\n        \"width\": null,\n        \"height\": null,\n        \"fingerprint\": \"f773c1d7bd57e3549a8cd2516fdbdd4e\",\n        \"created_at\": \"2026-07-07T11:04:57.000-07:00\",\n        \"updated_at\": \"2026-07-07T11:04:57.000-07:00\"\n      },\n      {\n        \"content_type\": \"image/png\",\n        \"id\": 2,\n        \"name\": \"closebutton.png\",\n        \"url\": \"https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/2/original/closebutton.png\",\n        \"size\": 6600,\n        \"width\": 100,\n        \"height\": 100,\n        \"fingerprint\": \"0c406c68a263801c7ce983efda254268\",\n        \"created_at\": \"2026-07-07T11:04:57.000-07:00\",\n        \"updated_at\": \"2026-07-07T11:04:57.000-07:00\"\n      },\n      {\n        \"content_type\": \"image/jpeg\",\n        \"id\": 1,\n        \"name\": \"santa.jpg\",\n        \"url\": \"https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg\",\n        \"size\": 121059,\n        \"width\": 960,\n        \"height\": 900,\n        \"fingerprint\": \"df262c29b6ab5f5a97b6870c3c9ba813\",\n        \"created_at\": \"2026-07-07T11:04:57.000-07:00\",\n        \"updated_at\": \"2026-07-07T11:04:57.000-07:00\"\n      }\n    ],\n    \"total\": 3\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9973f68e-78d7-4257-87be-84926eebed1e",
+          "name": "Upload an asset",
+          "request": {
+            "name": "Upload an asset",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) Asset file. The asset name is derived from the uploaded file name. Fails if an asset with the same name already exists on the account."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "75c92346-fff1-48c2-ba74-595afa0bf8ee",
+              "name": "asset uploaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Asset file. The asset name is derived from the uploaded file name. Fails if an asset with the same name already exists on the account.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"asset\": {\n      \"content_type\": \"image/jpeg\",\n      \"id\": 1,\n      \"name\": \"santa.jpg\",\n      \"url\": \"https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg\",\n      \"size\": 121059,\n      \"width\": 960,\n      \"height\": 900,\n      \"fingerprint\": \"df262c29b6ab5f5a97b6870c3c9ba813\",\n      \"created_at\": \"2026-07-07T11:05:03.000-07:00\",\n      \"updated_at\": \"2026-07-07T11:05:03.000-07:00\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a818923-6cd6-4aa1-8778-6ff15aed810e",
+              "name": "asset with the same name already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Asset file. The asset name is derived from the uploaded file name. Fails if an asset with the same name already exists on the account.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Validation failed: File name has already been taken\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1b64dbe9-313d-4c82-b998-9d37c7584e96",
+          "name": "Find an asset",
+          "request": {
+            "name": "Find an asset",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "assets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4b4f6a40-81cc-4da7-aa05-7bba36158f52",
+              "name": "asset found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"asset\": {\n      \"content_type\": \"image/jpeg\",\n      \"id\": 1,\n      \"name\": \"santa.jpg\",\n      \"url\": \"https://d2jjzw81hqbuqv.cloudfront.net/static_assets/files/1/original/santa.jpg\",\n      \"size\": 121059,\n      \"width\": 960,\n      \"height\": 900,\n      \"fingerprint\": \"df262c29b6ab5f5a97b6870c3c9ba813\",\n      \"created_at\": \"2026-07-07T11:05:10.000-07:00\",\n      \"updated_at\": \"2026-07-07T11:05:10.000-07:00\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c88067d-d66a-4fbd-bfc5-1d62241dd9b0",
+              "name": "asset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "assets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No asset found by `id`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "43fcd754-57ca-431b-989d-bbc536cd2592",
+    "name": "Talkable Advocate Offers Assets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

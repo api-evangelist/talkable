@@ -1,0 +1,483 @@
+{
+  "item": [
+    {
+      "id": "dcd1a120-836b-4eb3-9273-2898f0b9f7e9",
+      "name": "Rewards",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17705d77-6665-47b6-a2f7-b5be0c581679",
+          "name": "Share and claim an offer",
+          "request": {
+            "name": "Share and claim an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "offer_claims"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "advocate_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "friend_email",
+                  "value": "<email>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4340647d-4abb-4bdc-b9ed-da55db500900",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"friend_reward\": {\n      \"amount\": 10,\n      \"id\": 1,\n      \"reason\": \"click\",\n      \"status\": \"Paid\",\n      \"coupon\": {\n        \"amount\": 10,\n        \"description\": \"$10\",\n        \"code\": \"COUPON_CODE_29\",\n        \"expires_at\": null,\n        \"id\": 1,\n        \"percentage_discount\": false,\n        \"single_use\": true,\n        \"used\": false,\n        \"active\": true,\n        \"usages\": 0,\n        \"valid_until\": null\n      },\n      \"coupon_code\": \"COUPON_CODE_29\",\n      \"incentive_type\": \"discount_coupon\",\n      \"incentive_description\": \"single use coupon for $10 off\",\n      \"incentive_custom_description\": null\n    },\n    \"friend_unredeem_reason\": null,\n    \"friend_human_unredeem_reason\": null\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29fa49b9-d2d0-4ee2-87df-eb1e6a18cf2e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "offer_claims"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "advocate_email",
+                      "value": "advocate@example.com"
+                    },
+                    {
+                      "key": "friend_email",
+                      "value": "friend@example.com"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Invalid `advocate_email`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17991ad7-5a73-4c5f-95a4-cec0f3ad46df",
+          "name": "Get rewards received by person",
+          "request": {
+            "name": "Get rewards received by person",
+            "description": {
+              "content": "Returns rewards that person has earned in referral program.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "people",
+                ":person_slug",
+                "rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "person_slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "532b3d15-f36f-430b-bcbe-0296f0042e97",
+              "name": "person found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"rewards\": [\n      {\n        \"amount\": 10,\n        \"id\": 1,\n        \"reason\": \"referrer\",\n        \"status\": \"Unpaid\",\n        \"coupon\": null,\n        \"coupon_code\": null,\n        \"incentive_type\": \"discount_coupon\",\n        \"incentive_description\": \"single use coupon for $10 off\",\n        \"incentive_custom_description\": null\n      },\n      {\n        \"amount\": 10,\n        \"id\": 2,\n        \"reason\": \"click\",\n        \"status\": \"Paid\",\n        \"coupon\": {\n          \"amount\": 10,\n          \"description\": \"$10\",\n          \"code\": \"C1383-8321\",\n          \"expires_at\": null,\n          \"id\": 3,\n          \"percentage_discount\": null,\n          \"single_use\": false,\n          \"used\": false,\n          \"active\": true,\n          \"usages\": null,\n          \"valid_until\": null\n        },\n        \"coupon_code\": \"C1383-8321\",\n        \"incentive_type\": \"discount_coupon\",\n        \"incentive_description\": \"shared coupon \\\"C1383-8321\\\" for $10 off\",\n        \"incentive_custom_description\": null\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1354ea2f-9d5f-4072-9572-d5762cd12e50",
+              "name": "person not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "people",
+                    ":person_slug",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "person_slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No person found by `person_slug`.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3d04f2c7-df73-4aac-bb31-3a5f6aa160df",
+          "name": "List rewards",
+          "request": {
+            "name": "List rewards",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "rewards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "visitor_uuid",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c8fd2fd3-8a0d-4433-9def-a31c72f745db",
+              "name": "returns the list of rewards",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "rewards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "visitor_uuid",
+                      "value": "123e4567-e89b-32d1-a456-426614174000"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"rewards\": [\n      {\n        \"amount\": 10,\n        \"id\": 1,\n        \"reason\": \"referrer\",\n        \"status\": \"Paid\",\n        \"coupon\": null,\n        \"coupon_code\": null,\n        \"incentive_type\": \"rebate\",\n        \"incentive_description\": \"$10 back\",\n        \"incentive_custom_description\": null\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5493d58c-ce2e-4f53-9181-fdbbe7c5d64d",
+    "name": "Talkable Advocate Offers Rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

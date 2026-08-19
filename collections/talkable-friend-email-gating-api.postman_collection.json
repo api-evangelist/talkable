@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "2b2fd4da-7302-44b3-ba02-8281b3c1f6db",
+      "name": "Friend Email Gating",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2a4b2a39-e1fd-4e66-9099-efe537dd6369",
+          "name": "Friend Email Gating",
+          "request": {
+            "name": "Friend Email Gating",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_claim_signup_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"username\": \"<string>\",\n    \"unsubscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"subscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"phone_opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"is_loyalty_member\": \"<boolean>\",\n    \"loyalty_member\": \"<object>\",\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"gender\": \"<string>\",\n    \"referral_counts\": {\n      \"total\": \"<integer>\",\n      \"approved\": \"<integer>\",\n      \"pending\": \"<integer>\"\n    },\n    \"sub_choice\": \"<boolean>\",\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a39f7f3-b347-4f45-aa40-cb0e6e12710b",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_claim_signup_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"claim_signup_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"offer\": {\n      \"value\": \"reference #components/schemas/offer not found in the OpenAPI spec\"\n    },\n    \"campaign\": {\n      \"value\": \"reference #components/schemas/campaign not found in the OpenAPI spec\"\n    },\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference ../schemas.yaml#/phone_number not found in the OpenAPI spec\"\n    },\n    \"first_name\": \"John\",\n    \"last_name\": \"Doe\",\n    \"username\": \"johndoe1992\",\n    \"unsubscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"subscribed_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"phone_opted_in_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    },\n    \"is_loyalty_member\": true,\n    \"loyalty_member\": {},\n    \"custom_properties\": {\n      \"value\": \"reference ../schemas.yaml#/custom_properties not found in the OpenAPI spec\"\n    },\n    \"gender\": \"<string>\",\n    \"referral_counts\": {\n      \"total\": 2,\n      \"approved\": 1,\n      \"pending\": 1\n    },\n    \"sub_choice\": false,\n    \"ip_address\": {\n      \"value\": \"reference ../schemas.yaml#/ip_address not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "40c51b69-2fea-482a-8a12-04c4e8ad0c3d",
+    "name": "Talkable Advocate Offers Friend Email Gating API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

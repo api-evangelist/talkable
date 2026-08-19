@@ -1,4 +1,4 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
 source: https://docs.talkable.com/api_v2/intro/ + openapi/talkable-v2-openapi-original.yml
 api: REST API v2
@@ -41,7 +41,19 @@ errors:
     '401': Unauthorized - no valid API key provided.
     '404': Not Found - the requested item does not exist.
     '422': Unprocessable Entity - the request was well-formed but could not be processed.
+    '429': Too Many Requests - the site is being throttled; retry with incremental backoff.
+    '500,502,503,504': Server Errors - something is wrong on Talkable's end.
 rate_limiting:
-  documented: false
+  documented: true
+  numbers_published: false
+  ref: rate-limits/talkable-rate-limits.yml
+  status_on_exhaustion: 429
+  headers: []
+  notes: >-
+    Talkable documents a throttling POLICY but deliberately publishes no numeric
+    limits and no rate-limit response headers. Consumption is computed per site
+    across ALL integrations (REST, JS library, mobile SDKs), not per API key. The
+    only runtime signal is the bare 429; clients must implement incremental
+    backoff from seconds up to minutes.
 webhooks:
   ref: openapi/talkable-webhooks-openapi-original.yml

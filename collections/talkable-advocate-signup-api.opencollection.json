@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Advocate Signup API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Advocate Signup",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Advocate Signup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/your_api_offer_signup_web_hook_path",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Advocate Signup"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Referrals API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Referrals",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Friends referred by Advocate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/referrals_as_advocate",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns referrals where person is an advocate."
+        },
+        {
+          "info": {
+            "name": "Get Advocates who referred the Friend",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/people/:person_slug/referrals_as_friend",
+            "params": [
+              {
+                "name": "person_slug",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Returns referrals where person is a friend."
+        },
+        {
+          "info": {
+            "name": "Update referral status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.talkable.com/api/v2/origins/:origin_slug/referral",
+            "params": [
+              {
+                "name": "origin_slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Note that approved or voided referrals cannot be changed to the opposite state.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

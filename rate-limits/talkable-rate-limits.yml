@@ -1,0 +1,45 @@
+generated: '2026-08-13'
+method: searched
+source: https://docs.talkable.com/api_v2/intro/
+docs: https://docs.talkable.com/api_v2/intro/
+api: Talkable REST API v2
+limit_count: 0
+note: >-
+  Talkable documents that it throttles, and documents the runtime signal and the
+  client obligation, but deliberately publishes NO numeric limits. From the API
+  introduction: "Rate limits are not published because the computation logic is
+  evolving continuously to maximize reliability and performance for customers."
+  limit_count is therefore an honest 0 — the policy exists and is documented, the
+  numbers do not. Talkable also states it does not publish rate-limit response
+  headers; the only runtime signal an agent gets is the 429 status code.
+policy:
+  documented: true
+  scope: per-site (customer)
+  model: >-
+    Talkable computes the resources each client consumes across ALL requests from
+    all integrations — not only REST API v2 calls, but also the JavaScript
+    integration library, the mobile SDKs, and any other integration. When a site's
+    consumption rises unexpectedly, Talkable begins throttling that site.
+  window: unpublished
+  limit: unpublished
+  burst: unpublished
+limits: []
+response:
+  status_on_exhaustion: 429
+  status_name: Too Many Requests
+  headers: []
+  headers_note: >-
+    No X-RateLimit-*, RateLimit-* or Retry-After headers are documented for
+    Talkable API v2. An agent must treat the bare 429 as the whole signal.
+  retry_guidance: >-
+    Talkable recommends retrying on 429. Consecutive calls may keep returning 429
+    until server load drops. Clients should implement retry with incremental
+    backoff "in the realm of seconds and up to minutes".
+related:
+  errors: errors/talkable-problem-types.yml
+  conventions: conventions/talkable-conventions.yml
+x-evidence:
+  - url: https://docs.talkable.com/api_v2/intro.md
+    http_status: 200
+    fetched: '2026-08-13'
+    section: Request Throttling

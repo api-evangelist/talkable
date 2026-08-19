@@ -1,6 +1,43 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/talkable-v2-openapi-original.yml + well-known/ + https://docs.talkable.com/mcp_server/
+generated: '2026-08-13'
+method: searched
+source: >-
+  openapi/talkable-v2-openapi-original.yml + well-known/ +
+  https://docs.talkable.com/mcp_server/ + https://www.talkable.com/talkable-features
+compliance:
+  published: true
+  page: https://www.talkable.com/talkable-features
+  certifications:
+    - name: SOC 2
+      claim: 'Talkable''s campaigns "are SOC II certified".'
+      published_as: SOC II
+      evidence_url: https://www.talkable.com/talkable-features
+      note: >-
+        Claimed in prose on Talkable's own Features page under "Protect Your Data".
+        No SOC 2 report, audit date, type (I vs II), or auditor is published, and
+        Talkable operates no trust center or compliance portal — probed
+        trust.talkable.com (no DNS), /security (404), /security-compliance (404).
+        Recorded as a published claim, not as a verified certificate.
+  regulations:
+    - name: GDPR
+      claim: Talkable campaigns "can be made GDPR and CCPA compliant".
+      evidence_url: https://www.talkable.com/talkable-features
+      note: >-
+        Conditional, not absolute — the compliance posture is a property of how the
+        merchant configures the campaign, and Talkable says so.
+    - name: CCPA
+      claim: Talkable campaigns "can be made GDPR and CCPA compliant".
+      evidence_url: https://www.talkable.com/talkable-features
+  data_residency: United States ("data hosted in the USA")
+  api_support:
+    - operation: getPersonalInformationAboutPerson
+      supports: GDPR/CCPA subject access request
+    - operation: anonymizePerson
+      supports: GDPR/CCPA right to erasure
+    - operation: unsubscribePerson
+      supports: consent withdrawal
+  api_support_note: >-
+    The REST API v2 carries first-class privacy operations, which is the strongest
+    machine-readable evidence of the privacy posture claimed on the marketing page.
 standards:
   - id: oauth2
     conforms: true

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Friend Email Gating API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Friend Email Gating",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Friend Email Gating",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://www.talkable.com/your_api_claim_signup_web_hook_path",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Friend Email Gating"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,6 +1,13 @@
-generated: '2026-07-21'
+generated: '2026-08-13'
 method: searched
-source: https://docs.talkable.com/ + https://status.talkable.com/
+source: https://docs.talkable.com/ + https://status.talkable.com/ + https://www.talkable.com/product-updates
+changelog:
+  url: https://www.talkable.com/product-updates
+  ref: changelog/talkable-changelog.yml
+  scheme: dated-posts
+  note: >-
+    Dated product-update posts on the marketing site, not a versioned API release
+    log. 174 entries archived; most recent 2026-07-16. No feed is published.
 versioning:
   scheme: uri-path
   current: v2

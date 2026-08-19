@@ -1,0 +1,807 @@
+{
+  "item": [
+    {
+      "id": "90ce2644-38da-4b6a-9d5d-ce1b35ca1535",
+      "name": "Metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f3fa4269-fcba-43db-a1df-e56e09965c94",
+          "name": "Calculate a metric",
+          "request": {
+            "name": "Calculate a metric",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "metrics",
+                ":metric"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "sharing_channels[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sharing_channels[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic_sources[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic_sources[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_tags[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_tags[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mobile_visitor",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "device_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "live_campaigns_only",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_qa_generated",
+                  "value": "true"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metric",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e9ff432-3122-4ece-9c31-fde687bd707b",
+              "name": "metric info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "metrics",
+                    ":metric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sharing_channels[]",
+                      "value": "email"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaign_ids[]",
+                      "value": "42"
+                    },
+                    {
+                      "key": "campaign_tags[]",
+                      "value": "default"
+                    },
+                    {
+                      "key": "campaign_status",
+                      "value": "Live"
+                    },
+                    {
+                      "key": "mobile_visitor",
+                      "value": "true"
+                    },
+                    {
+                      "key": "device_type",
+                      "value": "mobile"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "0"
+                    },
+                    {
+                      "key": "live_campaigns_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "exclude_qa_generated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metric",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"plain\": 2,\n    \"formatted\": \"2\",\n    \"result_type\": \"number\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "20c50c0e-33e5-4358-829f-efb2639e3f7e",
+              "name": "returns an error when invalid metric passed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "metrics",
+                    ":metric"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sharing_channels[]",
+                      "value": "email"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaign_ids[]",
+                      "value": "42"
+                    },
+                    {
+                      "key": "campaign_tags[]",
+                      "value": "default"
+                    },
+                    {
+                      "key": "campaign_status",
+                      "value": "Live"
+                    },
+                    {
+                      "key": "mobile_visitor",
+                      "value": "true"
+                    },
+                    {
+                      "key": "device_type",
+                      "value": "mobile"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "0"
+                    },
+                    {
+                      "key": "live_campaigns_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "exclude_qa_generated",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metric",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"No metric found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a49e35d5-3a15-4949-adbe-5875525fa696",
+          "name": "Calculate a metric with all segmented information",
+          "request": {
+            "name": "Calculate a metric with all segmented information",
+            "description": {
+              "content": "Returns a metric value which includes plain value, formatted value, result’s type and all segmented information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "metrics",
+                ":metric",
+                "segmentize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "sharing_channels[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "sharing_channels[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic_sources[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "traffic_sources[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_ids[]",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_tags[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_tags[]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "campaign_status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mobile_visitor",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "device_type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "precision",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "live_campaigns_only",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "exclude_qa_generated",
+                  "value": "true"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment_by[period]",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment_by[campaign_tags]",
+                  "value": "<array>"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment_by[sharing_channels]",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment_by[campaign_types]",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metric",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1030f895-7f1a-4602-a0d8-a22a24ce4b1a",
+              "name": "metric segmented",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "metrics",
+                    ":metric",
+                    "segmentize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sharing_channels[]",
+                      "value": "email"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaign_ids[]",
+                      "value": "42"
+                    },
+                    {
+                      "key": "campaign_tags[]",
+                      "value": "default"
+                    },
+                    {
+                      "key": "campaign_status",
+                      "value": "Live"
+                    },
+                    {
+                      "key": "mobile_visitor",
+                      "value": "true"
+                    },
+                    {
+                      "key": "device_type",
+                      "value": "mobile"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "0"
+                    },
+                    {
+                      "key": "live_campaigns_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "exclude_qa_generated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "segment_by[period]",
+                      "value": "week"
+                    },
+                    {
+                      "key": "segment_by[campaign_tags]",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "segment_by[sharing_channels]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "segment_by[campaign_types]",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metric",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"segmented\": [\n      {\n        \"plain\": 0,\n        \"formatted\": \"0\",\n        \"result_type\": \"number\",\n        \"period\": \"6/7/26 - 6/30/26\"\n      },\n      {\n        \"plain\": 3,\n        \"formatted\": \"3\",\n        \"result_type\": \"number\",\n        \"period\": \"7/1/26 - 7/7/26\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c1dc601-c980-400b-9948-478d75ec1eec",
+              "name": "returns an error when invalid segment_by",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "metrics",
+                    ":metric",
+                    "segmentize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "sharing_channels[]",
+                      "value": "email"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "traffic_sources[]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "campaign_ids[]",
+                      "value": "42"
+                    },
+                    {
+                      "key": "campaign_tags[]",
+                      "value": "default"
+                    },
+                    {
+                      "key": "campaign_status",
+                      "value": "Live"
+                    },
+                    {
+                      "key": "mobile_visitor",
+                      "value": "true"
+                    },
+                    {
+                      "key": "device_type",
+                      "value": "mobile"
+                    },
+                    {
+                      "key": "precision",
+                      "value": "0"
+                    },
+                    {
+                      "key": "live_campaigns_only",
+                      "value": "true"
+                    },
+                    {
+                      "key": "exclude_qa_generated",
+                      "value": "false"
+                    },
+                    {
+                      "key": "segment_by[period]",
+                      "value": "week"
+                    },
+                    {
+                      "key": "segment_by[campaign_tags]",
+                      "value": "<array>"
+                    },
+                    {
+                      "key": "segment_by[sharing_channels]",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "segment_by[campaign_types]",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metric",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"error_message\": \"Unsupported option for period segmentation. Supported options: day, week, month, quarter, year\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "608f3eed-fd73-4877-8013-fc3d4141cb96",
+    "name": "Talkable Advocate Offers Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

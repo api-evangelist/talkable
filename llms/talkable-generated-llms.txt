@@ -1,0 +1,39 @@
+# Talkable
+
+> Talkable is a referral marketing and loyalty platform that lets e-commerce and subscription brands build, run, and optimize referral programs and loyalty campaigns. It exposes a RESTful API v2, native iOS/Android SDKs, a webhook event surface, and a customer-facing hosted MCP server so agents can operate a program without the dashboard.
+
+## APIs
+
+- [Talkable API v2](https://docs.talkable.com/api_v2/intro/): RESTful JSON API at https://www.talkable.com/api/v2, Bearer API-key auth, ok/result response envelope. 44 operations across origins, offers, shares, referrals, people, coupons, loyalty, metrics, assets, and traffic sources.
+- [Origins API](https://docs.talkable.com/api_v2/origins/): register off-site/backend purchases and CRM events to trigger the referral flow.
+- [Referrals API](https://docs.talkable.com/api_v2/referrals/): approve or void referrals.
+- [Webhooks](https://docs.talkable.com/web_hooks/): nine HTTP callback events (create_coupon, advocate_signup, friend_email_gating, post_share, event, referral, reward, unsubscribe, check_unsubscribe).
+
+## Specs
+
+- [OpenAPI (API v2)](https://www.talkable.com/api-docs/v2/openapi.yaml)
+- [OpenAPI (Webhooks)](https://www.talkable.com/api-docs/webhooks/openapi.yaml)
+- [Swagger UI](https://www.talkable.com/api-docs/)
+
+## MCP server
+
+- [Talkable MCP Server](https://docs.talkable.com/mcp_server/): hosted, streamable HTTP at https://www.talkable.com/mcp. OAuth 2.1 (PKCE + Dynamic Client Registration) or Bearer API key; scopes mcp:read / mcp:write. Install: `claude mcp add --transport http Talkable https://www.talkable.com/mcp`.
+- [MCP Authentication & Scopes](https://docs.talkable.com/mcp_server/authentication/)
+- [MCP Permissions](https://docs.talkable.com/mcp_server/permissions/)
+
+## SDKs
+
+- [Ruby gem: talkable](https://rubygems.org/gems/talkable) — official, https://github.com/talkable/talkable-ruby
+- [iOS SDK](https://github.com/talkable/ios-sdk) — official
+- [Android SDK](https://github.com/talkable/android-sdk) — official (JitPack)
+
+## Docs
+
+- [Documentation home](https://docs.talkable.com/)
+- [Integrations](https://docs.talkable.com/integration/standard/overview/)
+- [Events](https://docs.talkable.com/advanced_features/events/)
+- [Pricing](https://www.talkable.com/pricing)
+- [Status](https://status.talkable.com/)
+- [GitHub](https://github.com/talkable)
+- [Blog](https://www.talkable.com/blog)
+- [Privacy Policy](https://www.talkable.com/privacy)

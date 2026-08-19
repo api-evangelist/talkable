@@ -1,0 +1,154 @@
+generated: '2026-08-13'
+method: derived
+source: mcp/talkable-mcp.yml + openapi/_original/talkable-v2-openapi-original.yml
+note: >-
+  Binds each published Talkable MCP tool to the REST operation(s) that back it, so
+  a tool inherits a real inputSchema from the spec instead of a guessed one. The
+  live tools/list is OAuth-gated (probed 2026-08-13: HTTP 401 with
+  WWW-Authenticate: Bearer resource_metadata=.../.well-known/oauth-protected-resource/mcp),
+  so the tool names and descriptions come from Talkable's published MCP docs, not
+  from an authenticated introspection. Mappings are therefore by name and
+  semantics and confidence is set accordingly — nothing here is invented, and no
+  input schema is asserted beyond what the OpenAPI already defines.
+surfaces:
+  openapi:
+    file: openapi/_original/talkable-v2-openapi-original.yml
+    base_url: https://www.talkable.com/api/v2
+    operations: 44
+    gated: false
+  mcp:
+    url: https://www.talkable.com/mcp
+    docs: https://docs.talkable.com/mcp_server/
+    tools_published: 24
+    gated: true
+    gate_evidence: 'POST tools/list -> 401 {"code":-32001,"message":"Unauthorized"}'
+  graphql: null
+coverage:
+  tools_named: 24
+  tools_bound_to_rest: 7
+  mcp_only: 17
+  rest_operations_total: 44
+  rest_operations_with_a_tool: 9
+  rest_only: 35
+crosswalk:
+  - tool: list_campaigns
+    category: reporting
+    rest: [listCampaigns]
+    binding: rest
+    confidence: high
+    note: GET /api/v2/campaigns, site_slug scoped — same resource the tool lists.
+  - tool: calculate_metric
+    category: reporting
+    rest: [calculateMetric, calculateMetricWithAllSegmentedInformation]
+    binding: rest
+    confidence: high
+    note: >-
+      The tool takes filters and segmentations, which fans out across both metric
+      operations — /metrics/{metric} and /metrics/{metric}/segmentize.
+  - tool: list_traffic_sources
+    category: reporting
+    rest: [listTrafficSources]
+    binding: rest
+    confidence: high
+  - tool: find_person
+    category: customer-support
+    rest: [findPerson]
+    binding: rest
+    confidence: medium
+    note: >-
+      REST addresses a person by person_slug; the tool also accepts an email.
+      Lookup-by-email has no public REST operation, so that path is MCP-only.
+  - tool: find_coupon
+    category: customer-support
+    rest: [findCoupon]
+    binding: rest
+    confidence: high
+    note: GET /api/v2/coupons/{code}.
+  - tool: approve_or_void_referral
+    category: customer-support
+    rest: [updateReferralStatus]
+    binding: rest
+    confidence: high
+    note: PUT /api/v2/origins/{origin_slug}/referral sets the referral status.
+  - tool: manage_person
+    category: customer-support
+    rest: [unsubscribePerson, anonymizePerson, updatePerson]
+    binding: rest
+    confidence: medium
+    note: >-
+      One tool fans out to three operations — unsubscribe, anonymize, and the
+      resubscribe path, which REST expresses as updatePerson rather than a
+      dedicated endpoint.
+mcp_only:
+  - tool: list_sites
+    reason: >-
+      Site/account discovery. No public REST operation enumerates the sites a
+      credential can reach; site_slug is a required input to REST, never an output.
+  - tool: prompt_ai_assistant
+    reason: Hands a natural-language task to the Talkable AI Assistant — a server-side composite with no REST equivalent.
+  - tool: get_campaign
+    reason: REST v2 publishes only the campaign LIST operation; there is no GET /campaigns/{id}.
+  - tool: list_incentives
+    reason: Campaign incentives are dashboard configuration, not exposed on REST v2.
+  - tool: list_placements
+    reason: Placements are campaign configuration, not exposed on REST v2.
+  - tool: list_split_tests
+    reason: A/B test configuration is dashboard-only on the REST surface.
+  - tool: list_metrics
+    reason: >-
+      Metric DISCOVERY has no REST operation; REST requires the caller to already
+      know the {metric} path segment.
+  - tool: list_report_types
+    reason: Grid report catalog is dashboard-only.
+  - tool: schedule_report_export
+    reason: CSV export scheduling has no REST v2 operation.
+  - tool: list_view_templates
+    reason: Campaign view templates are dashboard configuration.
+  - tool: list_locale_entries
+    reason: Campaign copy/locale configuration is dashboard-only.
+  - tool: get_site_settings
+    reason: Site settings are not exposed on REST v2.
+  - tool: list_setting_changes
+    reason: Setting-change audit trail is not exposed on REST v2.
+  - tool: verify_integration
+    reason: Live JS-integration check is a server-side probe, not a REST resource.
+  - tool: find_referral
+    reason: >-
+      REST reaches a referral only through its origin
+      (PUT /origins/{origin_slug}/referral) or through a person's referral lists;
+      there is no GET referral-by-id operation.
+  - tool: list_coupon_lists
+    reason: Coupon LISTS (with remaining-code counts) are dashboard configuration; REST exposes individual coupons only.
+  - tool: expire_coupon
+    reason: No REST operation expires a coupon.
+rest_only:
+  - capability: Origins ingestion
+    operations: [createOrigin, createPurchase, createEvent, createAffiliateMember, createBatchOfPurchases, createBatchOfEvents, createBatchOfAffiliateMembers, markOriginAsRefunded]
+    note: >-
+      The whole server-to-server ingestion path — the thing the REST API exists for
+      — has no MCP tool. Correctly so: the MCP server is a human-in-the-loop
+      operations channel, not a data pipe.
+  - capability: Loyalty
+    operations: [findLoyaltyMember, updateLoyaltyMember, listCollectActions, createCollectAction, listRedeemActions, createRedeemAction, listManualAdjustmentActions, adjustLoyaltyMembersPointsBalance, listRedemptionBatches]
+    note: Loyalty is entirely absent from the MCP tool set.
+  - capability: Offers and sharing
+    operations: [findAdvocateOffer, checkOfferClaimLinkStatus, shareViaEmail, shareViaSocialChannel, shareAndClaimOffer, markVisitorOfferAsVisited]
+  - capability: Assets
+    operations: [listAssets, uploadAsset, findAsset]
+  - capability: People graph
+    operations: [getFriendsReferredByAdvocate, getAdvocatesWhoReferredFriend, getRewardsReceivedByPerson, getSharesMadeByPerson, getPersonalInformationAboutPerson]
+  - capability: Coupons
+    operations: [checkIfGivenCouponCodeBelongsToGivenPerson]
+  - capability: Rewards
+    operations: [listRewards]
+  - capability: Visitors
+    operations: [createVisitor]
+divergence_summary: >-
+  The two surfaces are near-complements, not projections of one another. MCP is a
+  reporting-and-support console (campaign config, split tests, report exports,
+  site settings, referral/person/coupon lookups) — 17 of its 24 tools have no REST
+  operation at all. REST is an ingestion-and-fulfilment API (origins, purchases,
+  events, loyalty ledger, offer sharing, assets) — 35 of its 44 operations have no
+  tool. Only 7 tools bind cleanly to REST. An agent limited to MCP cannot register
+  a purchase or move a loyalty balance; an integration limited to REST cannot read
+  a metric catalog or approve a referral by id.

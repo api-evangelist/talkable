@@ -1,0 +1,212 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Metrics API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate a metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/metrics/:metric",
+            "params": [
+              {
+                "name": "metric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sharing_channels[]",
+                "value": "email",
+                "type": "query"
+              },
+              {
+                "name": "traffic_sources[]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "campaign_ids[]",
+                "value": "42",
+                "type": "query"
+              },
+              {
+                "name": "campaign_tags[]",
+                "value": "default",
+                "type": "query"
+              },
+              {
+                "name": "campaign_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mobile_visitor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "device_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "live_campaigns_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exclude_qa_generated",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Calculate a metric"
+        },
+        {
+          "info": {
+            "name": "Calculate a metric with all segmented information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://www.talkable.com/api/v2/metrics/:metric/segmentize",
+            "params": [
+              {
+                "name": "metric",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "sharing_channels[]",
+                "value": "email",
+                "type": "query"
+              },
+              {
+                "name": "traffic_sources[]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "campaign_ids[]",
+                "value": "42",
+                "type": "query"
+              },
+              {
+                "name": "campaign_tags[]",
+                "value": "default",
+                "type": "query"
+              },
+              {
+                "name": "campaign_status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "mobile_visitor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "device_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "precision",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "live_campaigns_only",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "exclude_qa_generated",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment_by[period]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment_by[campaign_tags]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment_by[sharing_channels]",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "segment_by[campaign_types]",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a metric value which includes plain value, formatted value, result’s type and all segmented information"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

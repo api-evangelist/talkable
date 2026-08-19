@@ -1,0 +1,132 @@
+{
+  "item": [
+    {
+      "id": "659ebb6e-c026-4cbc-8b9d-77467e4f104e",
+      "name": "Campaigns",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2edae9a4-432b-4ed5-8003-bd4607eda9a4",
+          "name": "List campaigns",
+          "request": {
+            "name": "List campaigns",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "campaigns"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "site_slug",
+                  "value": "<string>",
+                  "description": "(Required) Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a23fde5b-c75f-4b21-a303-bff6e3a4c058",
+              "name": "returns the list of campaigns",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "campaigns"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "site_slug",
+                      "value": "my-store"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": true,\n  \"result\": {\n    \"campaigns\": [\n      {\n        \"slug\": 2,\n        \"is_active\": false,\n        \"appearance\": \"popup\",\n        \"id\": 2,\n        \"joinable_category_names\": [\n          \"purchase\"\n        ],\n        \"name\": \"Deal for friends\",\n        \"origin_max_age\": null,\n        \"origin_min_age\": null,\n        \"status\": \"Disabled\",\n        \"tag_names\": [],\n        \"live_period\": {\n          \"starts_at\": \"2026-07-07T11:05:00.000-07:00\",\n          \"ends_at\": \"2026-07-07T11:05:00.000-07:00\"\n        }\n      },\n      {\n        \"slug\": 1,\n        \"is_active\": true,\n        \"appearance\": \"inline\",\n        \"id\": 1,\n        \"joinable_category_names\": [\n          \"affiliate_member\"\n        ],\n        \"name\": \"Deal for friends\",\n        \"origin_max_age\": null,\n        \"origin_min_age\": null,\n        \"status\": \"Live\",\n        \"tag_names\": [],\n        \"live_period\": {\n          \"starts_at\": \"2026-07-07T11:05:00.000-07:00\",\n          \"ends_at\": null\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d02e112e-99eb-4819-9d89-420981844981",
+    "name": "Talkable Advocate Offers Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "item": [
+    {
+      "id": "f0c2cab6-67fa-473d-947b-79e6e22ae751",
+      "name": "Create Coupon",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d813a70-a093-4a40-b87f-8c8fda70355e",
+          "name": "Create Coupon",
+          "request": {
+            "name": "Create Coupon",
+            "description": {},
+            "url": {
+              "path": [
+                "your_api_create_coupon_web_hook_path"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"<string>\",\n  \"extras\": \"<object>\",\n  \"payload\": {\n    \"coupon_auto_sync_enabled\": \"<boolean>\",\n    \"coupon_code\": \"<string>\",\n    \"coupon_list_id\": \"<integer>\",\n    \"coupon_list_name\": \"<string>\",\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference #components/schemas/phone_number not found in the OpenAPI spec\"\n    },\n    \"discount_amount\": \"<string>\",\n    \"percentage_discount\": \"<boolean>\",\n    \"usage_limit\": \"<integer>\",\n    \"expires_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ca507598-b436-4384-8173-c7893dc939c8",
+              "name": "Talkable considers a Webhook as \"delivered successfully\" when a site server returns a 2xx response status. Otherwise Talkable will continually retry to deliver a Webhook after a set interval of time.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "your_api_create_coupon_web_hook_path"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key\": \"<string>\",\n  \"site\": {\n    \"value\": \"reference ../schemas.yaml#/site_slug not found in the OpenAPI spec\"\n  },\n  \"type\": \"create_coupon_web_hook\",\n  \"extras\": {},\n  \"payload\": {\n    \"coupon_auto_sync_enabled\": \"<boolean>\",\n    \"coupon_code\": \"<string>\",\n    \"coupon_list_id\": \"<integer>\",\n    \"coupon_list_name\": \"<string>\",\n    \"email\": {\n      \"value\": \"reference #components/schemas/email not found in the OpenAPI spec\"\n    },\n    \"phone_number\": {\n      \"value\": \"reference #components/schemas/phone_number not found in the OpenAPI spec\"\n    },\n    \"discount_amount\": \"10.0\",\n    \"percentage_discount\": \"<boolean>\",\n    \"usage_limit\": \"<integer>\",\n    \"expires_at\": {\n      \"value\": \"reference ../schemas.yaml#/date_time not found in the OpenAPI spec\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://www.talkable.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1100c627-e452-4d68-8729-0f3f2d9e28a5",
+    "name": "Talkable Advocate Offers Create Coupon API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Contact Support:\n Name: API Reference",
+      "type": "text/plain"
+    }
+  }
+}

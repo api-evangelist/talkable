@@ -1,6 +1,7 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/talkable-v2-openapi-original.yml + https://docs.talkable.com/api_v2/intro/
+generated: '2026-08-13'
+method: searched
+source: https://docs.talkable.com/api_v2/intro/ + openapi/talkable-v2-openapi-original.yml
+docs: https://docs.talkable.com/api_v2/intro/
 format: envelope
 envelope:
   shape: '{ "ok": false, "error_message": "..." }'
@@ -26,6 +27,33 @@ problems:
     title: Unprocessable Entity
     meaning: The request was well-formed but could not be processed (validation failed).
     action: Inspect error_message and correct the submitted values.
+  - status: 429
+    title: Too Many Requests
+    meaning: >-
+      The site is being throttled. Talkable computes resource consumption per site
+      across all integrations (REST, JavaScript library, mobile SDKs) and throttles
+      when consumption rises unexpectedly.
+    action: >-
+      Retry with incremental backoff in the realm of seconds and up to minutes.
+      Consecutive calls may keep returning 429 until server load drops. No
+      Retry-After or RateLimit-* header is returned.
+    ref: rate-limits/talkable-rate-limits.yml
+  - status: 500
+    title: Internal Server Error
+    meaning: Something is wrong on Talkable's end.
+    action: Retry; escalate to Talkable support if persistent. Check https://status.talkable.com/.
+  - status: 502
+    title: Bad Gateway
+    meaning: Server error on Talkable's end.
+    action: Retry with backoff.
+  - status: 503
+    title: Service Unavailable
+    meaning: Server error on Talkable's end.
+    action: Retry with backoff; check https://status.talkable.com/.
+  - status: 504
+    title: Gateway Timeout
+    meaning: Server error on Talkable's end.
+    action: Retry with backoff.
 observed_status_codes_by_operation:
   listAssets: [200]
   uploadAsset: [201, 422]

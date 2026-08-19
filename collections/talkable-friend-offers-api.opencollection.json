@@ -1,0 +1,48 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Talkable Advocate Offers Friend Offers API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Friend Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mark visitor offer as visited",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://www.talkable.com/api/v2/visitor_offers/:id/track_visit",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "site_slug",
+                "value": "my-store",
+                "type": "query",
+                "description": "Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site."
+              }
+            ]
+          },
+          "docs": "Mark visitor offer as visited"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
