@@ -1,14 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Talkable Advocate Offers Check Unsubscribe API
-  version: '2.0'
+  title: Webhooks Check Unsubscribe API
+  version: '1.0'
   contact:
-    name: API Reference
-    url: https://docs.talkable.com/api_v2/
+    name: Webhooks
+    url: https://docs.talkable.com/web_hooks/
 servers:
 - url: https://www.talkable.com
-security:
-- api_key: []
 tags:
 - name: Check Unsubscribe
 paths:
@@ -65,9 +63,3 @@ paths:
                       - loyalty_points_expiring_soon_email
                       example: notifier_offers_email
                       description: Described view category
-components:
-  securitySchemes:
-    api_key:
-      type: http
-      scheme: bearer
-      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

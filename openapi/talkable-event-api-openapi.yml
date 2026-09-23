@@ -1,14 +1,12 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Talkable Advocate Offers Event API
-  version: '2.0'
+  title: Webhooks Event API
+  version: '1.0'
   contact:
-    name: API Reference
-    url: https://docs.talkable.com/api_v2/
+    name: Webhooks
+    url: https://docs.talkable.com/web_hooks/
 servers:
 - url: https://www.talkable.com
-security:
-- api_key: []
 tags:
 - name: Event
 paths:
@@ -50,61 +48,34 @@ paths:
                       description: Event data
 components:
   schemas:
-    generic_origin:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique identifier of the origin event in Talkable
-          example: 1234
-        email:
-          $ref: '#/components/schemas/email'
-          description: Email address of the person
-        phone_number:
-          $ref: '#/components/schemas/phone_number'
-          description: Phone number of the person
-        customer_id:
-          type: string
-          example: AB1234
-          description: Unique external identifier of a customer who triggered the origin event
-        traffic_source:
-          type: string
-          example: post-checkout
-          description: Traffic source of the origin event
-        ip_address:
-          $ref: ../schemas.yaml#/ip_address
-          description: IP address of the origin event
-        subtotal:
-          type: number
-          format: float
-          description: Monetary attribute (for Purchase and Event)
-        coupon_code:
-          type: string
-          description: Coupon codes used with the Purchase or Event (separated by ``,`` if multiple) (for Purchase only)
-        segment1:
-          type: string
-          description: Value for segment1
-        segment2:
-          type: string
-          description: Value for segment2
-        segment3:
-          type: string
-          description: Value for segment3
-        utm_campaign:
-          type: string
-          description: Value for utm_campaign
-        utm_content:
-          type: string
-          description: Value for utm_content
-        utm_medium:
-          type: string
-          description: Value for utm_medium
-        utm_source:
-          type: string
-          description: Value for utm_source
-        utm_term:
-          type: string
-          description: Value for utm_term
+    email:
+      type: string
+      format: email
+      example: user@store.com
+    event:
+      allOf:
+      - $ref: '#/components/schemas/generic_origin'
+      - description: Event data
+        properties:
+          currency_iso_code:
+            type: string
+            description: Currency ISO code
+            example: USD
+          type:
+            type: string
+            enum:
+            - AffiliateMember
+            - Purchase
+            - Event
+            example: Event
+          event_category:
+            type: string
+            example: app_installed
+            description: Identifier of an action that trigger the Event (for Event only)
+          event_number:
+            type: string
+            description: Unique identifier of the Event within the associated event_category (for Event only)
+            example: subscription_12345
     person:
       type: object
       properties:
@@ -162,39 +133,61 @@ components:
           type: boolean
           example: false
           description: Subscription choice
-    email:
-      type: string
-      format: email
-      example: user@store.com
-    event:
-      allOf:
-      - $ref: '#/components/schemas/generic_origin'
-      - description: Event data
-        properties:
-          currency_iso_code:
-            type: string
-            description: Currency ISO code
-            example: USD
-          type:
-            type: string
-            enum:
-            - AffiliateMember
-            - Purchase
-            - Event
-            example: Event
-          event_category:
-            type: string
-            example: app_installed
-            description: Identifier of an action that trigger the Event (for Event only)
-          event_number:
-            type: string
-            description: Unique identifier of the Event within the associated event_category (for Event only)
-            example: subscription_12345
+    generic_origin:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique identifier of the origin event in Talkable
+          example: 1234
+        email:
+          $ref: '#/components/schemas/email'
+          description: Email address of the person
+        phone_number:
+          $ref: '#/components/schemas/phone_number'
+          description: Phone number of the person
+        customer_id:
+          type: string
+          example: AB1234
+          description: Unique external identifier of a customer who triggered the origin event
+        traffic_source:
+          type: string
+          example: post-checkout
+          description: Traffic source of the origin event
+        ip_address:
+          $ref: ../schemas.yaml#/ip_address
+          description: IP address of the origin event
+        subtotal:
+          type: number
+          format: float
+          description: Monetary attribute (for Purchase and Event)
+        coupon_code:
+          type: string
+          description: Coupon codes used with the Purchase or Event (separated by ``,`` if multiple) (for Purchase only)
+        segment1:
+          type: string
+          description: Value for segment1
+        segment2:
+          type: string
+          description: Value for segment2
+        segment3:
+          type: string
+          description: Value for segment3
+        utm_campaign:
+          type: string
+          description: Value for utm_campaign
+        utm_content:
+          type: string
+          description: Value for utm_content
+        utm_medium:
+          type: string
+          description: Value for utm_medium
+        utm_source:
+          type: string
+          description: Value for utm_source
+        utm_term:
+          type: string
+          description: Value for utm_term
     phone_number:
       type: string
       example: '+12025551111'
-  securitySchemes:
-    api_key:
-      type: http
-      scheme: bearer
-      description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key

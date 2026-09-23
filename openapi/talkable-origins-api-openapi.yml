@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Talkable Advocate Offers Origins API
+  title: Talkable Origins API
   version: '2.0'
   contact:
     name: API Reference
@@ -865,9 +865,7 @@ paths:
 
         The records are created asynchronously by a scheduled job. This can take
 
-        some time.
-
-        '
+        some time.'
       tags:
       - Origins
       parameters: []
@@ -977,9 +975,7 @@ paths:
 
         The records are created asynchronously by a scheduled job. This can take
 
-        some time.
-
-        '
+        some time.'
       tags:
       - Origins
       parameters: []
@@ -1129,9 +1125,7 @@ paths:
 
         The records are created asynchronously by a scheduled job. This can take
 
-        some time.
-
-        '
+        some time.'
       tags:
       - Origins
       parameters: []
@@ -1360,13 +1354,6 @@ paths:
               - site_slug
 components:
   schemas:
-    coupon_codes:
-      type: array
-      items:
-        type: string
-      example:
-      - C0001
-      - C0002
     origin_slug:
       type: string
       example: B00K2EOONI
@@ -1382,6 +1369,13 @@ components:
         `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
 
         '
+    coupon_codes:
+      type: array
+      items:
+        type: string
+      example:
+      - C0001
+      - C0002
     currency_code:
       type: string
       enum:

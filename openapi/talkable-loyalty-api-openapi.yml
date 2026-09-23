@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Talkable Advocate Offers Loyalty API
+  title: Talkable Loyalty API
   version: '2.0'
   contact:
     name: API Reference
@@ -191,9 +191,7 @@ paths:
         Accepts ``data`` JSON object with ``points`` property and optional ``description``.
 
 
-        E.g. ``{"points": 100}`` or ``{"points": -100, "description": "For cheating"}``.
-
-        '
+        E.g. ``{"points": 100}`` or ``{"points": -100, "description": "For cheating"}``.'
       tags:
       - Loyalty
       parameters: []
@@ -316,9 +314,7 @@ paths:
 
         Note that all values in ``custom_properties`` object will be stored as strings,
 
-        e.g. ``false`` will become ``"f"``, and ``123`` will become ``"123"``.
-
-        '
+        e.g. ``false`` will become ``"f"``, and ``123`` will become ``"123"``.'
       tags:
       - Loyalty
       parameters: []
@@ -566,6 +562,12 @@ paths:
                     ok: false
                     error_message: No loyalty campaign found for the member
 components:
+  schemas:
+    member_email:
+      type: string
+      format: email
+      example: customer@example.com
+      description: Loyalty member’s email
   parameters:
     site_slug_in_query_required:
       name: site_slug
@@ -575,12 +577,6 @@ components:
         type: string
       description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
       example: my-store
-  schemas:
-    member_email:
-      type: string
-      format: email
-      example: customer@example.com
-      description: Loyalty member’s email
   securitySchemes:
     api_key:
       type: http

@@ -115,21 +115,7 @@ crosswalk: mcp/talkable-tool-crosswalk.yml
 deployment:
   mode: remote
   endpoint: https://www.talkable.com/mcp
-  install: null
-  package: null
-  auth: oauth
   verified: probed
   probe: gated
-  checked: '2026-08-13'
-  source: >-
-    POST tools/list to https://www.talkable.com/mcp with
-    Accept: application/json, text/event-stream
-  probe_evidence:
-    http_status: 401
-    body: '{"jsonrpc":"2.0","id":null,"error":{"code":-32001,"message":"Unauthorized"}}'
-    www_authenticate: 'Bearer resource_metadata="https://www.talkable.com/.well-known/oauth-protected-resource/mcp"'
-    note: >-
-      A remote HTTPS endpoint an MCP client POSTs to — no stdio package is shipped.
-      The live tool schemas require an authenticated introspection; the tools[]
-      below are the names and descriptions Talkable publishes in its MCP docs, and
-      the tool crosswalk binds them to the REST operations that back them.
+  checked: '2026-08-12'
+  source: catalog MCP census
