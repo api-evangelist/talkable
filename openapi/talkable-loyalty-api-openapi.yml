@@ -562,12 +562,6 @@ paths:
                     ok: false
                     error_message: No loyalty campaign found for the member
 components:
-  schemas:
-    member_email:
-      type: string
-      format: email
-      example: customer@example.com
-      description: Loyalty member’s email
   parameters:
     site_slug_in_query_required:
       name: site_slug
@@ -577,6 +571,12 @@ components:
         type: string
       description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
       example: my-store
+  schemas:
+    member_email:
+      type: string
+      format: email
+      example: customer@example.com
+      description: Loyalty member’s email
   securitySchemes:
     api_key:
       type: http

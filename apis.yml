@@ -53,6 +53,7 @@ tags:
 - Customer Acquisition
 - Webhook
 - MCP
+- Loyalty & Incentives
 tags_raw:
 - Company
 - Referral Marketing
@@ -64,6 +65,7 @@ tags_raw:
 - Customer Acquisition
 - Webhooks
 - MCP
+- Loyalty & Incentives
 apis:
 - aid: talkable:talkable-advocate-offers-api
   name: Talkable Advocate Offers API

@@ -73,54 +73,6 @@ paths:
                           description: Sharing channel involved in the referral
 components:
   schemas:
-    email:
-      type: string
-      format: email
-      example: user@store.com
-    referral_reward:
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Unique reward ID
-        amount:
-          type: string
-          example: '10.0'
-          description: Amount of money to reward (null when non-monetary incentive is used)
-        email:
-          $ref: '#/components/schemas/email'
-          description: Email of the person who got reward
-        person:
-          $ref: '#/components/schemas/person'
-          description: Parameters describing the person who got reward
-        incentive:
-          type: string
-          enum:
-          - rebate
-          - discount_coupon
-          - other
-          example: rebate
-          description: 'Type of incentive reward
-
-
-            *Rebate* (``rebate``) — monetary reward, certain amount of money that should be paid out to a customer with a given email. The merchants’ payment system should handle the payment.
-
-
-            *Coupon code* (``discount_coupon``) — a discount coupon is issued to user. Talkable handles distributing this type of incentives.
-
-
-            *Non-monetary* (``other``) — used when a campaign has a non-monetary rebate like “Free T-shirt” or “One Month Free”. This should be handled on the merchant’s side. More information on the reward is specified in incentive_description.
-
-            '
-        incentive_description:
-          type: string
-          description: Verbose reward explanation
-        reward_coupon_code:
-          type: string
-          description: Coupon code received by person as a reward (present if incentive equals ``discount_coupon``)
-        origin:
-          $ref: '#/components/schemas/origin'
-          description: Contains data about the event that issued the reward
     person:
       type: object
       properties:
@@ -270,3 +222,51 @@ components:
     phone_number:
       type: string
       example: '+12025551111'
+    referral_reward:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique reward ID
+        amount:
+          type: string
+          example: '10.0'
+          description: Amount of money to reward (null when non-monetary incentive is used)
+        email:
+          $ref: '#/components/schemas/email'
+          description: Email of the person who got reward
+        person:
+          $ref: '#/components/schemas/person'
+          description: Parameters describing the person who got reward
+        incentive:
+          type: string
+          enum:
+          - rebate
+          - discount_coupon
+          - other
+          example: rebate
+          description: 'Type of incentive reward
+
+
+            *Rebate* (``rebate``) — monetary reward, certain amount of money that should be paid out to a customer with a given email. The merchants’ payment system should handle the payment.
+
+
+            *Coupon code* (``discount_coupon``) — a discount coupon is issued to user. Talkable handles distributing this type of incentives.
+
+
+            *Non-monetary* (``other``) — used when a campaign has a non-monetary rebate like “Free T-shirt” or “One Month Free”. This should be handled on the merchant’s side. More information on the reward is specified in incentive_description.
+
+            '
+        incentive_description:
+          type: string
+          description: Verbose reward explanation
+        reward_coupon_code:
+          type: string
+          description: Coupon code received by person as a reward (present if incentive equals ``discount_coupon``)
+        origin:
+          $ref: '#/components/schemas/origin'
+          description: Contains data about the event that issued the reward
+    email:
+      type: string
+      format: email
+      example: user@store.com

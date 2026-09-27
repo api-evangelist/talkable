@@ -48,34 +48,6 @@ paths:
                       description: Event data
 components:
   schemas:
-    email:
-      type: string
-      format: email
-      example: user@store.com
-    event:
-      allOf:
-      - $ref: '#/components/schemas/generic_origin'
-      - description: Event data
-        properties:
-          currency_iso_code:
-            type: string
-            description: Currency ISO code
-            example: USD
-          type:
-            type: string
-            enum:
-            - AffiliateMember
-            - Purchase
-            - Event
-            example: Event
-          event_category:
-            type: string
-            example: app_installed
-            description: Identifier of an action that trigger the Event (for Event only)
-          event_number:
-            type: string
-            description: Unique identifier of the Event within the associated event_category (for Event only)
-            example: subscription_12345
     person:
       type: object
       properties:
@@ -133,6 +105,30 @@ components:
           type: boolean
           example: false
           description: Subscription choice
+    event:
+      allOf:
+      - $ref: '#/components/schemas/generic_origin'
+      - description: Event data
+        properties:
+          currency_iso_code:
+            type: string
+            description: Currency ISO code
+            example: USD
+          type:
+            type: string
+            enum:
+            - AffiliateMember
+            - Purchase
+            - Event
+            example: Event
+          event_category:
+            type: string
+            example: app_installed
+            description: Identifier of an action that trigger the Event (for Event only)
+          event_number:
+            type: string
+            description: Unique identifier of the Event within the associated event_category (for Event only)
+            example: subscription_12345
     generic_origin:
       type: object
       properties:
@@ -191,3 +187,7 @@ components:
     phone_number:
       type: string
       example: '+12025551111'
+    email:
+      type: string
+      format: email
+      example: user@store.com
