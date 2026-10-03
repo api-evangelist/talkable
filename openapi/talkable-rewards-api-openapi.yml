@@ -183,15 +183,6 @@ paths:
                     incentive_description: $10 back
                     incentive_custom_description: null
 components:
-  schemas:
-    person_slug:
-      type: string
-      example: customer@example.com
-      description: Person’s email, phone number, customer ID or username
-    visitor_uuid:
-      type: string
-      format: uuid
-      example: 123e4567-e89b-32d1-a456-426614174000
   parameters:
     site_slug_in_query_required:
       name: site_slug
@@ -201,6 +192,15 @@ components:
         type: string
       description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
       example: my-store
+  schemas:
+    visitor_uuid:
+      type: string
+      format: uuid
+      example: 123e4567-e89b-32d1-a456-426614174000
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
   securitySchemes:
     api_key:
       type: http

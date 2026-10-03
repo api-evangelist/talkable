@@ -442,11 +442,6 @@ paths:
               required:
               - channel
 components:
-  schemas:
-    person_slug:
-      type: string
-      example: customer@example.com
-      description: Person’s email, phone number, customer ID or username
   parameters:
     site_slug_in_query_required:
       name: site_slug
@@ -456,6 +451,11 @@ components:
         type: string
       description: Your Talkable Site ID. You can get this from your Talkable dashboard after you log in and create a site.
       example: my-store
+  schemas:
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
   securitySchemes:
     api_key:
       type: http

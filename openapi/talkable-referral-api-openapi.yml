@@ -130,6 +130,9 @@ components:
           type: boolean
           example: false
           description: Subscription choice
+    phone_number:
+      type: string
+      example: '+12025551111'
     origin:
       type: object
       properties:
@@ -219,9 +222,10 @@ components:
         utm_term:
           type: string
           description: Value for utm_term
-    phone_number:
+    email:
       type: string
-      example: '+12025551111'
+      format: email
+      example: user@store.com
     referral_reward:
       type: object
       properties:
@@ -266,7 +270,3 @@ components:
         origin:
           $ref: '#/components/schemas/origin'
           description: Contains data about the event that issued the reward
-    email:
-      type: string
-      format: email
-      example: user@store.com

@@ -129,6 +129,9 @@ components:
             type: string
             description: Unique identifier of the Event within the associated event_category (for Event only)
             example: subscription_12345
+    phone_number:
+      type: string
+      example: '+12025551111'
     generic_origin:
       type: object
       properties:
@@ -184,9 +187,6 @@ components:
         utm_term:
           type: string
           description: Value for utm_term
-    phone_number:
-      type: string
-      example: '+12025551111'
     email:
       type: string
       format: email

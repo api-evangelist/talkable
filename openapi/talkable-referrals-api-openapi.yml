@@ -455,10 +455,6 @@ paths:
               - data
 components:
   schemas:
-    person_slug:
-      type: string
-      example: customer@example.com
-      description: Person’s email, phone number, customer ID or username
     origin_slug:
       type: string
       example: B00K2EOONI
@@ -474,6 +470,10 @@ components:
         `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
 
         '
+    person_slug:
+      type: string
+      example: customer@example.com
+      description: Person’s email, phone number, customer ID or username
   parameters:
     site_slug_in_query_required:
       name: site_slug
