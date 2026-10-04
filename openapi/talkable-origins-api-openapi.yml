@@ -1354,21 +1354,10 @@ paths:
               - site_slug
 components:
   schemas:
-    origin_slug:
+    visitor_uuid:
       type: string
-      example: B00K2EOONI
-      description: 'If origin is a ***Purchase***:
-
-
-        `order_number`, e.g.: `"B00K2EOONI"`
-
-
-        If origin is an ***Event***:
-
-
-        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
-
-        '
+      format: uuid
+      example: 123e4567-e89b-32d1-a456-426614174000
     coupon_codes:
       type: array
       items:
@@ -1376,10 +1365,6 @@ components:
       example:
       - C0001
       - C0002
-    visitor_uuid:
-      type: string
-      format: uuid
-      example: 123e4567-e89b-32d1-a456-426614174000
     currency_code:
       type: string
       enum:
@@ -1544,6 +1529,21 @@ components:
       - ZWL
       example: USD
       description: Required for multi-currency sites
+    origin_slug:
+      type: string
+      example: B00K2EOONI
+      description: 'If origin is a ***Purchase***:
+
+
+        `order_number`, e.g.: `"B00K2EOONI"`
+
+
+        If origin is an ***Event***:
+
+
+        `event_category:event_number`, e.g.: `"newsletter_subscription:42"`
+
+        '
   securitySchemes:
     api_key:
       type: http
