@@ -706,6 +706,9 @@ x-enrichment:
   artifacts_added: 8
   pass: local-v1
 common:
+- type: CapabilityMap
+  url: capabilities/talkable-capability-edges.yml
+  name: Talkable Business Capability Map
 - type: AgenticAccess
   url: agentic-access/talkable-agentic-access.yml
 - type: DomainSecurity

@@ -1,0 +1,35 @@
+slug: talkable
+provider: Talkable
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Loyalty
+  spec_file: talkable-loyalty-api-openapi.yml
+  capability_id: BC-420.40
+  capability_id_l1: BC-420
+  capability_name: Loyalty & Retention Management
+  confidence: 0.95
+  evidence: GET /api/v2/loyalty/members/{email} "Find a loyalty member"; "Adjust loyalty member’s points
+    balance"; "Create a redeem action"; "List redemption batches"
+  reason: Operations administer loyalty programme membership, point balances, redemptions and adjustments
+    — plainly loyalty programme management.
+- tag: People
+  spec_file: talkable-people-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.75
+  evidence: GET /api/v2/people/{person_slug} "Find a person"; PUT "Update a person"; POST "Anonymize a
+    person"; GET "Get personal information about a person"
+  reason: CRUD plus anonymisation/personal-data retrieval over person records is customer master data
+    stewardship; privacy-request handling is secondary, so the customer data sub-capability fits best.
