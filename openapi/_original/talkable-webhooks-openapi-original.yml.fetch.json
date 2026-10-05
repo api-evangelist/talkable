@@ -1,0 +1,12 @@
+{
+ "url": "https://www.talkable.com/api-docs/webhooks/openapi.yaml",
+ "requested_url": "https://www.talkable.com/api-docs/webhooks/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 39870,
+ "sha256": "9804a2232d7a42d776af80196bbf55567826f8df628431075d98cb2044ec7a0d",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}

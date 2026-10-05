@@ -1,0 +1,12 @@
+{
+ "url": "https://www.talkable.com/api-docs/v2/openapi.yaml",
+ "requested_url": "https://www.talkable.com/api-docs/v2/openapi.yaml",
+ "status": 200,
+ "content_type": "text/yaml",
+ "bytes": 165096,
+ "sha256": "6cfd4d79a738c58a1d3d6e5de8c049d609c7b9b0e5f9f2850747f4e3024c3c04",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 0.957), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
