@@ -1,5 +1,5 @@
 generated: '2026-10-12'
-method: none
+method: searched
 source:
 - https://zapier.com/apps/talkable/integrations
 - https://n8n.io/integrations/talkable/
@@ -9,8 +9,34 @@ checked:
 - https://composio.dev/toolkits/talkable
 - https://monid.ai/tools/talkable
 - https://n8n.io/integrations/talkable/
+- https://www.twilio.com/docs/segment/connections/destinations/catalog/talkable
 - https://zapier.com/apps/talkable/integrations
 summary: null
 marketplace_apps: []
-edges: []
+edges:
+- partner_name: Twilio Segment
+  partner: segment
+  partner_match: aggregator
+  marketplace: coverage
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: connector-coverage
+  evidence: https://www.twilio.com/docs/segment/connections/destinations/catalog/talkable
+  coverage_role:
+  - destination
+  cdp_signals:
+    destination:
+      catalog_entries:
+      - talkable
+      status: PUBLIC
+      partner_owned: false
+      connection_modes:
+      - device:web
+      accepted_methods:
+      - Identify
+      - Page
+      - Track
+  detected_by: sweep-cdp.py
+  first_seen: '2026-10-14'
 templates: []
