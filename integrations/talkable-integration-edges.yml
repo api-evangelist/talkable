@@ -7,6 +7,7 @@ source:
 - https://monid.ai/tools/talkable
 checked:
 - https://composio.dev/toolkits/talkable
+- https://github.com/meltano/hub
 - https://monid.ai/tools/talkable
 - https://n8n.io/integrations/talkable/
 - https://www.twilio.com/docs/segment/connections/destinations/catalog/talkable
@@ -39,4 +40,33 @@ edges:
       - Track
   detected_by: sweep-cdp.py
   first_seen: '2026-10-14'
+- partner_name: Meltano
+  partner: meltano
+  partner_match: aggregator
+  type: marketplace
+  marketplace: meltano-hub
+  channel: elt-connector
+  relationship: ipaas-bridge
+  direction: third-party
+  evidence: https://hub.meltano.com/extractors/tap-talkable--gthesheep
+  category: null
+  contract_reference:
+    register: Meltano Hub (github.com/meltano/hub _data/meltano extractors + loaders)
+    spec_file: null
+    role: elt-connector:meltano-hub
+    registered_name: Talkable
+    matched_domain: talkable.com
+    matched_by: domain
+    detected_by: sweep-data-integration.py
+    detected: '2026-10-18'
+    signal_note: one edge per (provider, platform); connectors, streams, packages and usage are context, never read
+    plugins:
+    - tap-talkable--gthesheep
+    maintenance_status:
+    - active
+    quality:
+    - silver
+    builder: 'community (Meltano Hub variant maintainers: gthesheep)'
+  detected_by: sweep-data-integration.py
+  first_seen: '2026-10-18'
 templates: []
