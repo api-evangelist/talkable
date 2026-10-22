@@ -75,18 +75,6 @@
     builder: 'community (Meltano Hub variant maintainers: gthesheep)'
   status: not-a-workflow
   arazzo: null
-- slug: talkable-yotpo-own
-  label: Yotpo (own)
-  partner: yotpo
-  partner_name: Yotpo (own)
-  type: marketplace
-  marketplace: own
-  channel: partner-built
-  evidence: https://www.yotpo.com/integrations/talkable/
-  source: edge
-  relationship: platform-app
-  status: not-a-workflow
-  arazzo: null
 - slug: talkable-500-global
   label: 500 Global
   partner: 500-global
@@ -114,5 +102,30 @@
     detected: '2026-10-21'
     batch: Distro 1
     year: '2011'
+  status: not-a-workflow
+  arazzo: null
+- slug: talkable-yotpo-own
+  label: Yotpo (own)
+  partner: yotpo
+  partner_name: Yotpo (own)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://www.yotpo.com/integrations/talkable/
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: talkable-adobe-commerce-own
+  label: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_name: Adobe Commerce (own)
+  category: Adobe Commerce Marketplace extension
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://commercemarketplace.adobe.com/talkable-magento2-integration.html
+  source: edge
+  relationship: platform-app
   status: not-a-workflow
   arazzo: null

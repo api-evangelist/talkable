@@ -25,6 +25,7 @@ checked:
 - https://www.antler.co/portfolio
 - https://www.techstars.com/portfolio
 - https://www.ycombinator.com/companies
+- adobe-commerce/integrations/adobe-commerce-integration-edges.yml
 summary: null
 marketplace_apps: []
 edges:
@@ -112,22 +113,6 @@ edges:
     builder: 'community (Meltano Hub variant maintainers: gthesheep)'
   detected_by: sweep-data-integration.py
   first_seen: '2026-10-18'
-- partner_name: Yotpo (own)
-  partner: yotpo
-  partner_match: mirror
-  mirror_match: domain
-  type: marketplace
-  relationship: platform-app
-  direction: third-party
-  channel: partner-built
-  marketplace: own
-  evidence: https://www.yotpo.com/integrations/talkable/
-  mirror_of: yotpo/integrations/yotpo-integration-edges.yml
-  apps:
-  - Talkable
-  listing_count: 1
-  detected: '2026-10-20'
-  detected_by: mirror-platform-listings.py
 - partner_name: 500 Global
   partner: 500-global
   partner_match: register
@@ -156,4 +141,37 @@ edges:
     year: '2011'
   detected_by: sweep-accelerator-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: Yotpo (own)
+  partner: yotpo
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://www.yotpo.com/integrations/talkable/
+  mirror_of: yotpo/integrations/yotpo-integration-edges.yml
+  apps:
+  - Talkable
+  listing_count: 1
+  detected: '2026-10-20'
+  detected_by: mirror-platform-listings.py
+- partner_name: Adobe Commerce (own)
+  partner: adobe-commerce
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: own
+  evidence: https://commercemarketplace.adobe.com/talkable-magento2-integration.html
+  mirror_of: adobe-commerce/integrations/adobe-commerce-integration-edges.yml
+  apps:
+  - Talkable
+  listing_count: 1
+  detected: '2026-10-22'
+  detected_by: mirror-platform-listings.py
+  category: Adobe Commerce Marketplace extension
 templates: []
