@@ -127,3 +127,9 @@ paths:
                     friend_origin:
                       $ref: '#components/schemas/origin'
                       description: Object of data related to the Friend origin
+x-provenance:
+  method: harvested
+  publisher: Talkable
+  source: https://www.talkable.com/api-docs/webhooks/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

@@ -270,3 +270,9 @@ components:
       type: string
       format: email
       example: user@store.com
+x-provenance:
+  method: harvested
+  publisher: Talkable
+  source: https://www.talkable.com/api-docs/webhooks/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)

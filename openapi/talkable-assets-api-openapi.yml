@@ -182,3 +182,9 @@ components:
       type: http
       scheme: bearer
       description: Please provide here your API key, you can find it in Site Settings -> API Integration -> API Key
+x-provenance:
+  method: harvested
+  publisher: Talkable
+  source: https://www.talkable.com/api-docs/v2/openapi.yaml
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
